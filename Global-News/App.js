@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import backgroundImg from './assets/background-startScreen-02.png'
 
 export default function App() {
   return (

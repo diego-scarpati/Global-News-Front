@@ -19,9 +19,6 @@ export default function StartScreen({ navigation }) {
         />
       </View>
       <View>
-        <Text>Bienvenidos a Global News</Text>
-      </View>
-      <View>
         <Button style={styles.button} title="Login" onPress={() => navigation.navigate("Login")} />
       </View>
       <View>

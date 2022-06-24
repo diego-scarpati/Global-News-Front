@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TextInput,
 } from "react-native";
+import { StatusBar } from "expo-status-bar";
 // import { Link, Redirect, Route, Switch } from 'react-router-native'
 import { useForm, Controller } from "react-hook-form";
 import logo from "../assets/gnlogogrande-01.png";

@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TextInput,
 } from "react-native";
+import { StatusBar } from "expo-status-bar";
 // import { Link, Redirect, Route, Switch } from 'react-router-native'
 import { useForm, Controller } from "react-hook-form";
 import logo from "../assets/gnlogogrande-01.png";
@@ -46,13 +47,13 @@ export default function Register() {
             required: true,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Name"
-              />
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              placeholder="Name"
+            />
           )}
           name="firstName"
         />

@@ -139,7 +139,6 @@ export default function Register() {
               onChangeText={onChange}
               value={value}
               placeholder="Birth Date"
-              secureTextEntry={true}
             />
           )}
           name="birthday"
@@ -158,7 +157,6 @@ export default function Register() {
               onChangeText={onChange}
               value={value}
               placeholder="Address"
-              secureTextEntry={true}
             />
           )}
           name="address"
@@ -177,7 +175,6 @@ export default function Register() {
               onChangeText={onChange}
               value={value}
               placeholder="Country of Residence"
-              secureTextEntry={true}
             />
           )}
           name="countryOfResidence"

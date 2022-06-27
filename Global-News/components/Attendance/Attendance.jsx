@@ -11,6 +11,8 @@ import {
 
 export default function Attendance (){
   return (
-    <View><Text>Attendance</Text></View>
+    <View>
+    <Text>Attendance</Text>
+    </View>
   )
 }

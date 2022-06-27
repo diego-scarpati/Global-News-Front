@@ -21,8 +21,8 @@ export default function Login({navigation}) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      email:"",
+      password:"",
     },
   });
   const onSubmit = (data) => {

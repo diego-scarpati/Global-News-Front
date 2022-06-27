@@ -16,7 +16,6 @@ export default function HomeButton(props) {
           </TouchableOpacity>
         </View>
       );
-   
 }
 
 const styles = StyleSheet.create({

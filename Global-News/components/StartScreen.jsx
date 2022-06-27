@@ -6,7 +6,6 @@ import { Link, Redirect, Route, Switch } from "react-router-native";
 import logo from "../assets/gnlogogrande-01.png";
 
 export default function StartScreen({ navigation }) {
-  console.log(navigation);
   return (
     <View style={styles.container}>
       <View>

@@ -1,47 +1,22 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
-export default function HomeButton() {
-  const data = [
-    {
-      key: "1",
-      name: "Mis Datos",
-      img: "https://img.icons8.com/ios/344/resume.png",
-    },
-    {
-      key: "2",
-      name: "Licencias",
-      img: "https://img.icons8.com/material-outlined/344/chrome-reader-mode.png",
-    },
-    {
-      key: "3",
-      name: "Presentismo",
-      img: "https://img.icons8.com/small/344/document.png",
-    },
-    {
-      key: "4",
-      name: "Equipos",
-      img: "https://img.icons8.com/small/344/conference.png",
-    },
-  ];
+export default function HomeButton(props) {
+  const {text, img, onPress} = props
 
-  const list = () => {
-    return data.map((element) => {
       return (
         <View style={styles.item}>
-          <TouchableOpacity onPress={() => {}}>
-            <View key={element.key} style={styles.iconContent}>
-              <Image style={styles.icon} source={element.img} />
+          <TouchableOpacity onPress={onPress}>
+            <View style={styles.iconContent}>
+              <Image style={styles.icon} source={img} />
             </View>
             <View style={styles.infoContent}>
-              <Text style={styles.info}>{element.name}</Text>
+              <Text style={styles.info}>{text}</Text>
             </View>
           </TouchableOpacity>
         </View>
       );
-    });
-  };
-  return <View>{list()}</View>;
+   
 }
 
 const styles = StyleSheet.create({

@@ -12,8 +12,9 @@ import { StatusBar } from "expo-status-bar";
 // import { Link, Redirect, Route, Switch } from 'react-router-native'
 import { useForm, Controller } from "react-hook-form";
 import logo from "../assets/gnlogogrande-01.png";
+import { NavigationType } from "react-router-native";
 
-export default function Login() {
+export default function Login({navigation}) {
   const {
     control,
     handleSubmit,
@@ -24,7 +25,10 @@ export default function Login() {
       password: "",
     },
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    navigation.navigate('HomeScreen')
+    console.log(data);
+  }
 
   return (
     <View style={styles.container}>
@@ -67,7 +71,9 @@ export default function Login() {
       />
       {errors.password && <Text>This is required.</Text>}
 
-      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+      <Button title="Submit" 
+      onPress={  handleSubmit(onSubmit) }
+      />
     </View>
   );
 }

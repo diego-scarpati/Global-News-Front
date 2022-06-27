@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  Button,
-  Alert,
-  StyleSheet,
-  TextInput,
-} from "react-native";
-import { StatusBar } from "expo-status-bar";
-// import { Link, Redirect, Route, Switch } from 'react-router-native'
+import { View, Text, Image, Button, StyleSheet, TextInput } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import logo from "../assets/gnlogogrande-01.png";
 import { ScrollView } from "react-native-gesture-handler";
@@ -52,10 +42,10 @@ export default function Register() {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="Name"
+              placeholder="Nombre"
             />
           )}
-          name="firstName"
+          name="Nombre"
         />
         {errors.firstName && <Text>This is required.</Text>}
 
@@ -224,5 +214,11 @@ const styles = StyleSheet.create({
     height: 100,
     width: 200,
     justifyContent: "center",
+  },
+  editar: {
+    flex: 1,
+    flexWrap: "nowrap",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });

@@ -9,8 +9,9 @@ import {
   TextInput,
 } from "react-native";
 
-export default function Attendance (){
+export default function Team (){
   return (
-    <View><Text>Attendance</Text></View>
+    <View><Text>Team</Text></View>
   )
 }
+

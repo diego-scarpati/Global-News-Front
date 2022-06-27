@@ -297,6 +297,12 @@ const styles = StyleSheet.create({
     width: 200,
     justifyContent: "center",
   },
+  editar: {
+    flex: 1,
+    flexWrap: "nowrap",
+    flexDirection: "row",
+    alignItems: "center",
+  },
 });
 
 

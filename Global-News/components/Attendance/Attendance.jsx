@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   View,
   Text,
@@ -8,11 +9,12 @@ import {
   StyleSheet,
   TextInput,
 } from "react-native";
+import AttendanceButton from "./components/AttendanceButton";
 
 export default function Attendance (){
   return (
     <View>
-    <Text>Attendance</Text>
+    <AttendanceButton text='Online' onPress={()=>console.log("hola")}/>
     </View>
   )
 }

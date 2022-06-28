@@ -18,6 +18,7 @@ export default function Register() {
       phoneNumber: "",
       birthday: "",
       address: "",
+      city: "",
       password: "",
       countryOfResidence: "",
     },

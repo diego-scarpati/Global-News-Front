@@ -23,6 +23,7 @@ export default function Register() {
       birthday: "23/01/1990",
       address: "Av. Juan Bautista Alberdi 6419",
       countryOfResidence: "Argentina",
+      city:"Ciudad Evita",
       shift: "Mañana",
       startDate: "01/01/2017",
       workingDays: "Lu/Ma/Mi/Ju/Vi",
@@ -181,6 +182,26 @@ export default function Register() {
 />
 {errors.countryOfResidence && <Text>This is required.</Text>}
 </View>
+        <View style={styles.editar}>
+        
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              placeholder="Ciudad"
+            />
+          )}
+          name="city"
+        />
+        {errors.city && <Text>This is required.</Text>}
+        </View>
         <View style={styles.editar}>
         
 <Controller

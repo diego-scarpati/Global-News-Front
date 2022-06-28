@@ -32,6 +32,7 @@ export default function Register({navigation}) {
       phoneNumber: "",
       birthday: "",
       address: "",
+      city: "",
       password: "",
       countryOfResidence: "",
     },
@@ -81,7 +82,7 @@ export default function Register({navigation}) {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="Last Name"
+              placeholder="Apellido"
             />
           )}
           name="lastName"
@@ -98,7 +99,7 @@ export default function Register({navigation}) {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="National Id"
+              placeholder="DNI"
             />
           )}
           name="nationalId"
@@ -132,7 +133,7 @@ export default function Register({navigation}) {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="Phone"
+              placeholder="Telefono"
             />
           )}
           name="phoneNumber"
@@ -170,7 +171,7 @@ export default function Register({navigation}) {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="Address"
+              placeholder="Direccion"
             />
           )}
           name="address"
@@ -188,12 +189,30 @@ export default function Register({navigation}) {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="Country of Residence"
+              placeholder="Pais"
             />
           )}
           name="countryOfResidence"
         />
         {errors.countryOfResidence && <Text>This is required.</Text>}
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              placeholder="Ciudad"
+            />
+          )}
+          name="city"
+        />
+        {errors.city && <Text>This is required.</Text>}
+        
         <Controller
           control={control}
           rules={{
@@ -205,7 +224,7 @@ export default function Register({navigation}) {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="Password"
+              placeholder="Contraseña"
               secureTextEntry={true}
             />
           )}

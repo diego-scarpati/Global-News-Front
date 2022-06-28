@@ -8,8 +8,6 @@ import {
   StyleSheet,
   TextInput,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
-// import { Link, Redirect, Route, Switch } from 'react-router-native'
 import { useForm, Controller } from "react-hook-form";
 import logo from "../../assets/gnlogogrande-01.png";
 import { ScrollView } from "react-native-gesture-handler";
@@ -39,6 +37,49 @@ export default function Register() {
       <View>
         <Image source={logo} style={styles.logo} />
       </View>
+      <Text>Mis datos</Text>
+      <View style={styles.editar}>
+        
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              defaultValue={value}
+              placeholder="Direccion"
+            />
+          )}
+          name="address"
+        />
+        {errors.address && <Text>This is required.</Text>}
+        <Button title="editar"/>
+        </View>
+                <View style={styles.editar}>
+                
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              defaultValue={value}
+              placeholder="Telefono"
+            />
+          )}
+          name="phoneNumber"
+        />
+        {errors.phoneNumber && <Text>This is required.</Text>}
+        <Button title="editar"/>
+        </View>
       <View style={styles.editar}>
       
 <Controller
@@ -51,14 +92,13 @@ export default function Register() {
       style={styles.input}
       onBlur={onBlur}
       onChangeText={onChange}
-      defaultValue={value}
+      value={value}
       placeholder="Nombre"
     />
   )}
   name="firstName"
 />
 {errors.firstName && <Text>This is required.</Text>}
-<Button title="editar"/>
 </View>
      <View style={styles.editar}>
      
@@ -72,14 +112,13 @@ export default function Register() {
       style={styles.input}
       onBlur={onBlur}
       onChangeText={onChange}
-      defaultValue={value}
+      value={value}
       placeholder="Apellido"
     />
   )}
   name="lastName"
 />
 {errors.lastName && <Text>This is required.</Text>}
-<Button title="editar"/>
 </View>
         <View style={styles.editar}>
         
@@ -93,57 +132,15 @@ export default function Register() {
       style={styles.input}
       onBlur={onBlur}
       onChangeText={onChange}
-      defaultValue={value}
+      value={value}
       placeholder="DNI"
     />
   )}
   name="nationalId"
 />
 {errors.nationalId && <Text>This is required.</Text>}
-<Button title="editar"/>
 </View>
-        <View style={styles.editar}>
-        
-<Controller
-  control={control}
-  rules={{
-    required: true,
-  }}
-  render={({ field: { onChange, onBlur, value } }) => (
-    <TextInput
-      style={styles.input}
-      onBlur={onBlur}
-      onChangeText={onChange}
-      defaultValue={value}
-      placeholder="Direccion"
-    />
-  )}
-  name="address"
-/>
-{errors.address && <Text>This is required.</Text>}
-<Button title="editar"/>
-</View>
-        <View style={styles.editar}>
-        
-<Controller
-  control={control}
-  rules={{
-    required: true,
-  }}
-  render={({ field: { onChange, onBlur, value } }) => (
-    <TextInput
-      style={styles.input}
-      onBlur={onBlur}
-      onChangeText={onChange}
-      defaultValue={value}
-      placeholder="Telefono"
-    />
-  )}
-  name="phoneNumber"
-/>
-{errors.phoneNumber && <Text>This is required.</Text>}
-<Button title="editar"/>
-</View>
+
         <View style={styles.editar}>
        
 <Controller
@@ -156,14 +153,13 @@ export default function Register() {
       style={styles.input}
       onBlur={onBlur}
       onChangeText={onChange}
-      defaultValue={value}
+      value={value}
       placeholder="Cumpleaños"
     />
   )}
   name="birthday"
 />
 {errors.birthday && <Text>This is required.</Text>}
-<Button title="editar"/>
 </View>
         <View style={styles.editar}>
         
@@ -177,14 +173,13 @@ export default function Register() {
       style={styles.input}
       onBlur={onBlur}
       onChangeText={onChange}
-      defaultValue={value}
+      value={value}
       placeholder="Pais"
     />
   )}
   name="countryOfResidence"
 />
 {errors.countryOfResidence && <Text>This is required.</Text>}
-<Button title="editar"/>
 </View>
         <View style={styles.editar}>
         
@@ -198,14 +193,13 @@ export default function Register() {
       style={styles.input}
       onBlur={onBlur}
       onChangeText={onChange}
-      defaultValue={value}
+      value={value}
       placeholder="Turno Laboral"
     />
   )}
   name="shift"
 />
 {errors.shift && <Text>This is required.</Text>}
-<Button title="editar"/>
 </View>
         <View style={styles.editar}>
         
@@ -219,14 +213,13 @@ export default function Register() {
       style={styles.input}
       onBlur={onBlur}
       onChangeText={onChange}
-      defaultValue={value}
+      value={value}
       placeholder="Inicio Laboral"
     />
   )}
   name="startDate"
 />
 {errors.startDate && <Text>This is required.</Text>}
-<Button title="editar"/>
 </View>
         <View style={styles.editar}>
         
@@ -240,14 +233,13 @@ export default function Register() {
       style={styles.input}
       onBlur={onBlur}
       onChangeText={onChange}
-      defaultValue={value}
+      value={value}
       placeholder="Dias Laborales"
     />
   )}
   name="workingDays"
 />
 {errors.workingDays && <Text>This is required.</Text>}
-<Button title="editar"/>
 </View>
         <View style={styles.editar}>
        
@@ -261,14 +253,13 @@ export default function Register() {
       style={styles.input}
       onBlur={onBlur}
       onChangeText={onChange}
-      defaultValue={value}
+      value={value}
       placeholder="Disponibilidad"
     />
   )}
   name="available"
 />
 {errors.available && <Text>This is required.</Text>}
-<Button title="editar"/>
 </View>
 
       <Button title="Submit" onPress={handleSubmit(onSubmit)} />

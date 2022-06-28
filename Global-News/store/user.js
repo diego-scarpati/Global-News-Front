@@ -11,9 +11,11 @@ return info.data
 
 export const sendLoginRequest = createAsyncThunk("LOGIN", async (data)=>{
     try{ 
-    const info = await axios.post("http://localhost:3001/api/users/login",data)
-    
-    return info.data 
+    //despues invertir el orden de las rutas MARIANO I
+    const user = await axios.get(`http://localhost:3001/api/users/${data.email}`)
+        return user.data
+    // const info = await axios.post("http://localhost:3001/api/users/login",data)
+    // return info.data 
     }catch(error){console.log(error)}
 });
 

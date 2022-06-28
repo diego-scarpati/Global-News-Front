@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 export default function Profile() {
 
 const user = useSelector((state) => state.user)
+console.log("USERRRRR", user)
 
   // useEffect(() => {
   //   axios.get("http://localhost:3001/api/users/").then((productlist) => {
@@ -23,9 +24,9 @@ const user = useSelector((state) => state.user)
             uri: "https://img.icons8.com/ios/344/user-male-circle.png",
           }}
         />
-        <Text style={styles.name}>Mariano Alvarez</Text>
-        <Text style={styles.userInfo}>malvarez@globalnewsgroup.com</Text>
-        <Text style={styles.userInfo}>Buenos Aires, Argentina</Text>
+        <Text style={styles.name}>{user.firstName}</Text>
+        <Text style={styles.userInfo}>{user.email}</Text>
+        <Text style={styles.userInfo}>{`${user.city}, ${user.countryOfResidence}`}</Text>
       </View>
     </View>
   );

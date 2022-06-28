@@ -1,8 +1,5 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
 import { View, Text, Image, Button, Alert, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { Link, Redirect, Route, Switch } from "react-router-native";
 import logo from "../assets/gnlogogrande-01.png";
 
 export default function StartScreen({ navigation }) {

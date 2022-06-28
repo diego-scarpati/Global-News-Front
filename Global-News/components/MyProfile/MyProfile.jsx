@@ -11,23 +11,26 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import logo from "../../assets/gnlogogrande-01.png";
 import { ScrollView } from "react-native-gesture-handler";
+import { useSelector } from "react-redux";
 
 export default function Register() {
+  const user = useSelector((state) => state.user)
+  
   const {control, handleSubmit, formState: { errors },} = useForm({
     defaultValues: {
-      firstName: "Mariano",
-      lastName: "Imhoff",
-      nationalId: "34749456",
-      email: "imhmariano@gmail.com",
-      phoneNumber: "1161918486",
-      birthday: "23/01/1990",
-      address: "Av. Juan Bautista Alberdi 6419",
-      countryOfResidence: "Argentina",
-      city:"Ciudad Evita",
-      shift: "Mañana",
-      startDate: "01/01/2017",
-      workingDays: "Lu/Ma/Mi/Ju/Vi",
-      available: "Si",
+      firstName: user.firstName||"",
+      lastName: user.lastName||"",
+      nationalId: user.nationalId||"",
+      email: user.email||"",
+      phoneNumber: user.phoneNumber||"",
+      birthday: user.birthday||"",
+      address: user.address||"",
+      countryOfResidence: user.countryOfResidence||"",
+      city: user.city||"",
+      shift: user.shift||"",
+      startDate: user.startDate||"",
+      workingDays: user.workingDays||"",
+      available: user.available||"",
     },
   });
   const onSubmit = (data) => console.log(data);

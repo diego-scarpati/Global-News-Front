@@ -33,7 +33,6 @@ export default function Login({navigation}) {
   const dispatch = useDispatch();
 
   const onSubmit = (info) =>{
-    console.log(info);
       dispatch(sendLoginRequest (info))
       navigation.navigate('HomeScreen')
     }

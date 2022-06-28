@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+
 import {
   View,
   Text,
@@ -13,6 +15,8 @@ import { StatusBar } from "expo-status-bar";
 import { useForm, Controller } from "react-hook-form";
 import logo from "../assets/gnlogogrande-01.png";
 import { NavigationType } from "react-router-native";
+import { sendLoginRequest } from "../store/user";
+
 
 export default function Login({navigation}) {
   const {
@@ -25,10 +29,14 @@ export default function Login({navigation}) {
       password:"",
     },
   });
-  const onSubmit = (data) => {
-    navigation.navigate('HomeScreen')
-    console.log(data);
-  }
+
+  const dispatch = useDispatch();
+
+  const onSubmit = (info) =>{
+    console.log(info);
+      dispatch(sendLoginRequest (info))
+      navigation.navigate('HomeScreen')
+    }
 
   return (
     <View style={styles.container}>

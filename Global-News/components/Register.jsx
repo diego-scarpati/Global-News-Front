@@ -41,7 +41,6 @@ export default function Register({navigation}) {
   const dispatch = useDispatch();
 
   const onSubmit = (info) =>{
-    console.log("Prueba INFO", info);
       dispatch(sendRegisterRequest (info))
       navigation.navigate('Login')
     }

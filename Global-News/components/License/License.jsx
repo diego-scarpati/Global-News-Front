@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import {View, Text, Button, StyleSheet, TextInput} from "react-native";
+import {View, Text, Image, Button, StyleSheet, TextInput} from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
 import { Picker } from "@react-native-picker/picker";
+import { useDispatch } from "react-redux";
 
 export default function License() {
+
   const {
     control,
     handleSubmit,
@@ -13,20 +15,23 @@ export default function License() {
     defaultValues: {
       startDate: "",
       endDate: "",
-      attachment: "",
-      observations: "",
+      attachment: " ",
+      observations: " ",
     },
   });
 
-const [license, setLicense] = useState('Unknown');
-
-  const onSubmit = (data) => {
-    console.log(data)
+  
+  const onSubmit = (info) => {
+    console.log("informacion",info)
+    //dispatch(sendLicenseRequest(info,license))
     // axios
     //   .post("http://localhost:3001/xxxx/xxxx/xxxxx", data)
     //   .then((res) => res.data)
     //   navigate("/Home");
   };
+  const [license, setLicense] = useState('Unknown');
+  console.log("aa",license)
+    const dispatch = useDispatch();
 
   return (
     <ScrollView>
@@ -42,6 +47,24 @@ const [license, setLicense] = useState('Unknown');
           <Picker.Item label="Día de Estudio" value="Día de Estudio" />
           <Picker.Item label="Otro" value="Otro" />
         </Picker>
+     
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              placeholder="Fecha Inicio"
+            />
+          )}
+          name="startDate"
+        />
+        {errors.startDate && <Text>This is required.</Text>}
 
         <Controller
           control={control}
@@ -54,29 +77,12 @@ const [license, setLicense] = useState('Unknown');
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="Fecha inicio"
-            />
-          )}
-          name="startDate"
-        />
-        {errors.startDate && <Text>Campo requerido.</Text>}
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Fecha finalizacion"
+              placeholder="Fecha fin"
             />
           )}
           name="endDate"
         />
-        {errors.endDate && <Text>Campo requerido.</Text>}
+        {errors.endDate && <Text>This is required.</Text>}
         <Controller
           control={control}
           rules={{
@@ -88,12 +94,12 @@ const [license, setLicense] = useState('Unknown');
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="Adjuntar"
+              placeholder="Documento adjunto"
             />
           )}
           name="attachment"
         />
-        {/* {errors.attachment && <Text>This is required.</Text>} */}
+         {errors.attachment && <Text>This is required.</Text>}
         <Controller
           control={control}
           rules={{
@@ -110,8 +116,8 @@ const [license, setLicense] = useState('Unknown');
           )}
           name="observations"
         />
-        {/* {errors.observations && <Text>This is required.</Text>} */}
-        <Button title="Enviar" onPress={handleSubmit(onSubmit)} />
+         {errors.observations && <Text>This is required.</Text>} 
+        <Button title="Submit" onPress={handleSubmit(onSubmit)}/>
       </View>
     </ScrollView>
   );

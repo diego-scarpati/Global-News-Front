@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 export default function Profile() {
 
 const user = useSelector((state) => state.user)
-console.log("USERRRRR", user)
 
   // useEffect(() => {
   //   axios.get("http://localhost:3001/api/users/").then((productlist) => {

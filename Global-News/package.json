@@ -10,6 +10,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-picker/picker": "2.4.0",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
     "@react-navigation/stack": "^6.2.1",
@@ -29,8 +30,7 @@
     "react-native-web": "0.17.7",
     "react-redux": "^8.0.2",
     "react-router-native": "^6.3.0",
-    "redux-logger": "^3.0.6",
-    "@react-native-picker/picker": "2.4.0"
+    "redux-logger": "^3.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

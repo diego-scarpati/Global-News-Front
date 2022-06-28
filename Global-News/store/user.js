@@ -21,11 +21,13 @@ export const sendLogoutRequest = createAsyncThunk("LOGIN",()=>{
 });
 
 
-const userReducer = createReducer([], {
+const userReducer = createReducer({}, {
     [sendRegisterRequest.fulfilled]: (state,action)=>action.payload,
     [sendRegisterRequest.rejected]: (state,action)=>action.payload,
+
     [sendLoginRequest.fulfilled]: (state,action)=>action.payload,
     [sendLoginRequest.rejected]: (state,action)=>action.payload,
+
     [sendLogoutRequest.fulfilled]: (state,action)=>action.payload,
     [sendLogoutRequest.rejected]: (state,action)=>action.payload,
   });

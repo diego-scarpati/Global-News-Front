@@ -2,7 +2,7 @@ import axios from "axios";
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
 
-const attendanceReducer = createReducer([], {
+const attendanceReducer = createReducer({}, {
     
 });
 

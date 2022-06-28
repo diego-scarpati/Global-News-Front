@@ -7,6 +7,7 @@ import teamReducer from "./team";
 import userReducer from "./user";
 import availabilityReducer from "./availability"
 import officeReducer from "./office"
+import positionReducer from "./position";
 
 const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger), 
@@ -17,6 +18,7 @@ const store = configureStore({
         attendance: attendanceReducer,
         availability: availabilityReducer,
         office: officeReducer,
+        position: positionReducer,
     }
 })
 

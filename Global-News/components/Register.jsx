@@ -3,8 +3,22 @@ import { View, Text, Image, Button, StyleSheet, TextInput } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import logo from "../assets/gnlogogrande-01.png";
 import { ScrollView } from "react-native-gesture-handler";
+import { useDispatch } from "react-redux";
+import axios from "axios"
+import { sendRegisterRequest } from "../store/user";
 
-export default function Register() {
+
+export default function Register({navigation}) {
+
+  // let date = fecha?fecha:new Date()
+
+  // const formatDate = (date) => {
+  //   let formatted_date = `${date.getFullYear()}-${
+  //     date.getMonth() - 1
+  //   }-${date.getDate()}`;
+  //   return formatted_date;
+  // };
+
   const {
     control,
     handleSubmit,
@@ -23,7 +37,14 @@ export default function Register() {
       countryOfResidence: "",
     },
   });
-  const onSubmit = (data) => console.log(data);
+
+  const dispatch = useDispatch();
+
+  const onSubmit = (info) =>{
+    console.log("Prueba INFO", info);
+      dispatch(sendRegisterRequest (info))
+      navigation.navigate('Login')
+    }
 
   return (
     <ScrollView>
@@ -46,7 +67,7 @@ export default function Register() {
               placeholder="Nombre"
             />
           )}
-          name="Nombre"
+          name="firstName"
         />
         {errors.firstName && <Text>This is required.</Text>}
 
@@ -129,7 +150,10 @@ export default function Register() {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="Cumpleaños"
+              placeholder="Birth Date"
+              options={{
+                format: 'DD-MM-YYYY'
+              }}
             />
           )}
           name="birthday"

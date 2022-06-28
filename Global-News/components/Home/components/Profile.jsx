@@ -1,13 +1,27 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
+import axios from "axios";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function Profile() {
+
+const user = useSelector((state) => state.user)
+
+  // useEffect(() => {
+  //   axios.get("http://localhost:3001/api/users/").then((productlist) => {
+  //     setProducts(productlist.data);
+  //   });
+  // }, []);
+
   return (
     <View style={styles.header}>
       <View style={styles.headerContent}>
         <Image
           style={styles.avatar}
-          source={{ uri: "https://img.icons8.com/ios/344/user-male-circle.png" }}
+          source={{
+            uri: "https://img.icons8.com/ios/344/user-male-circle.png",
+          }}
         />
         <Text style={styles.name}>Mariano Alvarez</Text>
         <Text style={styles.userInfo}>malvarez@globalnewsgroup.com</Text>

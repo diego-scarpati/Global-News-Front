@@ -2,21 +2,26 @@ import axios from "axios";
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
 
-export const sendRegisterRequest = createAsyncThunk("REGISTER", async ()=>{
+export const sendRegisterRequest = createAsyncThunk("REGISTER", async (data)=>{
     try{
-    const info = await axios.post("/api/users/register")
+        const info = await axios.post("http://localhost:3001/api/users/register", data)
+return info.data
     }catch(error){console.log(error)}
 });
 
 export const sendLoginRequest = createAsyncThunk("LOGIN", async (data)=>{
     try{ 
-    const info = await axios.post("/api/users/login",data)
+    const info = await axios.post("http://localhost:3001/api/users/login",data)
+    
     return info.data 
     }catch(error){console.log(error)}
 });
 
-export const sendLogoutRequest = createAsyncThunk("LOGIN",()=>{
-    
+export const sendLogoutRequest = createAsyncThunk("LOGOUT", async(data)=>{
+    try{ 
+        const info = await axios.post("http://localhost:3001/api/users/logout",data)
+        return info.data 
+        }catch(error){console.log(error)} 
 });
 
 

@@ -3,14 +3,18 @@ import {View, Text, Button, StyleSheet, TextInput} from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
 import { Picker } from "@react-native-picker/picker";
+import { useDispatch } from 'react-redux';
+import { sendLicenseRequest } from '../../store/license';
 
-export default function License() {
+export default function License({navigation}) {
   const {
     control,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: {
+      type: "",
       startDate: "",
       endDate: "",
       attachment: "",
@@ -18,30 +22,36 @@ export default function License() {
     },
   });
 
-const [license, setLicense] = useState('Unknown');
+  const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    console.log(data)
-    // axios
-    //   .post("http://localhost:3001/xxxx/xxxx/xxxxx", data)
-    //   .then((res) => res.data)
-    //   navigate("/Home");
+  const onSubmit = (info) => {
+    dispatch(sendLicenseRequest(info))
+      navigation.navigate('HomeScreen')
   };
 
   return (
     <ScrollView>
       <View>
-        <Picker 
-        style={styles.input}
-         selectedValue={license}
-         onValueChange={(value, index) => setLicense(value)}
-         mode="dropdown"
-       >
-          <Picker.Item label="Tipo de Licencia" value="Unknown" color="#aaaa"/>
-          <Picker.Item label="Vacaciones" value="Vacaciones" />
-          <Picker.Item label="Día de Estudio" value="Día de Estudio" />
-          <Picker.Item label="Otro" value="Otro" />
-        </Picker>
+      <Controller
+          control={control}
+          render={({ value }) => (
+            <View>
+              <Picker
+                selectedValue={value}
+                onValueChange={itemValue => setValue("type", itemValue)}
+                style={styles.input}
+              >
+                <Picker.Item label="Tipo de Licencia" value="Unknown" color="#aaaa"/>
+                <Picker.Item label="Vacaciones" value="Vacaciones" />
+                <Picker.Item label="Día de estudio" value="Día de estudio" />
+                <Picker.Item label="Enfermedad" value="Enfermedad" />
+              </Picker>
+            </View>
+          )}
+          name="type"
+          defaultValue="Tipo de licencia"
+        />
+        {errors.type && <Text>Seleccione una opción</Text>}
 
         <Controller
           control={control}
@@ -79,9 +89,6 @@ const [license, setLicense] = useState('Unknown');
         {errors.endDate && <Text>Campo requerido.</Text>}
         <Controller
           control={control}
-          rules={{
-            required: true,
-          }}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
               style={styles.input}
@@ -93,12 +100,8 @@ const [license, setLicense] = useState('Unknown');
           )}
           name="attachment"
         />
-        {/* {errors.attachment && <Text>This is required.</Text>} */}
         <Controller
           control={control}
-          rules={{
-            required: true,
-          }}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
               style={styles.input}
@@ -110,7 +113,6 @@ const [license, setLicense] = useState('Unknown');
           )}
           name="observations"
         />
-        {/* {errors.observations && <Text>This is required.</Text>} */}
         <Button title="Enviar" onPress={handleSubmit(onSubmit)} />
       </View>
     </ScrollView>
@@ -125,5 +127,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     margin: 10,
+  },
+  error: {
+    color: '#ff0000',
+    fontSize: 9,
+    marginBottom: 8,
+    marginLeft: 6,
   },
 });

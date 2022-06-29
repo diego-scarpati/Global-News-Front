@@ -7,17 +7,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios"
 import { sendRegisterRequest } from "../store/user";
 
-
 export default function Register({navigation}) {
-
-  // let date = fecha?fecha:new Date()
-
-  // const formatDate = (date) => {
-  //   let formatted_date = `${date.getFullYear()}-${
-  //     date.getMonth() - 1
-  //   }-${date.getDate()}`;
-  //   return formatted_date;
-  // };
 
   const {
     control,
@@ -69,7 +59,7 @@ export default function Register({navigation}) {
           )}
           name="firstName"
         />
-        {errors.firstName && <Text>This is required.</Text>}
+        {errors.firstName && <Text>Campo requerido.</Text>}
 
         <Controller
           control={control}
@@ -87,7 +77,7 @@ export default function Register({navigation}) {
           )}
           name="lastName"
         />
-        {errors.lastName && <Text>This is required.</Text>}
+        {errors.lastName && <Text>Campo requerido.</Text>}
         <Controller
           control={control}
           rules={{
@@ -104,7 +94,7 @@ export default function Register({navigation}) {
           )}
           name="nationalId"
         />
-        {errors.nationalId && <Text>This is required.</Text>}
+        {errors.nationalId && <Text>Campo requerido.</Text>}
         <Controller
           control={control}
           rules={{
@@ -121,7 +111,7 @@ export default function Register({navigation}) {
           )}
           name="email"
         />
-        {errors.email && <Text>This is required.</Text>}
+        {errors.email && <Text>Campo requerido.</Text>}
         <Controller
           control={control}
           rules={{
@@ -138,11 +128,11 @@ export default function Register({navigation}) {
           )}
           name="phoneNumber"
         />
-        {errors.phoneNumber && <Text>This is required.</Text>}
+        {errors.phoneNumber && <Text>Campo requerido.</Text>}
         <Controller
           control={control}
           rules={{
-            maxLength: 100,
+            required: true,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
@@ -158,12 +148,12 @@ export default function Register({navigation}) {
           )}
           name="birthday"
         />
-        {errors.birthday && <Text>This is required.</Text>}
+        {errors.birthday && <Text>Campo requerido.</Text>}
 
         <Controller
           control={control}
           rules={{
-            maxLength: 100,
+            required: true,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
@@ -177,11 +167,11 @@ export default function Register({navigation}) {
           name="address"
         />
 
-        {errors.address && <Text>This is required.</Text>}
+        {errors.address && <Text>Campo requerido.</Text>}
         <Controller
           control={control}
           rules={{
-            maxLength: 100,
+            required: true,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
@@ -194,7 +184,7 @@ export default function Register({navigation}) {
           )}
           name="countryOfResidence"
         />
-        {errors.countryOfResidence && <Text>This is required.</Text>}
+        {errors.countryOfResidence && <Text>Campo requerido.</Text>}
         <Controller
           control={control}
           rules={{
@@ -211,12 +201,12 @@ export default function Register({navigation}) {
           )}
           name="city"
         />
-        {errors.city && <Text>This is required.</Text>}
+        {errors.city && <Text>Campo requerido.</Text>}
         
         <Controller
           control={control}
           rules={{
-            maxLength: 100,
+            required: true,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
@@ -230,7 +220,7 @@ export default function Register({navigation}) {
           )}
           name="password"
         />
-        {errors.password && <Text>This is required.</Text>}
+        {errors.password && <Text>Campo requerido.</Text>}
 
         <Button title="Submit" onPress={handleSubmit(onSubmit)} />
       </View>

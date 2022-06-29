@@ -56,6 +56,7 @@ export default function Register() {
               onChangeText={onChange}
               defaultValue={value}
               placeholder="Direccion"
+              editable = { false }
             />
           )}
           name="address"

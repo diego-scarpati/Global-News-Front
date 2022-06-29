@@ -8,7 +8,6 @@ export default function HomeButton(props) {
         <View style={styles.item}>
           <TouchableOpacity onPress={onPress}>
             <View style={styles.iconContent}>
-              <Image style={styles.icon} source={img} />
             </View>
             <View style={styles.infoContent}>
               <Text style={styles.info}>{text}</Text>
@@ -21,11 +20,12 @@ export default function HomeButton(props) {
 const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   infoContent: {
-    flex: 1,
-    alignItems: "flex-start",
+    // flex: 1,
+    // alignItems: "flex-start",
   },
   iconContent: {
     flex: 1,

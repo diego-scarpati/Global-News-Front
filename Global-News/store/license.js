@@ -9,8 +9,11 @@ export const sendLicenseRequest = createAsyncThunk("LICENSE", async (data)=>{
     }catch(error){console.log(error)}
 });
 
-const licenseReducer = createReducer({}, {
-    [sendLicenseRequest.fulfilled]: (state,action)=>action.payload,
+const licenseReducer = createReducer([], {
+    [sendLicenseRequest.fulfilled]: (state,action)=>{
+        const newState = [...state, action.payload]
+        return newState // chequear si esto agrega al array de licencias.
+    },
     [sendLicenseRequest.rejected]: (state,action)=>action.payload,
 });
 

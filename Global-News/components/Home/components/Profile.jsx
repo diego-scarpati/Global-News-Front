@@ -23,7 +23,7 @@ const user = useSelector((state) => state.user)
             uri: "https://img.icons8.com/ios/344/user-male-circle.png",
           }}
         />
-        <Text style={styles.name}>{user.firstName}</Text>
+        <Text style={styles.name}>{user.firstName} {user.lastName}</Text>
         <Text style={styles.userInfo}>{user.email}</Text>
         <Text style={styles.userInfo}>{`${user.city}, ${user.countryOfResidence}`}</Text>
       </View>

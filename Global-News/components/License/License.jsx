@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import {View, Text, Image, Button, StyleSheet, TextInput} from "react-native";
+import {View, Text, Image, Button, StyleSheet, TextInput, Modal} from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
 import { Picker } from "@react-native-picker/picker";
 import { useDispatch } from "react-redux";
+import Calendar from '../Calendar/Calendar';
 
 export default function License() {
+  const [showModal, setShowModal] = useState(false)
 
   const {
     control,
@@ -19,7 +21,7 @@ export default function License() {
       observations: " ",
     },
   });
-
+const dispatch = useDispatch();
   
   const onSubmit = (info) => {
     console.log("informacion",info)
@@ -30,8 +32,11 @@ export default function License() {
     //   navigate("/Home");
   };
   const [license, setLicense] = useState('Unknown');
-  console.log("aa",license)
-    const dispatch = useDispatch();
+  // console.log("aa",license)
+  // const handleVisibility = () => {
+  //   const view = true
+  // }
+    
 
   return (
     <ScrollView>
@@ -47,8 +52,51 @@ export default function License() {
           <Picker.Item label="Día de Estudio" value="Día de Estudio" />
           <Picker.Item label="Otro" value="Otro" />
         </Picker>
-     
-        <Controller
+        <Modal
+        animationType='slide'
+        transparent = { false }
+        visible= {showModal}
+        >
+          <Calendar/>
+          <Button
+          title='Cerrar'
+          onPress={()=> {
+            setShowModal(!showModal)
+          }}
+          ></Button>
+
+        </Modal>
+        <Button
+         title="Elegir Fecha Fin"
+         onPress={()=> {
+          setShowModal(!showModal)
+         }}
+        >
+        </Button>
+        <Modal
+        animationType='slide'
+        transparent = { false }
+        visible= {showModal}
+        >
+          <Calendar/>
+          <Button
+          title='Cerrar'
+          onPress={()=> {
+            setShowModal(!showModal)
+          }}
+          ></Button>
+
+        </Modal>
+        <Button
+         title="Elegir Fecha Inicio"
+         onPress={()=> {
+          setShowModal(!showModal)
+         }}
+        >
+        </Button>
+
+        {/* <Modal> */}
+        {/* <Controller
           control={control}
           rules={{
             required: true,
@@ -64,9 +112,9 @@ export default function License() {
           )}
           name="startDate"
         />
-        {errors.startDate && <Text>This is required.</Text>}
-
-        <Controller
+        {errors.startDate && <Text>This is required.</Text>} */}
+       
+        {/* <Controller
           control={control}
           rules={{
             required: true,
@@ -82,7 +130,7 @@ export default function License() {
           )}
           name="endDate"
         />
-        {errors.endDate && <Text>This is required.</Text>}
+        {errors.endDate && <Text>This is required.</Text>} */}
         <Controller
           control={control}
           rules={{

@@ -58,11 +58,11 @@ export default function Login({navigation}) {
         )}
         name="email"
       />
-      {errors.email && <Text>This is required.</Text>}
+      {errors.email && <Text>Campo requerido.</Text>}
       <Controller
         control={control}
         rules={{
-          maxLength: 100,
+          required: true,
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
@@ -76,7 +76,7 @@ export default function Login({navigation}) {
         )}
         name="password"
       />
-      {errors.password && <Text>This is required.</Text>}
+      {errors.password && <Text>Campo requerido.</Text>}
 
       <Button title="Submit" 
       onPress={  handleSubmit(onSubmit) }

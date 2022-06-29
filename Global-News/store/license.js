@@ -3,11 +3,8 @@ import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const sendLicenseRequest = createAsyncThunk("LICENSE", async (data)=>{
     try{
-         const {info,license} = data
-        console.log(info,license) 
-        const licencia = await axios.post("http://localhost:3001/api/workLicenses/addLicense", info,license)
-        console.log(licencia)
-        //return licencia.data
+        console.log(data) 
+        const licencia = await axios.post("http://localhost:3001/api/workLicenses/addLicense", data)
     }catch(error){console.log(error)}
 });
 

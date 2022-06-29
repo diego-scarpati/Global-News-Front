@@ -3,18 +3,21 @@ import {View, Text, Image, Button, StyleSheet, TextInput} from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
 import { Picker } from "@react-native-picker/picker";
-import { useDispatch } from "react-redux";
+
+import { useDispatch } from 'react-redux';
 import { sendLicenseRequest } from '../../store/license';
 
-export default function License() {
+export default function License({navigation}) {
 
   const {
     control,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: {
-      license:"",
+
+      type: "",
       startDate: "",
       endDate: "",
       attachment: "",
@@ -22,12 +25,13 @@ export default function License() {
     },
   });
 
-  const [license1, setLicense] = useState('Unknown');
+
   const dispatch = useDispatch();
-  
+
   const onSubmit = (info) => {
-    console.log(info)
-    /* dispatch(sendLicenseRequest({info,license})) */
+    dispatch(sendLicenseRequest(info))
+      navigation.navigate('HomeScreen')
+
   };
 
 
@@ -35,73 +39,37 @@ export default function License() {
   return (
     <ScrollView>
       <View>
-     
-        <Controller
+
+      <Controller
           control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Fecha Inicio"
-            />
+          render={({ value }) => (
+            <View>
+              <Picker
+                selectedValue={value}
+                onValueChange={itemValue => setValue("type", itemValue)}
+                style={styles.input}
+              >
+                <Picker.Item label="Tipo de Licencia" value="Unknown" color="#aaaa"/>
+                <Picker.Item label="Vacaciones" value="Vacaciones" />
+                <Picker.Item label="Día de estudio" value="Día de estudio" />
+                <Picker.Item label="Enfermedad" value="Enfermedad" />
+              </Picker>
+            </View>
           )}
-          name="startDate"
+          name="type"
+          defaultValue="Tipo de licencia"
         />
-        {errors.startDate && <Text>This is required.</Text>}
+        {errors.type && <Text>Seleccione una opción</Text>}
+
+
+
 
         <Controller
           control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Fecha fin"
-            />
-          )}
-          name="endDate"
-        />
-        {errors.endDate && <Text>This is required.</Text>}
-        <Controller
-          control={control}
-          
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Documento adjunto"
-            />
-          )}
-          name="attachment"
-        />
-         
-        <Controller
-          control={control}
-          
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Observaciones"
-            />
-          )}
-          name="observations"
-        />
-          
-        <Button title="Submit" onPress={handleSubmit(onSubmit)}/>
+
+
+        <Button title="Enviar" onPress={handleSubmit(onSubmit)} />
+
       </View>
     </ScrollView>
   );
@@ -115,5 +83,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     margin: 10,
+  },
+  error: {
+    color: '#ff0000',
+    fontSize: 9,
+    marginBottom: 8,
+    marginLeft: 6,
   },
 });

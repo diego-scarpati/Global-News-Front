@@ -12,7 +12,7 @@ import HomeScreen2 from './components/Home/HomeScreen2'
 import Team from "./components/Team/Team"
 import Attendance from "./components/Attendance/Attendance"
 import MyProfile from "./components/MyProfile/MyProfile"
-
+import Calendar from "./components/Calendar/Calendar"
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -28,6 +28,7 @@ export default function App() {
       <Stack.Screen name="MyProfile" component={MyProfile}/>
       <Stack.Screen name="Attendance" component={Attendance}/>
       <Stack.Screen name="Team" component={Team}/>
+      <Stack.Screen name="Calendar" component={Calendar}/>
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>

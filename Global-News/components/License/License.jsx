@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import {View, Text, Image, Button, StyleSheet, TextInput} from "react-native";
+import {View, Text, Image, Button, StyleSheet, TextInput, Modal} from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
 import { Picker } from "@react-native-picker/picker";
-
+import Calendar from "../Calendar/Calendar"
 import { useDispatch } from 'react-redux';
 import { sendLicenseRequest } from '../../store/license';
 
@@ -25,16 +25,14 @@ export default function License({navigation}) {
     },
   });
 
-
   const dispatch = useDispatch();
+
+  const [showModal, setShowModal] = useState(false)
 
   const onSubmit = (info) => {
     dispatch(sendLicenseRequest(info))
       navigation.navigate('HomeScreen')
-
   };
-
-
 
   return (
     <ScrollView>
@@ -61,11 +59,76 @@ export default function License({navigation}) {
         />
         {errors.type && <Text>Seleccione una opción</Text>}
 
+        <Modal
+        animationType='slide'
+        transparent = { false }
+        visible= {showModal}
+        >
+          <Calendar/>
+          <Button
+          title='Cerrar'
+          onPress={()=> {
+            setShowModal(!showModal)
+          }}
+          ></Button>
 
+        </Modal>
+        <Button
+         title="Elegir Fecha Inicio"
+         onPress={()=> {
+          setShowModal(!showModal)
+         }}
+        >
+        </Button>
+        <Modal
+        animationType='slide'
+        transparent = { false }
+        visible= {showModal}
+        >
+          <Calendar/>
+          <Button
+          title='Cerrar'
+          onPress={()=> {
+            setShowModal(!showModal)
+          }}
+          ></Button>
 
+        </Modal>
+        <Button
+         title="Elegir Fecha Fin"
+         onPress={()=> {
+          setShowModal(!showModal)
+         }}
+        >
+        </Button>
 
         <Controller
-          control={control}
+        control={control}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            style={styles.input}
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            placeholder="Archivo adjunto"
+          />
+        )}
+        name="attachment"
+      />
+
+      <Controller
+        control={control}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            style={styles.input}
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            placeholder="Observaciones"
+          />
+        )}
+        name="observations"
+      />
 
 
         <Button title="Enviar" onPress={handleSubmit(onSubmit)} />

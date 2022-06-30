@@ -1,14 +1,6 @@
 import React from "react";
+import {View,} from "react-native";
 
-import {
-  View,
-  Text,
-  Image,
-  Button,
-  Alert,
-  StyleSheet,
-  TextInput,
-} from "react-native";
 import AttendanceButton from "./components/AttendanceButton";
 
 export default function Attendance (){

@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Text, Image, Button, StyleSheet, TextInput } from "react-native";
-import { useForm, Controller } from "react-hook-form";
-import logo from "../assets/gnlogogrande-01.png";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
-import axios from "axios"
-import { sendRegisterRequest } from "../store/user";
+import { useForm, Controller } from "react-hook-form";
+import { View, Text, Image, Button, StyleSheet, TextInput } from "react-native";
+
+import logo from "../../assets/gnlogogrande-01.png";
+import { sendRegisterRequest } from "../../store/user";
 
 export default function Register({navigation}) {
 

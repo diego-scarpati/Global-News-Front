@@ -4,6 +4,7 @@ import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const sendRegisterRequest = createAsyncThunk("REGISTER", async (data)=>{
     try{
+        console.log('DATA: ', data)
         const info = await axios.post("http://localhost:3001/api/users/register", data)
 return info.data
     }catch(error){console.log(error)}
@@ -28,7 +29,7 @@ export const sendLogoutRequest = createAsyncThunk("LOGOUT", async(data)=>{
 
 
 const userReducer = createReducer({}, {
-    [sendRegisterRequest.fulfilled]: (state,action)=>action.payload,
+    [sendRegisterRequest.fulfilled]: (state,action)=>{action.payload},
     [sendRegisterRequest.rejected]: (state,action)=>action.payload,
 
     [sendLoginRequest.fulfilled]: (state,action)=>action.payload,

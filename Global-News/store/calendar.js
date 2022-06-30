@@ -15,7 +15,7 @@ import { createReducer, createAction } from "@reduxjs/toolkit";
 
 export const selectDay = createAction("SELECT_DAY");
 
-const calendarReducer = createReducer([], {
+const calendarReducer = createReducer({}, {
   [selectDay]: (state, action) =>{ state.push(action.payload)},
 });
 

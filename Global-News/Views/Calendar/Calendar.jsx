@@ -1,17 +1,20 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { selectDay } from "../../store/calendar";
+import { startDay, endDay } from "../../store/calendar";
 import { Modal, Text, View } from "react-native";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import CalendarHeader from "react-native-calendars/src/calendar/header";
 
-export default function Calendario() {
+export default function Calendario(props) {
 
+  const {text} = props
+console.log("esto es text", text)
   const dispatch = useDispatch();
 
   const handleSelect = (day) => {
-    dispatch(selectDay(day.dateString))
+    dispatch(
+      text === "start" ?  startDay(day.dateString) : endDay(day.dateString))
     console.log('Dia: ',day.dateString)
   }
 
@@ -78,64 +81,3 @@ export default function Calendario() {
 
   );
 }
-
-// import { connect } from 'react-redux';
-// import React, { Component } from 'react';
-// import {StyleSheet,Text,View,} from 'react-native';
-// import CalendarPicker from 'react-native-calendar-picker';
-// import { setStart, setEnd } from '../../store/calendar';
-
-
-
-// class Calendar extends Component {
- 
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       selectedStartDate: null,
-//     };
-//     this.onDateChange = this.onDateChange.bind(this);
-//   }
-
-//   onDateChange(date) {
-//     this.setState({selectedStartDate: date,});
-//     this.props.setDate(date._i,this.props.text)
-//   }
-
-//   render() {
-//     const { selectedStartDate } = this.state;
-//     const startDate = selectedStartDate ? selectedStartDate.toString() : '';
-    
-//     return (
-//       <View style={styles.container}>
-//         <CalendarPicker
-
-//           onDateChange={this.onDateChange}
-//         />
-//          <Text>{startDate}</Text>
-//       </View>
-//     );
-//   }
-  
-// }
-
-// const mapDispatchToProps=(dispatch)=>{ 
-// return{
-//   setDate:(date,text)=>{
-//   console.log(text)
-  
-// const action = text === "start" ? setStart : setEnd
-//       dispatch(action(date))}} 
-// }
-
-// export default connect(null, mapDispatchToProps)(Calendar)
-
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#FFFFFF',
-//     marginTop: 100,
-//   },
-// });
-

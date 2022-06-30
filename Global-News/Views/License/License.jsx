@@ -27,6 +27,8 @@ export default function License({ navigation }) {
   const dispatch = useDispatch();
 
   const selectedDay = useSelector((state) => state.calendar);
+  const user = useSelector((state) => state.user)
+
 console.log("esto es selectedday", selectedDay)
 
   const [showModalStart, setShowModalStart] = useState(false);
@@ -35,7 +37,6 @@ console.log("esto es selectedday", selectedDay)
   const onSubmit = (info) => {
     info.startDate = selectedDay.start
     info.endDate = selectedDay.end
-    console.log('INFO:' , info)
     dispatch(sendLicenseRequest(info));
     navigation.navigate("HomeScreen");
   };

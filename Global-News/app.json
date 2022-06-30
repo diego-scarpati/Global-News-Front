@@ -18,7 +18,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.GlobalNews.app",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {

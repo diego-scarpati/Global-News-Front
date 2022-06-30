@@ -1,18 +1,11 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import axios from "axios";
-import { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
+import { StyleSheet, Text, View, Image } from "react-native";
+
 
 export default function Profile() {
 
 const user = useSelector((state) => state.user)
-
-  // useEffect(() => {
-  //   axios.get("http://localhost:3001/api/users/").then((productlist) => {
-  //     setProducts(productlist.data);
-  //   });
-  // }, []);
 
   return (
     <View style={styles.header}>

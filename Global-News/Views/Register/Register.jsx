@@ -6,6 +6,7 @@ import { View, Text, Image, Button, StyleSheet, TextInput } from "react-native";
 
 import logo from "../../assets/gnlogogrande-01.png";
 import { sendRegisterRequest } from "../../store/user";
+import Calendar from "../Calendar/Calendar";
 
 export default function Register({navigation}) {
 
@@ -31,6 +32,7 @@ export default function Register({navigation}) {
   const dispatch = useDispatch();
 
   const onSubmit = (info) =>{
+    console.log(info)
       dispatch(sendRegisterRequest (info))
       navigation.navigate('Login')
     }

@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import store from "./store/store"
 import Team from "./Views/Team/Team"
+import RrHh from "./Views/RRHH/RrHh"
 import Login from "./Views/Login/Login"
 import License from "./Views/License/License"
 import Calendar from "./Views/Calendar/Calendar"
@@ -12,6 +13,7 @@ import MyProfile from "./Views/MyProfile/MyProfile"
 import HomeScreen from "./Views/HomeScreen/HomeScreen"
 import Attendance from "./Views/Attendance/Attendance"
 import StartScreen from "./Views/StartScreen/StartScreen";
+
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -28,6 +30,7 @@ export default function App() {
       <Stack.Screen    name="Attendance" component={Attendance}/>
       <Stack.Screen    name="Team"       component={Team}/>
       <Stack.Screen    name="Calendar"   component={Calendar}/>
+      <Stack.Screen    name="RrHh"       component={RrHh}/>
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>

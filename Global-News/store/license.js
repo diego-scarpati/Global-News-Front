@@ -10,9 +10,21 @@ export const sendLicenseRequest = createAsyncThunk("LICENSE", async (data, thunk
     }catch(error){console.log(error)}
 });
 
+export const rrhhReviewLicense = createAsyncThunk("RRHH_REVIEW_LICENCE", async ()=> {
+    try{
+        const licences = await axios.get("http://localhost:3001/api/workLicenses/")
+        return licences.data
+    }catch(error){console.log(error)}
+})
+
 const licenseReducer = createReducer({}, {
     [sendLicenseRequest.fulfilled]: (state,action)=>action.payload,
     [sendLicenseRequest.rejected]: (state,action)=>action.payload,
+
+    [rrhhReviewLicense.fulfilled]: (state,action)=>action.payload,
+    [rrhhReviewLicense.rejected]: (state,action)=>action.payload,
+
+
 });
 
 export default licenseReducer

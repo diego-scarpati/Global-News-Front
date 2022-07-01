@@ -19,6 +19,8 @@ export default function RrHh() {
         sections={[{ title: "Licencias", data: licencias }]}
         renderItem={({ item }) => (
           <View style={styles.row}>
+          
+            <Text>Solicitante: {item.user?.firstName} {item.user?.lastName}</Text>
             <Text>Tipo de licencia: {item.type}</Text>
             <Text>Inicio: {item.startDate}</Text>
             <Text>Fin: {item.endDate}</Text>

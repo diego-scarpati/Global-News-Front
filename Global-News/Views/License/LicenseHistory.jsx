@@ -1,6 +1,6 @@
 import React,{ useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, SectionList, StatusBar} from "react-native";
 import { sendHistoyLicensesRequest } from "../../store/license"
 
 
@@ -10,43 +10,49 @@ export default function RrHh() {
   const licencias = useSelector((state) => state.license);
   useEffect(() => {dispatch(sendHistoyLicensesRequest())},[])
 
-  console.log("LicensesJSX",licencias)
-
 
   return (
-    <View style={styles.header}>
-      <View style={styles.headerContent}>
-        <Text>Hola!</Text>
-      </View>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <SectionList
+        sections={[{ title: "Historial licencias", data: licencias }]}
+        renderItem={({ item }) => (
+          <View style={styles.row}>
+          
+            {/* <Text>Solicitante: {item.user?.firstName} {item.user?.lastName}</Text> */}
+            <Text>Tipo de licencia: {item.type}</Text>
+            <Text>Inicio: {item.startDate}</Text>
+            <Text>Fin: {item.endDate}</Text>
+            <Text>Observaciones:{item.observations}</Text>
+          </View>
+        )}
+       
+        keyExtractor={(item) => item.id}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: "#0073b7",
+  container: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+    marginHorizontal: 16,
   },
-  headerContent: {
-    padding: 30,
-    alignItems: "center",
+  item: {
+    backgroundColor: "#f9c2ff",
+    padding: 20,
+    marginVertical: 8,
   },
-  avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 100,
-    borderWidth: 4,
-    borderColor: "#f89d1e",
-    marginBottom: 10,
+  title: {
+    fontSize: 24,
   },
-  name: {
-    fontSize: 22,
-    color: "#fff",
-    fontWeight: "600",
+  row: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
-  userInfo: {
-    fontSize: 16,
-    color: "#fff",
-    fontWeight: "600",
-    marginTop: 5,
+  sectionHeader: {
+    backgroundColor: "#efefef",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
 });

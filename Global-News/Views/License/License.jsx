@@ -40,7 +40,7 @@ export default function License({ navigation }) {
   };
 
   const onSend = () =>{
-    navigation.navigate("LicenseHistory")
+    navigation.navigate("Historial Licencias")
   }
 
   return (

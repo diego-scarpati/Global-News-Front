@@ -39,7 +39,7 @@ export default function RrHh() {
         sections={[{ title: "Licencias", data: licencias }]}
         renderItem={({ item }) => (
           <View style={styles.row}>
-            <Text>
+            <Text style={styles.text}>
               Solicitante: {item.user?.firstName} {item.user?.lastName}
             </Text>
             <Text>Tipo de licencia: {item.type}</Text>
@@ -114,5 +114,8 @@ const styles = StyleSheet.create({
   },
   buttomView: {
     margin: 10
+  },
+  text:{
+    fontSize: 20
   }
 });

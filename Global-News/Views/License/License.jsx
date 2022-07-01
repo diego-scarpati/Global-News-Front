@@ -29,8 +29,6 @@ export default function License({ navigation }) {
   const selectedDay = useSelector((state) => state.calendar);
   const user = useSelector((state) => state.user)
 
-console.log("esto es selectedday", selectedDay)
-
   const [showModalStart, setShowModalStart] = useState(false);
   const [showModalEnd, setShowModalEnd] = useState(false);
 
@@ -40,6 +38,10 @@ console.log("esto es selectedday", selectedDay)
     dispatch(sendLicenseRequest(info));
     navigation.navigate("HomeScreen");
   };
+
+  const onSend = () =>{
+    navigation.navigate("LicenseHistory")
+  }
 
   return (
     <ScrollView>
@@ -144,6 +146,11 @@ console.log("esto es selectedday", selectedDay)
           style={{ padding: 10 }}
           title="Enviar"
           onPress={handleSubmit(onSubmit)}
+        />
+        <Button
+          style={{ padding: 10 }}
+          title="Historial Licencias"
+          onPress={handleSubmit(onSend)}
         />
       </View>
     </ScrollView>

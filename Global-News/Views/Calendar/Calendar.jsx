@@ -1,21 +1,16 @@
 import React from "react";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { startDay, endDay } from "../../store/calendar";
-import { Modal, Text, View } from "react-native";
-import { Calendar, CalendarList, Agenda } from "react-native-calendars";
-import CalendarHeader from "react-native-calendars/src/calendar/header";
+import { View } from "react-native";
+import { Calendar } from "react-native-calendars";
+
 
 export default function Calendario(props) {
+const {text} = props
+const dispatch = useDispatch();
 
-  const {text} = props
-console.log("esto es text", text)
-  const dispatch = useDispatch();
-
-  const handleSelect = (day) => {
-    dispatch(
-      text === "start" ?  startDay(day.dateString) : endDay(day.dateString))
-    console.log('Dia: ',day.dateString)
+const handleSelect = (day) => {
+    dispatch(text === "start" ?  startDay(day.dateString) : endDay(day.dateString))
   }
 
   return (

@@ -50,7 +50,6 @@ export const rrhhReviewLicense = createAsyncThunk(
 export const rrhhChangeLicenseStatus = createAsyncThunk(
   "RRHH_CHANGE_STATUS_LICENCE",
   async (data, thunkAPI) => {
-  console.log("🚀 ~ file: license.js ~ line 53 ~ data", data)
     try {
       const licences = await axios.put(`http://localhost:3001/api/workLicenses/${data.id}`,data)
       return licences.data

@@ -16,8 +16,8 @@ export default function StartScreen({ navigation }) {
         />
       </View>
       <View style={styles.button}>
-        <Button  title="Login" onPress={() => navigation.navigate("Login")} />
-        <Button title="Register" onPress={() => navigation.navigate("Register")}/>
+        <Button  title="Login" onPress={() => navigation.navigate("Inicio Sesion")} />
+        <Button title="Register" onPress={() => navigation.navigate("Registro")}/>
       </View>
     </View>
   );

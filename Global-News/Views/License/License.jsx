@@ -29,8 +29,6 @@ export default function License({ navigation }) {
   const selectedDay = useSelector((state) => state.calendar);
   const user = useSelector((state) => state.user)
 
-console.log("esto es selectedday", selectedDay)
-
   const [showModalStart, setShowModalStart] = useState(false);
   const [showModalEnd, setShowModalEnd] = useState(false);
 

@@ -13,6 +13,7 @@ export const sendLicenseRequest = createAsyncThunk("LICENSE", async (data, thunk
 export const rrhhReviewLicense = createAsyncThunk("RRHH_REVIEW_LICENCE", async ()=> {
     try{
         const licences = await axios.get("http://localhost:3001/api/workLicenses/")
+        console.log("licencias data", licences.data)
         return licences.data
     }catch(error){console.log(error)}
 })

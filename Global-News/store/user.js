@@ -27,6 +27,13 @@ export const sendLogoutRequest = createAsyncThunk("LOGOUT", async(data)=>{
         }catch(error){console.log(error)} 
 });
 
+export const userRequest = createAsyncThunk("USER_REQUEST", async (data)=>{
+    try{ 
+    const user = await axios.get(`http://localhost:3001/api/users/${data.userId}`)
+        return user.data
+    }catch(error){console.log(error)}
+});
+
 
 const userReducer = createReducer({}, {
     [sendRegisterRequest.fulfilled]: (state,action)=>{action.payload},
@@ -37,6 +44,10 @@ const userReducer = createReducer({}, {
 
     [sendLogoutRequest.fulfilled]: (state,action)=>action.payload,
     [sendLogoutRequest.rejected]: (state,action)=>action.payload,
+
+    [userRequest.fulfilled]: (state,action)=>action.payload,
+    [userRequest.rejected]: (state,action)=>action.payload,
+
   });
 
 export default userReducer

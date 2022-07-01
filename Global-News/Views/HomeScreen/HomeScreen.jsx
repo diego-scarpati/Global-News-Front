@@ -14,11 +14,11 @@ export default function UserProfileView({navigation}) {
     <ScrollView style={styles.container}>
       <Profile />
       <View style={styles.body}>
-        <HomeButton text="Mis Datos"   onPress={()=>navigation.navigate("MyProfile")}/>
-        <HomeButton text="Licencias"   onPress={()=>navigation.navigate("License")}/>
-        <HomeButton text="Equipos"     onPress={()=>navigation.navigate("Team")}/> 
-        <HomeButton text="Presentismo" onPress={()=>navigation.navigate("Attendance")}/>
-        {(user.RRHH)&& <HomeButton text="Recursos Humanos"        onPress={()=>navigation.navigate("RrHh")}/>}
+        <HomeButton text="Mis Datos"                         onPress={()=>navigation.navigate("MyProfile")}/>
+        <HomeButton text="Licencias"                         onPress={()=>navigation.navigate("License")}/>
+        <HomeButton text="Equipos"                           onPress={()=>navigation.navigate("Team")}/> 
+        <HomeButton text="Presentismo"                       onPress={()=>navigation.navigate("Attendance")}/>
+        {(user.RRHH)&& <HomeButton text="Recursos Humanos"   onPress={()=>navigation.navigate("Recursos Humanos")}/>}
         
       </View>
     </ScrollView>

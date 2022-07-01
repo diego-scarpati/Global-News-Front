@@ -13,6 +13,7 @@ import MyProfile from "./Views/MyProfile/MyProfile"
 import HomeScreen from "./Views/HomeScreen/HomeScreen"
 import Attendance from "./Views/Attendance/Attendance"
 import StartScreen from "./Views/StartScreen/StartScreen";
+import LicenseHistory from "./Views/License/LicenseHistory"
 
 
 const Stack = createNativeStackNavigator();
@@ -21,16 +22,17 @@ export default function App() {
     <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen    name="Home"       component={StartScreen}/>
-      <Stack.Screen    name="Login"      component={Login}/>
-      <Stack.Screen    name="Register"   component={Register}/>
-      <Stack.Screen    name="License"    component={License}/>
-      <Stack.Screen    name="HomeScreen" component={HomeScreen}/>
-      <Stack.Screen    name="MyProfile"  component={MyProfile}/>
-      <Stack.Screen    name="Attendance" component={Attendance}/>
-      <Stack.Screen    name="Team"       component={Team}/>
-      <Stack.Screen    name="Calendar"   component={Calendar}/>
-      <Stack.Screen    name="RrHh"       component={RrHh}/>
+      <Stack.Screen    name="Home"                component={StartScreen}/>
+      <Stack.Screen    name="Login"               component={Login}/>
+      <Stack.Screen    name="Register"            component={Register}/>
+      <Stack.Screen    name="License"             component={License}/>
+      <Stack.Screen    name="HomeScreen"          component={HomeScreen}/>
+      <Stack.Screen    name="Historial Licencias" component={LicenseHistory}/>
+      <Stack.Screen    name="MyProfile"           component={MyProfile}/>
+      <Stack.Screen    name="Attendance"          component={Attendance}/>
+      <Stack.Screen    name="Team"                component={Team}/>
+      <Stack.Screen    name="Calendar"            component={Calendar}/>
+      <Stack.Screen    name="Recursos Humanos"    component={RrHh}/>
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>

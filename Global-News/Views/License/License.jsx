@@ -39,6 +39,10 @@ export default function License({ navigation }) {
     navigation.navigate("HomeScreen");
   };
 
+  const onSend = () =>{
+    navigation.navigate("Historial Licencias")
+  }
+
   return (
     <ScrollView>
       <View style={{ alignItems: "center" }}>
@@ -142,6 +146,11 @@ export default function License({ navigation }) {
           style={{ padding: 10 }}
           title="Enviar"
           onPress={handleSubmit(onSubmit)}
+        />
+        <Button
+          style={{ padding: 10 }}
+          title="Historial Licencias"
+          onPress={handleSubmit(onSend)}
         />
       </View>
     </ScrollView>

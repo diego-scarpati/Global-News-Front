@@ -34,7 +34,7 @@ export default function Register({navigation}) {
   const onSubmit = (info) =>{
     console.log(info)
       dispatch(sendRegisterRequest (info))
-      navigation.navigate('Login')
+      navigation.navigate('Inicio Sesion')
     }
 
   return (

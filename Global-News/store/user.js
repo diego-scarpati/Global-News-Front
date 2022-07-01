@@ -41,6 +41,16 @@ export const searchAllUsers = createAsyncThunk("USER_REQUEST", async ()=>{
     }catch(error){console.log(error)}
 });
 
+export const searchUsersByName = createAsyncThunk("USER_BY_NAME", async (data) => {
+console.log("🚀 ~ file: user.js ~ line 45 ~ searchUsersByName ~ data", data)
+    try {
+        const userSearch = await axios.get(`http://localhost:3001/api/users/search/${data}`)
+        return userSearch.data
+    } catch(error) {
+        console.error(error)
+    }
+})
+
 
 const userReducer = createReducer({}, {
     [sendRegisterRequest.fulfilled]: (state,action)=>{action.payload},
@@ -57,6 +67,9 @@ const userReducer = createReducer({}, {
 
     [searchAllUsers.fulfilled]: (state,action)=>action.payload,
     [searchAllUsers.rejected]: (state,action)=>action.payload,
+
+    [searchUsersByName.fulfilled]: (state,action)=>action.payload,
+    [searchUsersByName.rejected]: (state,action)=>action.payload,
 
   });
 

@@ -24,7 +24,7 @@ export default function Login({navigation}) {
   
   const onSubmit = (info) =>{
   dispatch(sendLoginRequest (info))
-  navigation.navigate('HomeScreen')
+  navigation.navigate('Pantalla Principal')
     }
 
   return (

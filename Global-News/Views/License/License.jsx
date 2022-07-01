@@ -36,7 +36,7 @@ export default function License({ navigation }) {
     info.startDate = selectedDay.start
     info.endDate = selectedDay.end
     dispatch(sendLicenseRequest(info));
-    navigation.navigate("HomeScreen");
+    navigation.navigate("Pantalla Principal");
   };
 
   const onSend = () =>{
@@ -59,9 +59,23 @@ export default function License({ navigation }) {
                 value="Unknown"
                 color="#aaaa"
               />
-              <Picker.Item label="Vacaciones" value="Vacaciones" />
-              <Picker.Item label="Día de estudio" value="Día de estudio" />
-              <Picker.Item label="Enfermedad" value="Enfermedad" />
+              <Picker.Item label="Ausencia con aviso" value="Ausencia con aviso" />
+              <Picker.Item label="Ausencia sin aviso" value="Ausencia sin aviso" />
+              <Picker.Item label="Feriados" value="Feriados" />
+              <Picker.Item label="Guardia" value="Guardia" />
+              <Picker.Item label="Hora a compensar" value="Hora a compensar" />
+              <Picker.Item label="Hora extra" value="Hora extra" />
+              <Picker.Item label="Horas nocturnidad" value="Horas nocturnidad" />
+              <Picker.Item label="Ingreso fuera de horario" value="Ingreso fuera de horario" />
+              <Picker.Item label="Licencia estudio" value="Licencia estudio" />
+              <Picker.Item label="Licencia justificada" value="Licencia justificada" />
+              <Picker.Item label="Licencia no justificada" value="Licencia no justificada" />
+              <Picker.Item label="Licencia por enfermedad" value="Licencia por enfermedad" />
+              <Picker.Item label="Licencia sin goce de sueldos" value="Licencia sin goce de sueldos" />
+              <Picker.Item label="Llegada tarde" value="Llegada Tarde" />
+              <Picker.Item label="Licencia vacaciones" value="Licencia vacaciones" />
+              <Picker.Item label="Otros" value="Otros" />
+              <Picker.Item label="Retiro fuera de horario" value="Retiro Ffera de horario" />
             </Picker>
           )}
           name="type"
@@ -78,7 +92,7 @@ export default function License({ navigation }) {
             onPress={() => {
               setShowModalStart(!showModalStart);
             }}
-          ></Button>
+          />
         </Modal>
         <Button
           style={{ marginBottom: 20 }}
@@ -86,7 +100,7 @@ export default function License({ navigation }) {
           onPress={() => {
             setShowModalStart(!showModalStart);
           }}
-        ></Button>
+        />
          <View style = {styles.input} pointerEvents="none">
            <Text>Dia de inicio: </Text>
           <Text>{selectedDay.start}</Text>
@@ -99,15 +113,14 @@ export default function License({ navigation }) {
             onPress={() => {
               setShowModalEnd(!showModalEnd);
             }}
-          ></Button>
+          />
         </Modal>
         <Button
           title="Elegir Fecha Fin"
           onPress={() => {
             setShowModalEnd(!showModalEnd);
           }}
-        ></Button>
-        
+        />
          <View style = {styles.input} pointerEvents="none">
            <Text>Dia de finalizacion: </Text>
           <Text>{selectedDay.end}</Text>

@@ -34,6 +34,13 @@ export const userRequest = createAsyncThunk("USER_REQUEST", async (data)=>{
     }catch(error){console.log(error)}
 });
 
+export const searchAllUsers = createAsyncThunk("USER_REQUEST", async ()=>{
+    try{ 
+    const user = await axios.get(`http://localhost:3001/api/users/`)
+        return user.data
+    }catch(error){console.log(error)}
+});
+
 
 const userReducer = createReducer({}, {
     [sendRegisterRequest.fulfilled]: (state,action)=>{action.payload},
@@ -47,6 +54,9 @@ const userReducer = createReducer({}, {
 
     [userRequest.fulfilled]: (state,action)=>action.payload,
     [userRequest.rejected]: (state,action)=>action.payload,
+
+    [searchAllUsers.fulfilled]: (state,action)=>action.payload,
+    [searchAllUsers.rejected]: (state,action)=>action.payload,
 
   });
 

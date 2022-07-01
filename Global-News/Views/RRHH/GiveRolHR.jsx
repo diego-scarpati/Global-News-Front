@@ -9,7 +9,9 @@ import {
   StatusBar,
   Button
 } from "react-native";
+import SearchInput from "../Search/SearchInput";
 import { searchAllUsers } from "../../store/user";
+import { searchUsersByName } from "../../store/user";
 
 export default function RrHh() {
   const dispatch = useDispatch();
@@ -19,7 +21,8 @@ export default function RrHh() {
   console.log(users)
 
   useEffect(() => {
-    dispatch(searchAllUsers());
+    dispatch(searchAllUsers())
+   // dispatch(searchUsersByName())
   }, []);
 
   const handlePromove = (userId,position) => {
@@ -30,6 +33,7 @@ export default function RrHh() {
  
   return (
     <SafeAreaView style={styles.container}>
+      <SearchInput />
     <Text style={styles.mainText}>Promover Empleados</Text>
       <SectionList
         sections={[{ title: "Promover Empleados", data: users}]}

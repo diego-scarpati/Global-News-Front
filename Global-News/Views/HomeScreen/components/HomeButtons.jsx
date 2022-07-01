@@ -1,46 +1,33 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from "react-native";
 
 export default function HomeButton(props) {
   const {text, img, onPress} = props
 
       return (
         <View style={styles.item}>
-          <TouchableOpacity onPress={onPress}>
-            <View style={styles.iconContent}>
-              <Image style={styles.icon} source={img} />
-            </View>
-            <View style={styles.infoContent}>
-              <Text style={styles.info}>{text}</Text>
-            </View>
-          </TouchableOpacity>
+          <Button title={text} style={styles.to} onPress={onPress}/>
         </View>
       );
 }
 
 const styles = StyleSheet.create({
+  to:{
+    // backgroundColor: '#0073b7',
+    // borderRadius: 5,
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+  },
   item: {
     flexDirection: "row",
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 20
   },
   infoContent: {
     flex: 1,
     alignItems: "flex-start",
   },
-  iconContent: {
-    flex: 1,
-    alignItems: "flex-center",
-    // paddingRight: 5,
-  },
-  icon: {
-    width: 50,
-    height: 50,
-    marginTop: 20,
-    marginLeft: 20,
-  },
-  info: {
-    fontSize: 25,
-    marginTop: 15,
-    color: "#FFFFFF",
-  },
+  
 });

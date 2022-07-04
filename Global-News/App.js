@@ -16,13 +16,14 @@ import Attendance from "./Views/Attendance/Attendance";
 import BossHomeScreen from "./Views/Boss/BossHomeScreen"
 import StartScreen from "./Views/StartScreen/StartScreen";
 import LicenseHistory from "./Views/License/LicenseHistory";
-import HRLicensesRequest from "./Views/RRHH/HRLicensesRequest";
 import HRLicensesHistory from "./Views/RRHH/HRLicencesHistory"
-import BossLicencesRequest from "./Views/Boss/BossLicencesRequest";
+import HRLicensesRequest from "./Views/RRHH/HRLicensesRequest";
 import ManagerHomeScreen from "./Views/Manager/ManagerHomeScreen"
-import ManagerLicencesRequest from "./Views/Manager/ManagerLicensesRequest"
+import BossLicencesRequest from "./Views/Boss/BossLicencesRequest";
 import CoordinatorLicenses from "./Views/Coordinator/CoordinatorLicenses"
+import ManagerLicencesRequest from "./Views/Manager/ManagerLicensesRequest"
 import CoordinatorHomeScreen from "./Views/Coordinator/CoordinatorHomeScreen"
+import HREditUser from "./Views/RRHH/HREditUser"
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -50,6 +51,7 @@ export default function App() {
           <Stack.Screen name="Gerente" component={ManagerHomeScreen} />
           <Stack.Screen name="Manager Solicitud de Licencias" component={ManagerLicencesRequest} />
 
+          <Stack.Screen name="Editar Usuario" component={HREditUser} />
           <Stack.Screen name="Promover Empleado" component={HRGiveRol} />
           <Stack.Screen name="Recursos Humanos" component={HRHomeScreen} />
           <Stack.Screen name="Solicitud de Licencias" component={HRLicensesRequest}/>

@@ -20,6 +20,10 @@ export default function HRHomeScreen({ navigation }) {
           text="Historial de Licencias"
           onPress={() => navigation.navigate("Historial de Licencias")}
         />
+        <HomeButton
+          text="Editar Usuario"
+          onPress={() => navigation.navigate("Editar Usuario")}
+        />
       </View>
     </ScrollView>
   );

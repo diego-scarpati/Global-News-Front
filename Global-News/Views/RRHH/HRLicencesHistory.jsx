@@ -14,10 +14,8 @@ import SearchInput from "../Search/SearchInput";
 
 export default function HRLicencesHistory() {
   const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.user);
   const licencias = useSelector((state) => state.license);
-  console.log(licencias)
+  
 
   useEffect(() => {
     dispatch(rrhhReviewLicense());

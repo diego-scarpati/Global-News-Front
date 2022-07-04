@@ -2,9 +2,9 @@ import  React, {useState} from "react";
 import { Searchbar } from "react-native-paper";
 import { StyleSheet, Button } from "react-native";
 import { useDispatch } from "react-redux";
-import { searchUsersByName } from "../../store/user";
+
 import { View } from "react-native-web";
-import { onChange } from "react-native-reanimated";
+
 
 const SearchInput = (props) => {
   const {dispatchInput} = props

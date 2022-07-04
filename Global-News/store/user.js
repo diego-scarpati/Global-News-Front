@@ -41,9 +41,8 @@ export const searchAllUsers = createAsyncThunk("USER_REQUEST", async ()=>{
     }catch(error){console.log(error)}
 });
 
-export const searchUsersByName = createAsyncThunk("USER_BY_NAME", async (data) => {
+export const searchUsersByInput = createAsyncThunk("USER_BY_INPUT", async (data) => {
     try {
-        console.log(data)
         const userSearch = await axios.get(`http://localhost:3001/api/users/search/${data}`)
         return userSearch.data
     } catch(error) {
@@ -68,8 +67,8 @@ const userReducer = createReducer({}, {
     [searchAllUsers.fulfilled]: (state,action)=>action.payload,
     [searchAllUsers.rejected]: (state,action)=>action.payload,
 
-    [searchUsersByName.fulfilled]: (state,action)=>action.payload,
-    [searchUsersByName.rejected]: (state,action)=>action.payload,
+    [searchUsersByInput.fulfilled]: (state,action)=>action.payload,
+    [searchUsersByInput.rejected]: (state,action)=>action.payload,
 
   });
 

@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
 import { searchAllUsers } from "../../store/user";
-import { searchUsersByName } from "../../store/user";
+
 
 export default function RrHh() {
   const dispatch = useDispatch();
@@ -22,7 +22,6 @@ export default function RrHh() {
 
   useEffect(() => {
     dispatch(searchAllUsers())
-   // dispatch(searchUsersByName())
   }, []);
 
   const handlePromove = (userId,position) => {

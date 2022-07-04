@@ -48,6 +48,9 @@ export default function License({ navigation }) {
       <View style={{ alignItems: "center" }}>
         <Controller
           control={control}
+          rules={{
+            required: true,
+          }}
           render={({ value }) => (
             <Picker
               selectedValue={value}
@@ -58,6 +61,7 @@ export default function License({ navigation }) {
                 label="Tipo de Licencia"
                 value="Unknown"
                 color="#aaaa"
+                enabled={false}
               />
               <Picker.Item label="Ausencia con aviso" value="Ausencia con aviso" />
               <Picker.Item label="Ausencia sin aviso" value="Ausencia sin aviso" />
@@ -75,7 +79,7 @@ export default function License({ navigation }) {
               <Picker.Item label="Llegada tarde" value="Llegada Tarde" />
               <Picker.Item label="Licencia vacaciones" value="Licencia vacaciones" />
               <Picker.Item label="Otros" value="Otros" />
-              <Picker.Item label="Retiro fuera de horario" value="Retiro Ffera de horario" />
+              <Picker.Item label="Retiro fuera de horario" value="Retiro Fuera de horario" />
             </Picker>
           )}
           name="type"
@@ -83,7 +87,7 @@ export default function License({ navigation }) {
         />
         {errors.type && <Text>Seleccione una opción</Text>}
       </View>
-
+      
       <View style={styles.container}>
         <Modal animationType="slide" transparent={false} visible={showModalStart}>
           <Calendar text={"start"}/>
@@ -101,10 +105,12 @@ export default function License({ navigation }) {
             setShowModalStart(!showModalStart);
           }}
         />
+        
          <View style = {styles.input} pointerEvents="none">
            <Text>Dia de inicio: </Text>
           <Text>{selectedDay.start}</Text>
         </View>
+        {errors.startDate && <Text>Campo requerido.</Text>}
 
         <Modal animationType="slide" transparent={false} visible={showModalEnd}>
           <Calendar text={"end"}/>
@@ -125,7 +131,7 @@ export default function License({ navigation }) {
            <Text>Dia de finalizacion: </Text>
           <Text>{selectedDay.end}</Text>
           </View>
-       
+          {errors.endDate && <Text>Campo requerido.</Text>}
 
         <Controller
           control={control}

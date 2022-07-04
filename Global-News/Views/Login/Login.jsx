@@ -1,21 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-
-import {
-  View,
-  Text,
-  Image,
-  Button,
-  Alert,
-  StyleSheet,
-  TextInput,
-} from "react-native";
-import { StatusBar } from "expo-status-bar";
-// import { Link, Redirect, Route, Switch } from 'react-router-native'
 import { useForm, Controller } from "react-hook-form";
-import logo from "../assets/gnlogogrande-01.png";
-import { NavigationType } from "react-router-native";
-import { sendLoginRequest } from "../store/user";
+import { useDispatch, useSelector } from "react-redux";
+import {View,Text,Image,Button,StyleSheet,TextInput,} from "react-native";
+
+
+import logo from "../../assets/gnlogogrande-01.png";
+import { sendLoginRequest } from "../../store/user";
 
 
 export default function Login({navigation}) {
@@ -31,10 +21,10 @@ export default function Login({navigation}) {
   });
 
   const dispatch = useDispatch();
-
+  
   const onSubmit = (info) =>{
-      dispatch(sendLoginRequest (info))
-      navigation.navigate('HomeScreen')
+  dispatch(sendLoginRequest (info))
+  navigation.navigate('Pantalla Principal')
     }
 
   return (
@@ -58,11 +48,11 @@ export default function Login({navigation}) {
         )}
         name="email"
       />
-      {errors.email && <Text>This is required.</Text>}
+      {errors.email && <Text>Campo requerido.</Text>}
       <Controller
         control={control}
         rules={{
-          maxLength: 100,
+          required: true,
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
@@ -76,7 +66,7 @@ export default function Login({navigation}) {
         )}
         name="password"
       />
-      {errors.password && <Text>This is required.</Text>}
+      {errors.password && <Text>Campo requerido.</Text>}
 
       <Button title="Submit" 
       onPress={  handleSubmit(onSubmit) }
@@ -102,7 +92,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     height: 100,
-    width: 200,
+    width: 250,
     justifyContent: "center",
   },
 });

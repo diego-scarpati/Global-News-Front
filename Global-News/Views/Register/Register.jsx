@@ -1,23 +1,13 @@
-import React from "react";
-import { View, Text, Image, Button, StyleSheet, TextInput } from "react-native";
-import { useForm, Controller } from "react-hook-form";
-import logo from "../assets/gnlogogrande-01.png";
+import React, { useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import { useDispatch } from "react-redux";
-import axios from "axios"
-import { sendRegisterRequest } from "../store/user";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useForm, Controller } from "react-hook-form";
+import { View, Text, Image, Button, StyleSheet, TextInput, Modal } from "react-native";
+import logo from "../../assets/gnlogogrande-01.png";
+import { sendRegisterRequest } from "../../store/user";
+import Calendar from "../Calendar/Calendar";
 
 export default function Register({navigation}) {
-
-  // let date = fecha?fecha:new Date()
-
-  // const formatDate = (date) => {
-  //   let formatted_date = `${date.getFullYear()}-${
-  //     date.getMonth() - 1
-  //   }-${date.getDate()}`;
-  //   return formatted_date;
-  // };
 
   const {
     control,
@@ -30,7 +20,7 @@ export default function Register({navigation}) {
       nationalId: "",
       email: "",
       phoneNumber: "",
-      birthday: "",
+      startDate: "",
       address: "",
       city: "",
       password: "",
@@ -40,9 +30,14 @@ export default function Register({navigation}) {
 
   const dispatch = useDispatch();
 
+  const selectedDay = useSelector((state) => state.calendar);
+
+  const [showModalDate, setShowModalDate] = useState(false);
+
   const onSubmit = (info) =>{
+    console.log(info)
       dispatch(sendRegisterRequest (info))
-      navigation.navigate('Login')
+      navigation.navigate('Inicio Sesion')
     }
 
   return (
@@ -68,7 +63,7 @@ export default function Register({navigation}) {
           )}
           name="firstName"
         />
-        {errors.firstName && <Text>This is required.</Text>}
+        {errors.firstName && <Text>Campo requerido.</Text>}
 
         <Controller
           control={control}
@@ -86,7 +81,7 @@ export default function Register({navigation}) {
           )}
           name="lastName"
         />
-        {errors.lastName && <Text>This is required.</Text>}
+        {errors.lastName && <Text>Campo requerido.</Text>}
         <Controller
           control={control}
           rules={{
@@ -103,7 +98,7 @@ export default function Register({navigation}) {
           )}
           name="nationalId"
         />
-        {errors.nationalId && <Text>This is required.</Text>}
+        {errors.nationalId && <Text>Campo requerido.</Text>}
         <Controller
           control={control}
           rules={{
@@ -120,7 +115,7 @@ export default function Register({navigation}) {
           )}
           name="email"
         />
-        {errors.email && <Text>This is required.</Text>}
+        {errors.email && <Text>Campo requerido.</Text>}
         <Controller
           control={control}
           rules={{
@@ -137,11 +132,11 @@ export default function Register({navigation}) {
           )}
           name="phoneNumber"
         />
-        {errors.phoneNumber && <Text>This is required.</Text>}
-        <Controller
+        {errors.phoneNumber && <Text>Campo requerido.</Text>}
+        {/* <Controller
           control={control}
           rules={{
-            maxLength: 100,
+            required: true,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
@@ -157,12 +152,32 @@ export default function Register({navigation}) {
           )}
           name="birthday"
         />
-        {errors.birthday && <Text>This is required.</Text>}
+        {errors.birthday && <Text>Campo requerido.</Text>} */}
+
+        <Modal animationType="slide" transparent={false} visible={showModalDate}>
+          <Calendar text={"start"}/>
+          <Button
+            title="Cerrar"
+            onPress={() => {
+              setShowModalDate(!showModalDate);
+            }}
+          />
+        </Modal>
+        <Button
+          style={{ marginBottom: 20 }}
+          title="Fecha de Nacimiento"
+          onPress={() => {
+            setShowModalDate(!showModalDate);
+          }}
+        />
+         <View style = {styles.input} pointerEvents="none">
+           <Text>Fecha: {selectedDay.start} </Text>
+        </View>
 
         <Controller
           control={control}
           rules={{
-            maxLength: 100,
+            required: true,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
@@ -176,11 +191,11 @@ export default function Register({navigation}) {
           name="address"
         />
 
-        {errors.address && <Text>This is required.</Text>}
+        {errors.address && <Text>Campo requerido.</Text>}
         <Controller
           control={control}
           rules={{
-            maxLength: 100,
+            required: true,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
@@ -193,7 +208,7 @@ export default function Register({navigation}) {
           )}
           name="countryOfResidence"
         />
-        {errors.countryOfResidence && <Text>This is required.</Text>}
+        {errors.countryOfResidence && <Text>Campo requerido.</Text>}
         <Controller
           control={control}
           rules={{
@@ -210,12 +225,12 @@ export default function Register({navigation}) {
           )}
           name="city"
         />
-        {errors.city && <Text>This is required.</Text>}
+        {errors.city && <Text>Campo requerido.</Text>}
         
         <Controller
           control={control}
           rules={{
-            maxLength: 100,
+            required: true,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
@@ -229,7 +244,7 @@ export default function Register({navigation}) {
           )}
           name="password"
         />
-        {errors.password && <Text>This is required.</Text>}
+        {errors.password && <Text>Campo requerido.</Text>}
 
         <Button title="Submit" onPress={handleSubmit(onSubmit)} />
       </View>
@@ -251,6 +266,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     margin: 10,
+    flexDirection: 'row'
   },
   logo: {
     height: 100,

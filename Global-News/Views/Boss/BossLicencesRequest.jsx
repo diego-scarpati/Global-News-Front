@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { rrhhReviewLicense, rrhhChangeLicenseStatus } from "../../store/license";
 
-export default function RrHh() {
+export default function BossLicencesRequest() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
@@ -22,22 +22,21 @@ export default function RrHh() {
   }, []);
 
   const handleApprove = (licenceId) => {
-    console.log("licencia aprobada", licenceId);
-    dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'approved'}))
+    dispatch(rrhhChangeLicenseStatus( {id: licenceId, bossApproval: 'approved'}))
     dispatch(rrhhReviewLicense());
   }
 
   const handleReject = (licenceId) => {
-    console.log("licencia rechazada", licenceId);
-    dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'rejected'}))
+    dispatch(rrhhChangeLicenseStatus( {id: licenceId, bossApproval: 'rejected'}))
     dispatch(rrhhReviewLicense());
   };
 
   return (
     <SafeAreaView style={styles.container}>
+    <Text style={styles.mainText}>Licencias</Text>
       <SectionList
         sections={[{ title: "Licencias", data: licencias }]}
-        renderItem={({ item }) => (
+        renderItem={({ item }) => (       
           <View style={styles.row}>
             <Text style={styles.text}>
               Solicitante: {item.user?.firstName} {item.user?.lastName}
@@ -46,8 +45,9 @@ export default function RrHh() {
             <Text>Inicio: {item.startDate}</Text>
             <Text>Fin: {item.endDate}</Text>
             <Text>Observaciones: {item.observations}</Text>
+            <Text>Estado Jefe: {item.bossApproval}</Text>
             <Text>Estado RRHH: {item.HRApproval}</Text>
-            {item.HRApproval === 'pending' &&
+            {item.bossApproval === 'pending' &&
             <View style={styles.buttomView}>
               <Button
                 style={styles.button}
@@ -62,11 +62,6 @@ export default function RrHh() {
             </View>}
           </View>
         )}
-        // renderSectionHeader={({ section }) => (
-        //   <View style={styles.sectionHeader}>
-        //     <Text>{section.type}</Text>
-        //   </View>
-        // )}
         keyExtractor={(item) => item.id}
       />
     </SafeAreaView>
@@ -117,5 +112,8 @@ const styles = StyleSheet.create({
   },
   text:{
     fontSize: 20
+  },
+  mainText:{
+    fontSize: 30
   }
 });

@@ -20,7 +20,7 @@ export default function Register({navigation}) {
       nationalId: "",
       email: "",
       phoneNumber: "",
-      startDate: "",
+      birthday:"",
       address: "",
       city: "",
       password: "",
@@ -31,11 +31,12 @@ export default function Register({navigation}) {
   const dispatch = useDispatch();
 
   const selectedDay = useSelector((state) => state.calendar);
+  console.log(selectedDay.start)
 
   const [showModalDate, setShowModalDate] = useState(false);
 
   const onSubmit = (info) =>{
-    console.log(info)
+      info.birthday = selectedDay.start
       dispatch(sendRegisterRequest (info))
       navigation.navigate('Inicio Sesion')
     }

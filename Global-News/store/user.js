@@ -42,8 +42,8 @@ export const searchAllUsers = createAsyncThunk("USER_REQUEST", async ()=>{
 });
 
 export const searchUsersByName = createAsyncThunk("USER_BY_NAME", async (data) => {
-console.log("🚀 ~ file: user.js ~ line 45 ~ searchUsersByName ~ data", data)
     try {
+        console.log(data)
         const userSearch = await axios.get(`http://localhost:3001/api/users/search/${data}`)
         return userSearch.data
     } catch(error) {

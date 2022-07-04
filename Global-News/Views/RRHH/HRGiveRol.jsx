@@ -12,6 +12,7 @@ import {
 import SearchInput from "../Search/SearchInput";
 import { searchAllUsers } from "../../store/user";
 import { rrhhGiveRol } from "../../store/position"
+import { searchUsersByName } from "../../store/user";
 
 
 export default function HRGiveRol() {
@@ -29,7 +30,7 @@ export default function HRGiveRol() {
  
   return (
     <SafeAreaView style={styles.container}>
-      <SearchInput />
+      <SearchInput dispatchInput={searchUsersByName}/>
     <Text style={styles.mainText}>Promover Empleados</Text>
       <SectionList
         sections={[{ title: "Promover Empleados", data: users}]}

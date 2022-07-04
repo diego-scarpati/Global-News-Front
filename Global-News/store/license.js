@@ -59,6 +59,15 @@ export const rrhhChangeLicenseStatus = createAsyncThunk(
   }
 );
 
+export const rrhhLicenseBySearch = createAsyncThunk("USER_BY_NAME", async (data) => {
+  try {
+      const userSearch = await axios.get(`http://localhost:3001/api/workLicenses/search/${data}`)
+      return userSearch.data
+  } catch(error) {
+      console.error(error)
+  }
+})
+
 const licenseReducer = createReducer(
   {},
   {
@@ -73,6 +82,9 @@ const licenseReducer = createReducer(
 
     [rrhhChangeLicenseStatus.fulfilled]: (state, action) => action.payload,
     [rrhhChangeLicenseStatus.rejected]: (state, action) => action.payload,
+
+    [rrhhLicenseBySearch.fulfilled]: (state, action) => action.payload,
+    [rrhhLicenseBySearch.rejected]: (state, action) => action.payload,
   }
 );
 

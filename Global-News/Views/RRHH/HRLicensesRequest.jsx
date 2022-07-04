@@ -11,45 +11,53 @@ import {
 } from "react-native";
 import { rrhhReviewLicense, rrhhChangeLicenseStatus } from "../../store/license";
 
-export default function RrHh() {
+export default function HRLicensesRequest() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
+  console.log("User",user)
+
   const licencias = useSelector((state) => state.license);
+  console.log(licencias)
 
   useEffect(() => {
     dispatch(rrhhReviewLicense());
   }, []);
 
   const handleApprove = (licenceId) => {
-    console.log("licencia aprobada", licenceId);
     dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'approved'}))
     dispatch(rrhhReviewLicense());
   }
 
   const handleReject = (licenceId) => {
-    console.log("licencia rechazada", licenceId);
     dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'rejected'}))
     dispatch(rrhhReviewLicense());
   };
 
   return (
+      
     <SafeAreaView style={styles.container}>
-    <Text style={styles.mainText}>Licencias</Text>
       <SectionList
         sections={[{ title: "Licencias", data: licencias }]}
-        renderItem={({ item }) => (       
-          <View style={styles.row}>
-            <Text style={styles.text}>
-              Solicitante: {item.user?.firstName} {item.user?.lastName}
-            </Text>
+        renderItem={({ item }) => (
+          item.bossApproval === 'approved' && item.HRApproval === 'pending' 
+          &&<View style={styles.row}>
+            <Text style={styles.text}>Solicitante: {item.user?.firstName} {item.user?.lastName}</Text>
+            <Text>Legajo: {item.employeeId}</Text>
+            {/* <Text>Rango: {
+              (item.user?.positionId === 4)&& "Empleado"
+              (item.user?.positionId === 3)&& "Coordinador"
+              (item.user?.positionId === 2)&& "Jefe"
+              (item.user?.positionId === 1)&& "Gerente"
+              }</Text> */}
             <Text>Tipo de licencia: {item.type}</Text>
             <Text>Inicio: {item.startDate}</Text>
             <Text>Fin: {item.endDate}</Text>
             <Text>Observaciones: {item.observations}</Text>
+            <Text>Estado Jefe: {item.bossApproval}</Text>
             <Text>Estado RRHH: {item.HRApproval}</Text>
-            {item.HRApproval === 'pending' &&
-            <View style={styles.buttomView}>
+            {item.HRApproval === 'pending'
+            && <View style={styles.buttomView}>
               <Button
                 style={styles.button}
                 title="Aprobar"
@@ -113,8 +121,5 @@ const styles = StyleSheet.create({
   },
   text:{
     fontSize: 20
-  },
-  mainText:{
-    fontSize: 30
   }
 });

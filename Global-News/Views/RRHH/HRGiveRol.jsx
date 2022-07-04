@@ -11,36 +11,33 @@ import {
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
 import { searchAllUsers } from "../../store/user";
-import { searchUsersByName } from "../../store/user";
+import { rrhhGiveRol } from "../../store/position"
+import { searchUsersByInput } from "../../store/user";
 
-export default function RrHh() {
+
+export default function HRGiveRol() {
   const dispatch = useDispatch();
-
   const users = useSelector((state) => state.user);
   
-  console.log(users)
-
   useEffect(() => {
     dispatch(searchAllUsers())
-   // dispatch(searchUsersByName())
   }, []);
 
-  const handlePromove = (userId,position) => {
-  console.log(userId,position)
-    // dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'approved'}))
-    // dispatch(rrhhReviewLicense());
+  const handlePromote = (userId,position) => {
+  dispatch(rrhhGiveRol( {userId: userId, position: position}))
+  dispatch(searchAllUsers());
   }
  
   return (
     <SafeAreaView style={styles.container}>
-      <SearchInput />
+      <SearchInput dispatchInput={searchUsersByInput}/>
     <Text style={styles.mainText}>Promover Empleados</Text>
       <SectionList
         sections={[{ title: "Promover Empleados", data: users}]}
         renderItem={({ item }) => (
           <View style={styles.row}>
             <Text style={styles.text}>
-              Solicitante: {item.user?.firstName} {item.user?.lastName}
+              Solicitante: {item.firstName} {item.lastName}
             </Text>
             <Text>Legajo: {item.employeeId}</Text>
             <Text>Nombre: {item.firstName}</Text>
@@ -49,27 +46,32 @@ export default function RrHh() {
             <Text>Dias Laborales: {item.workingDays}</Text>
             <Text>Turnos: {item.shift}</Text>
             <View style={styles.buttomView}>
-              <Button
+
+            {(item.positionId != 1)
+              &&<Button
                 style={styles.button}
                 title="Manager"
                 value="Manager"
-                onPress={()=>handlePromove(item.id,"manager")}
-              />
-              <Button
+                onPress={()=>handlePromote(item.id,"Gerente")}
+              />}
+              {(item.positionId != 2)
+              &&<Button
                 style={styles.button}
                 title="Jefe"
-                onPress={()=>handlePromove(item.id,"jefe")}
-              />
-              <Button
+                onPress={()=>handlePromote(item.id,"Jefe")}
+              />}
+              {(item.positionId != 3)
+              &&<Button
                 style={styles.button}
                 title="Coordinador"
-                onPress={()=>handlePromove(item.id,"coordinador")}
-              />
-              <Button
+                onPress={()=>handlePromote(item.id,"Coordinador")}
+              />}
+              {(item.positionId != 4)
+              &&<Button
                 style={styles.button}
                 title="Empleado"
-                onPress={()=>handlePromove(item.id,"empleado")}
-              />
+                onPress={()=>handlePromote(item.id,"Empleado")}
+              />}
             </View>
           </View>
         )}

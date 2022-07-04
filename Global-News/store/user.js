@@ -13,7 +13,7 @@ return info.data
 export const sendLoginRequest = createAsyncThunk("LOGIN", async (data)=>{
     try{ 
     //despues invertir el orden de las rutas MARIANO I
-    const user = await axios.get(`http://localhost:3001/api/users/${data.email}`)
+    const user = await axios.get(`http://localhost:3001/api/users/email/${data.email}`)
         return user.data
     // const info = await axios.post("http://localhost:3001/api/users/login",data)
     // return info.data 
@@ -41,8 +41,7 @@ export const searchAllUsers = createAsyncThunk("USER_REQUEST", async ()=>{
     }catch(error){console.log(error)}
 });
 
-export const searchUsersByName = createAsyncThunk("USER_BY_NAME", async (data) => {
-console.log("🚀 ~ file: user.js ~ line 45 ~ searchUsersByName ~ data", data)
+export const searchUsersByInput = createAsyncThunk("USER_BY_INPUT", async (data) => {
     try {
         const userSearch = await axios.get(`http://localhost:3001/api/users/search/${data}`)
         return userSearch.data
@@ -68,8 +67,8 @@ const userReducer = createReducer({}, {
     [searchAllUsers.fulfilled]: (state,action)=>action.payload,
     [searchAllUsers.rejected]: (state,action)=>action.payload,
 
-    [searchUsersByName.fulfilled]: (state,action)=>action.payload,
-    [searchUsersByName.rejected]: (state,action)=>action.payload,
+    [searchUsersByInput.fulfilled]: (state,action)=>action.payload,
+    [searchUsersByInput.rejected]: (state,action)=>action.payload,
 
   });
 

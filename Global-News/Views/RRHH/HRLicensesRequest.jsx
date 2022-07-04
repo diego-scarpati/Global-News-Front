@@ -15,6 +15,8 @@ export default function HRLicensesRequest() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
+  console.log("User",user)
+
   const licencias = useSelector((state) => state.license);
   console.log(licencias)
 
@@ -23,13 +25,11 @@ export default function HRLicensesRequest() {
   }, []);
 
   const handleApprove = (licenceId) => {
-    console.log("licencia aprobada", licenceId);
     dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'approved'}))
     dispatch(rrhhReviewLicense());
   }
 
   const handleReject = (licenceId) => {
-    console.log("licencia rechazada", licenceId);
     dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'rejected'}))
     dispatch(rrhhReviewLicense());
   };

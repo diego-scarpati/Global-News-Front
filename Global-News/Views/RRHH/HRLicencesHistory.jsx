@@ -9,7 +9,8 @@ import {
   StatusBar,
   Button
 } from "react-native";
-import { rrhhReviewLicense, rrhhChangeLicenseStatus } from "../../store/license";
+import { rrhhReviewLicense, rrhhChangeLicenseStatus, rrhhLicenseBySearch } from "../../store/license";
+import SearchInput from "../Search/SearchInput";
 
 export default function HRLicencesHistory() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export default function HRLicencesHistory() {
   return (
       
     <SafeAreaView style={styles.container}>
+    <SearchInput dispatchInput={rrhhLicenseBySearch}/>
       <SectionList
         sections={[{ title: "Licencias", data: licencias }]}
         renderItem={({ item }) => (

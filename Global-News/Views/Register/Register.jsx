@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
-import { View, Text, Image, Button, StyleSheet, TextInput } from "react-native";
-
+import { View, Text, Image, Button, StyleSheet, TextInput, Modal } from "react-native";
 import logo from "../../assets/gnlogogrande-01.png";
 import { sendRegisterRequest } from "../../store/user";
 import Calendar from "../Calendar/Calendar";
@@ -21,7 +20,7 @@ export default function Register({navigation}) {
       nationalId: "",
       email: "",
       phoneNumber: "",
-      birthday: "",
+      startDate: "",
       address: "",
       city: "",
       password: "",
@@ -30,6 +29,10 @@ export default function Register({navigation}) {
   });
 
   const dispatch = useDispatch();
+
+  const selectedDay = useSelector((state) => state.calendar);
+
+  const [showModalDate, setShowModalDate] = useState(false);
 
   const onSubmit = (info) =>{
     console.log(info)
@@ -130,7 +133,7 @@ export default function Register({navigation}) {
           name="phoneNumber"
         />
         {errors.phoneNumber && <Text>Campo requerido.</Text>}
-        <Controller
+        {/* <Controller
           control={control}
           rules={{
             required: true,
@@ -149,7 +152,27 @@ export default function Register({navigation}) {
           )}
           name="birthday"
         />
-        {errors.birthday && <Text>Campo requerido.</Text>}
+        {errors.birthday && <Text>Campo requerido.</Text>} */}
+
+        <Modal animationType="slide" transparent={false} visible={showModalDate}>
+          <Calendar text={"start"}/>
+          <Button
+            title="Cerrar"
+            onPress={() => {
+              setShowModalDate(!showModalDate);
+            }}
+          />
+        </Modal>
+        <Button
+          style={{ marginBottom: 20 }}
+          title="Fecha de Nacimiento"
+          onPress={() => {
+            setShowModalDate(!showModalDate);
+          }}
+        />
+         <View style = {styles.input} pointerEvents="none">
+           <Text>Fecha: {selectedDay.start} </Text>
+        </View>
 
         <Controller
           control={control}
@@ -243,6 +266,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     margin: 10,
+    flexDirection: 'row'
   },
   logo: {
     height: 100,

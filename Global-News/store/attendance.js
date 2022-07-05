@@ -1,17 +1,28 @@
 import axios from "axios";
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const attendanceRequest = createAsyncThunk("ATTENDANCE", async (data)=>{
+export const attendaceStartRequest = createAsyncThunk("ATTENDANCE", async (data)=>{
     try{
-        const info = await axios.post("http://localhost:3001/api/users/register", data)
-return info.data
+        console.log(data)
+          const info = await axios.post("http://localhost:3001/api/attendance/workDayStart", data)
+          return info.data
+    }catch(error){console.log(error)}
+});
+
+export const attendaceEndRequest = createAsyncThunk("ATTENDANCE", async (data)=>{
+    try{
+          const info = await axios.put("http://localhost:3001/api/attendance/workDayEnd", data)
+          return info.data
     }catch(error){console.log(error)}
 });
 
 
 const attendanceReducer = createReducer({}, {
-    [attendanceRequest.fulfilled]: (state,action)=>{action.payload},
-    [attendanceRequest.rejected]: (state,action)=>action.payload,
+    [attendaceStartRequest.fulfilled]: (state,action)=>action.payload,
+    [attendaceStartRequest.rejected]: (state,action)=>action.payload,
+
+    [attendaceEndRequest.fulfilled]: (state,action)=>action.payload,
+    [attendaceEndRequest.rejected]: (state,action)=>action.payload,
 });
 
 export default attendanceReducer

@@ -20,8 +20,10 @@ import LicenseHistory from "./Views/License/LicenseHistory";
 import HRLicensesHistory from "./Views/RRHH/HRLicencesHistory"
 import HRLicensesRequest from "./Views/RRHH/HRLicensesRequest";
 import ManagerHomeScreen from "./Views/Manager/ManagerHomeScreen"
-import LicensesHomeScreen from "./Views/License/LicensesHomeScreen"
 import BossLicencesRequest from "./Views/Boss/BossLicencesRequest";
+import LicensesHomeScreen from "./Views/License/LicensesHomeScreen"
+import BossAttendanceControl from "./Views/Boss/BossAttendanceControl"
+import AttendanceControler from "./Views/Attendance/AttendanceControler"
 import CoordinatorLicenses from "./Views/Coordinator/CoordinatorLicenses"
 import ManagerLicencesRequest from "./Views/Manager/ManagerLicensesRequest"
 import CoordinatorHomeScreen from "./Views/Coordinator/CoordinatorHomeScreen"
@@ -51,11 +53,14 @@ export default function App() {
 
           <Stack.Screen name="Calendario" component={Calendar} />
 
+          <Stack.Screen name="Control Asistencias" component={AttendanceControler} />
+
           <Stack.Screen name="Coordinador" component={CoordinatorHomeScreen} />
           <Stack.Screen name="Coordinador Licencias de Equipo" component={CoordinatorLicenses} />
 
           <Stack.Screen name="Jefe" component={BossHomeScreen} />
           <Stack.Screen name="Jefe Solicitud de Licencias" component={BossLicencesRequest} />
+          <Stack.Screen name="Asistencias" component={BossAttendanceControl} />
 
           <Stack.Screen name="Gerente" component={ManagerHomeScreen} />
           <Stack.Screen name="Gerente Solicitud de Licencias" component={ManagerLicencesRequest} />

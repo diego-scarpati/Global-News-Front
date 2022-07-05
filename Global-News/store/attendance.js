@@ -16,6 +16,14 @@ export const attendaceEndRequest = createAsyncThunk("ATTENDANCE", async (data)=>
     }catch(error){console.log(error)}
 });
 
+export const attendaceControl = createAsyncThunk("ATTENDANCE", async (data)=>{
+    try{
+        console.log(data.id)
+          const info = await axios.get(`http://localhost:3001/api/attendance/search/${data.id}`)
+          return info.data
+    }catch(error){console.log(error)}
+});
+
 
 const attendanceReducer = createReducer({}, {
     [attendaceStartRequest.fulfilled]: (state,action)=>action.payload,
@@ -23,6 +31,9 @@ const attendanceReducer = createReducer({}, {
 
     [attendaceEndRequest.fulfilled]: (state,action)=>action.payload,
     [attendaceEndRequest.rejected]: (state,action)=>action.payload,
+
+    [attendaceControl.fulfilled]: (state,action)=>action.payload,
+    [attendaceControl.rejected]: (state,action)=>action.payload,
 });
 
 export default attendanceReducer

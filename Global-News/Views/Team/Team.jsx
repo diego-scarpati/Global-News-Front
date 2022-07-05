@@ -1,44 +1,102 @@
-import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Table, Row, Rows } from 'react-native-table-component';
+import React, { Component, useEffect } from "react";
+import { StyleSheet, View, Text, StatusBar, SafeAreaView, SectionList } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { ScrollView } from "react-native-gesture-handler";
+import { DataTable } from "react-native-paper";
+import { teamRequest } from "../../store/team";
+
+const optionsPerPage = [2, 3, 4];
+
+export default function Team() {
+  const user = useSelector((state) => state.user);
+  const team = useSelector((state)=> state.team)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(teamRequest());
+  }, []);
+
+  console.log("user", user);
+  console.log("user name", user.firstName);
+  console.log("team", team)
 
 
-export default class Team extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tableHead: ['Nombre', 'Apellido', 'Email','Cargo', 'Online'],
-      tableData: [
-      ['Mariano', 'Imhoff', 'imhmariano@gmail.com','User','Si'],
-      ['Solomeo', 'Paredes', 'solomeo.p@gmail.com','User', 'No'],
-      ['Armando', 'Casas', 'armando.c@gmail.com','User', 'No'],
-      ['Elba', 'Tracio', 'elba.t@gmail.com','User', 'Si']]
-    }
-  }
+  // const [page, setPage] = React.useState(0);
+  // const [itemsPerPage, setItemsPerPage] = React.useState(optionsPerPage[0]);
 
-  render() {
-    const state = this.state;
-    return (
-      
-      
-      <View style={styles.container}>
-        <Table borderStyle={styles.border}>
-          <Row data={state.tableHead} style={styles.head} textStyle={{color:'#fff', fontSize:15}}/>
-          <Rows data={state.tableData} textStyle={styles.text}/>
-        </Table>
-      </View>
-      
-      
-    )
-  }
+  // React.useEffect(() => {
+  // setPage(0);
+  // }, [itemsPerPage]);
+
+  return (
+    <SafeAreaView style={styles.container}>
+    <Text style={styles.mainText}>Mi Equipo</Text>
+      <SectionList
+        sections={[{ title: "Mi Equipo", data: team}]}
+        renderItem={({ item }) => (
+          <View style={styles.row}>
+            <Text style={styles.text}>
+              Nombre: {item.team.firstName} {item.team.lastName}
+            </Text>
+            <Text>Email: {item.users.email}</Text>
+            <Text>Puesto: {item.users.positionId}</Text>
+            <Text>Conectado: {item.users.availability}</Text>
+          </View>
+        )}
+        
+        keyExtractor={(item) => item.id}
+      /> 
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-  border:{borderWidth: 2, borderColor: '#0073b7'},
-  container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-  head: { height: 40, textAlign: 'center', backgroundColor:'#0073b7'},
-  text: { margin: 10,textAlign: 'center', fontSize:10 },
-  
-
-});
-
+    container: {
+      flex: 1,
+      paddingTop: StatusBar.currentHeight,
+      marginHorizontal: 16,
+      justifyContent: "center",
+      alignContent: "center",
+      padding: 5,
+      margin: 5,
+     
+    },
+    item: {
+      backgroundColor: "#f9c2ff",
+      padding: 20,
+      marginVertical: 8,
+    },
+    title: {
+      fontSize: 24,
+    },
+    row: {
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+      borderColor: "#0073b7",
+      borderWidth: 2,
+      margin: 2,
+      borderRadius: 5,
+    },
+    sectionHeader: {
+      backgroundColor: "#efefef",
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+    },
+    button: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      margin: 10,
+      padding: 10
+    },
+    buttomView: {
+      margin: 10
+    },
+    text:{
+      fontSize: 20
+    },
+    mainText:{
+      fontSize: 30
+    }
+  });

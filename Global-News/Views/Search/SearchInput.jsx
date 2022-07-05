@@ -1,10 +1,7 @@
 import  React, {useState} from "react";
 import { Searchbar } from "react-native-paper";
-import { StyleSheet, Button } from "react-native";
+import { StyleSheet, Button, View } from "react-native";
 import { useDispatch } from "react-redux";
-
-import { View } from "react-native-web";
-
 
 const SearchInput = (props) => {
   const {dispatchInput} = props

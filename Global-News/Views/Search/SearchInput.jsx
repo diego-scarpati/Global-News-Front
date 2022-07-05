@@ -3,8 +3,7 @@ import { Searchbar } from "react-native-paper";
 import { StyleSheet, Button, View } from "react-native";
 import { useDispatch } from "react-redux";
 
-const SearchInput = (props) => {
-  const {dispatchInput} = props
+const SearchInput = ({dispatchInput}) => {
   const [searchQuery, setSearchQuery] = useState("");
   
   const dispatch = useDispatch();
@@ -12,7 +11,7 @@ const SearchInput = (props) => {
   const onChangeSearch = (query) => {
         setSearchQuery(query)
     }
-  const handleSearch = () => dispatch(dispatchInput(searchQuery));
+  const handleSearch = () => dispatch(dispatchInput(searchQuery))
 
   return (
     <View>

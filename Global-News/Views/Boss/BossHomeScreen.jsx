@@ -12,7 +12,10 @@ export default function BossHomeScreen({ navigation }) {
           text="Solicitud de Licencias"
           onPress={() => navigation.navigate("Jefe Solicitud de Licencias")}
         />
-       
+       <HomeButton
+          text="Control Asistencias"
+          onPress={() => navigation.navigate("Asistencias")}
+        />
       </View>
     </ScrollView>
   );

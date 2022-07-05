@@ -9,8 +9,8 @@ export default function ManagerHomeScreen({ navigation }) {
     <ScrollView style={styles.container}>
       <View style={styles.body}>
         <HomeButton
-          text="Jefe Solicitud de Licencias"
-          onPress={() => navigation.navigate("Jefe Solicitud de Licencias")}
+          text="Solicitud de Licencias"
+          onPress={() => navigation.navigate("Gerente Solicitud de Licencias")}
         />
        
       </View>

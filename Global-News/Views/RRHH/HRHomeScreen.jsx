@@ -10,19 +10,19 @@ export default function HRHomeScreen({ navigation }) {
       <View style={styles.body}>
         <HomeButton
           text="Solicitud de Licencias"
-          onPress={() => navigation.navigate("Solicitud de Licencias")}
+          onPress={() => navigation.navigate("Recursos Humanos Solicitud de Licencias")}
         />
         <HomeButton
           text="Promover Empleado"
-          onPress={() => navigation.navigate("Promover Empleado")}
+          onPress={() => navigation.navigate("Recursos Humanos Promover Empleado")}
         />
         <HomeButton
           text="Historial de Licencias"
-          onPress={() => navigation.navigate("Historial de Licencias")}
+          onPress={() => navigation.navigate("Recursos Humanos Historial de Licencias")}
         />
         <HomeButton
           text="Editar Usuario"
-          onPress={() => navigation.navigate("Editar Usuario")}
+          onPress={() => navigation.navigate("Recursos Humanos Editar Usuario")}
         />
       </View>
     </ScrollView>

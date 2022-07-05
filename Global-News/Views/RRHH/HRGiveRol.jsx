@@ -39,6 +39,7 @@ export default function HRGiveRol() {
             <Text style={styles.text}>
               Solicitante: {item.firstName} {item.lastName}
             </Text>
+            <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
             <Text>Legajo: {item.employeeId}</Text>
             <Text>Nombre: {item.firstName}</Text>
             <Text>Apellido: {item.lastName}</Text>
@@ -50,8 +51,7 @@ export default function HRGiveRol() {
             {(item.positionId != 1)
               &&<Button
                 style={styles.button}
-                title="Manager"
-                value="Manager"
+                title="Gerente"
                 onPress={()=>handlePromote(item.id,"Gerente")}
               />}
               {(item.positionId != 2)

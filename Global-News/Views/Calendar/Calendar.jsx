@@ -19,9 +19,9 @@ const handleSelect = (day) => {
       <View style={{ flex: 1, margin: 10, padding: 60 }}>
         <Calendar
           onChange={(range) => console.log(range)}
-          minDate={new Date().toString()}
-          startDate={new Date().toString()}
-          endDate={new Date().toString()}
+          minDate={ Date().toString()}
+          startDate={ Date().toString()}
+          endDate={ Date().toString()}
         
           theme={{
             activeDayColor: {},

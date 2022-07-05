@@ -4,13 +4,17 @@ import { StyleSheet, View, ScrollView } from "react-native";
 
 import HomeButton from "../HomeScreen/components/HomeButtons";
 
-export default function BossHomeScreen({ navigation }) {
+export default function ManagerHomeScreen({ navigation }) {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.body}>
         <HomeButton
           text="Solicitud de Licencias"
-          onPress={() => navigation.navigate("Jefe Solicitud de Licencias")}
+          onPress={() => navigation.navigate("Solicitud de Licencias")}
+        />
+        <HomeButton
+          text="Historial Licencias"
+          onPress={() => navigation.navigate("Historial Licencias")}
         />
        
       </View>

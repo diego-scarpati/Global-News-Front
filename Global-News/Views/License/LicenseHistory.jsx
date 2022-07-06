@@ -9,7 +9,7 @@ import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 export default function RrHh() {
   const dispatch = useDispatch();
   const licencias = useSelector((state) => state.license);
-  useEffect(() => {dispatch(sendHistoyLicensesRequest())},[])
+  // useEffect(() => {dispatch(sendHistoyLicensesRequest())},[])
 
 console.log(licencias)
   return (

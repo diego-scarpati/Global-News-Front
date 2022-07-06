@@ -1,47 +1,28 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  SectionList,
-  StatusBar,
-  Button
-} from "react-native";
-import { rrhhReviewLicense, rrhhChangeLicenseStatus } from "../../store/license";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {StyleSheet,Text,View,StatusBar,Button} from "react-native";
+import { rrhhReviewLicense, rrhhChangeLicenseStatus } from "../../../store/license";
 
-export default function HRLicensesRequest() {
+export default function SectionRender({item}) {
   const dispatch = useDispatch();
-
   const user = useSelector((state) => state.user);
-  console.log("User",user)
-
-  const licencias = useSelector((state) => state.license);
-  console.log(licencias)
-
-  useEffect(() => {
-    dispatch(rrhhReviewLicense());
-  }, []);
+  console.log(item)
 
   const handleApprove = (licenceId) => {
-    dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'approved'}))
-    dispatch(rrhhReviewLicense());
+    if(user.positionId === 1 || user.positionId === 2){dispatch(rrhhChangeLicenseStatus( {id: licenceId, bossApproval: 'approved'}))}
+    else{dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'approved'}))}
+    dispatch(rrhhReviewLicense({id:user.id}));
   }
 
   const handleReject = (licenceId) => {
-    dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'rejected'}))
-    dispatch(rrhhReviewLicense());
+    if(user.positionId === 1 || user.positionId === 2){dispatch(rrhhChangeLicenseStatus( {id: licenceId, bossApproval: 'rejected'}))}
+    else{dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'rejected'}))}
+    dispatch(rrhhReviewLicense({id:user.id}));
   };
 
+  
   return (
-      
-    <SafeAreaView style={styles.container}>
-      <SectionList
-        sections={[{ title: "Licencias", data: licencias }]}
-        renderItem={({ item }) => (
-          item.bossApproval === 'approved' && item.HRApproval === 'pending' 
-          &&<View style={styles.row}>
+          <View style={styles.row}>
             <Text style={styles.text}>Solicitante: {item.user?.firstName} {item.user?.lastName}</Text>
             <Text>Legajo: {item.employeeId}</Text>
             <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
@@ -51,7 +32,7 @@ export default function HRLicensesRequest() {
             <Text>Observaciones: {item.observations}</Text>
             <Text>Estado Jefe: {item.bossApproval}</Text>
             <Text>Estado RRHH: {item.HRApproval}</Text>
-            {item.HRApproval === 'pending'
+            {item.HRApproval === 'pending' && user.positionId !==3
             && <View style={styles.buttomView}>
               <Button
                 style={styles.button}
@@ -64,33 +45,11 @@ export default function HRLicensesRequest() {
                 onPress={()=>handleReject(item.id)}
               ></Button>
             </View>}
-          </View>
-        )}
-        keyExtractor={(item) => item.id}
-      />
-    </SafeAreaView>
+          </View> 
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    marginHorizontal: 16,
-    justifyContent: "center",
-    alignContent: "center",
-    padding: 5,
-    margin: 5,
-   
-  },
-  item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-  },
-  title: {
-    fontSize: 24,
-  },
   row: {
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -98,11 +57,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     margin: 2,
     borderRadius: 5,
-  },
-  sectionHeader: {
-    backgroundColor: "#efefef",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
   },
   button: {
     flexDirection: "row",

@@ -33,12 +33,14 @@ export const sendHistoyLicensesRequest = createAsyncThunk(
   }
 );
 
+
 export const rrhhReviewLicense = createAsyncThunk(
   "RRHH_REVIEW_LICENCE",
-  async () => {
+  async (data) => {
+
     try {
       const licences = await axios.get(
-        "http://localhost:3001/api/workLicenses/"
+        `http://localhost:3001/api/workLicenses/${data.id}`
       );
       return licences.data;
     } catch (error) {

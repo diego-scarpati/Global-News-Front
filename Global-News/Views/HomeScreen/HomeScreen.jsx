@@ -19,41 +19,41 @@ export default function UserProfileView({ navigation }) {
   //   dispatch(userRequest(userId));
   // },[])
 
-  try {
-    storage.getAllDataForKey("loggedUser").then((users) => {
-      console.log("Users:", users);
-    });
-  } catch (error) {
-    console.log("getAllDataForKey", error);
-  }
+  // try {
+  //   storage.getAllDataForKey("loggedUser").then((users) => {
+  //     console.log("Users:", users);
+  //   });
+  // } catch (error) {
+  //   console.log("getAllDataForKey", error);
+  // }
 
-  try {
-    console.log("entre al try");
-    storage
-      .load({
-        key: "loggedUser",
-        autoSync: true,
-        syncInBackground: true,
-      })
-      .then((ret) => {
-        console.log("ret", ret);
-      });
-  } catch (error) {
-    console.log("entre al catch");
-    console.warn(error.message);
-  }
+  // try {
+  //   console.log("entre al try");
+  //   storage
+  //     .load({
+  //       key: "loggedUser",
+  //       autoSync: true,
+  //       syncInBackground: true,
+  //     })
+  //     .then((ret) => {
+  //       console.log("ret", ret);
+  //     });
+  // } catch (error) {
+  //   console.log("entre al catch");
+  //   console.warn(error.message);
+  // }
 
-  const logoutHandler = () => {
-    try {
-      storage.remove({
-        key: "loggedUser",
-      });
-    } catch (error) {
-      console.log("logoutHandler Error:", error);
-    }
-    navigation.replace("Inicio");
-    // console.log("logout")
-  };
+  // const logoutHandler = () => {
+  //   try {
+  //     storage.remove({
+  //       key: "loggedUser",
+  //     });
+  //   } catch (error) {
+  //     console.log("logoutHandler Error:", error);
+  //   }
+  //   navigation.replace("Inicio");
+  //   // console.log("logout")
+  // };
 
   return (
     <ScrollView style={styles.container}>
@@ -78,26 +78,26 @@ export default function UserProfileView({ navigation }) {
 
         {user.positionId === 3 && (
           <HomeButton
-            text="Coordinador"
-            onPress={() => navigation.navigate("Coordinador")}
+            text="Vista Principal"
+            onPress={() => navigation.navigate("Vista Principal")}
           />
+          
         )}
 
         {user.positionId === 2 && (
-          <HomeButton text="Jefe" onPress={() => navigation.navigate("Jefe")} />
+          <HomeButton text="Vista Principal" onPress={() => navigation.navigate("Vista Principal")} />
         )}
 
         {user.positionId === 1 && (
-          <HomeButton
-            text="Gerente"
-            onPress={() => navigation.navigate("Gerente")}
-          />
+
+          <HomeButton text="Vista Principal" onPress={() => navigation.navigate("Vista Principal")} />
+
         )}
 
         {user.RRHH && (
           <HomeButton
-            text="Recursos Humanos"
-            onPress={() => navigation.navigate("Recursos Humanos")}
+            text="Vista Principal"
+            onPress={() => navigation.navigate("Vista Principal")}
           />
         )}
         <HomeButton text="Logout" onPress={() => logoutHandler()} />

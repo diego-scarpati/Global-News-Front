@@ -15,6 +15,8 @@ export default function HRLicensesRequest() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
+  console.log("User",user)
+
   const licencias = useSelector((state) => state.license);
   console.log(licencias)
 
@@ -23,13 +25,11 @@ export default function HRLicensesRequest() {
   }, []);
 
   const handleApprove = (licenceId) => {
-    console.log("licencia aprobada", licenceId);
     dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'approved'}))
     dispatch(rrhhReviewLicense());
   }
 
   const handleReject = (licenceId) => {
-    console.log("licencia rechazada", licenceId);
     dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'rejected'}))
     dispatch(rrhhReviewLicense());
   };
@@ -44,12 +44,7 @@ export default function HRLicensesRequest() {
           &&<View style={styles.row}>
             <Text style={styles.text}>Solicitante: {item.user?.firstName} {item.user?.lastName}</Text>
             <Text>Legajo: {item.employeeId}</Text>
-            {/* <Text>Rango: {
-              (item.user?.positionId === 4)&& "Empleado"
-              (item.user?.positionId === 3)&& "Coordinador"
-              (item.user?.positionId === 2)&& "Jefe"
-              (item.user?.positionId === 1)&& "Gerente"
-              }</Text> */}
+            <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
             <Text>Tipo de licencia: {item.type}</Text>
             <Text>Inicio: {item.startDate}</Text>
             <Text>Fin: {item.endDate}</Text>

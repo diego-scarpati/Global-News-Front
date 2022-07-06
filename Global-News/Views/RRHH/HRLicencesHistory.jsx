@@ -9,14 +9,13 @@ import {
   StatusBar,
   Button
 } from "react-native";
-import { rrhhReviewLicense, rrhhChangeLicenseStatus } from "../../store/license";
+import { rrhhReviewLicense, rrhhChangeLicenseStatus, rrhhLicenseBySearch } from "../../store/license";
+import SearchInput from "../Search/SearchInput";
 
 export default function HRLicencesHistory() {
   const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.user);
   const licencias = useSelector((state) => state.license);
-  console.log(licencias)
+  
 
   useEffect(() => {
     dispatch(rrhhReviewLicense());
@@ -25,6 +24,7 @@ export default function HRLicencesHistory() {
   return (
       
     <SafeAreaView style={styles.container}>
+    <SearchInput dispatchInput={rrhhLicenseBySearch}/>
       <SectionList
         sections={[{ title: "Licencias", data: licencias }]}
         renderItem={({ item }) => (
@@ -33,6 +33,8 @@ export default function HRLicencesHistory() {
             <Text style={styles.text}>
             Solicitante: {item.user?.firstName} {item.user?.lastName}
             </Text>
+            <Text>Legajo: {item.employeeId}</Text>
+            <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
             <Text>Tipo de licencia: {item.type}</Text>
             <Text>Inicio: {item.startDate}</Text>
             <Text>Fin: {item.endDate}</Text>

@@ -1,19 +1,17 @@
-import * as React from "react";
+import  React, {useState} from "react";
 import { Searchbar } from "react-native-paper";
-import { StyleSheet, Button } from "react-native";
+import { StyleSheet, Button, View } from "react-native";
 import { useDispatch } from "react-redux";
-import { searchUsersByName } from "../../store/user";
-import { View } from "react-native-web";
-import { onChange } from "react-native-reanimated";
 
-const SearchInput = () => {
-  const [searchQuery, setSearchQuery] = React.useState("");
+const SearchInput = ({dispatchInput}) => {
+  const [searchQuery, setSearchQuery] = useState("");
   
   const dispatch = useDispatch();
-    const onChangeSearch = (query) => {
+
+  const onChangeSearch = (query) => {
         setSearchQuery(query)
     }
-  const handleSearch = () => dispatch(searchUsersByName(searchQuery));
+  const handleSearch = () => dispatch(dispatchInput(searchQuery))
 
   return (
     <View>

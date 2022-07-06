@@ -19,41 +19,41 @@ export default function UserProfileView({ navigation }) {
   //   dispatch(userRequest(userId));
   // },[])
 
-  try {
-    storage.getAllDataForKey("loggedUser").then((users) => {
-      console.log("Users:", users);
-    });
-  } catch (error) {
-    console.log("getAllDataForKey", error);
-  }
+  // try {
+  //   storage.getAllDataForKey("loggedUser").then((users) => {
+  //     console.log("Users:", users);
+  //   });
+  // } catch (error) {
+  //   console.log("getAllDataForKey", error);
+  // }
 
-  try {
-    console.log("entre al try");
-    storage
-      .load({
-        key: "loggedUser",
-        autoSync: true,
-        syncInBackground: true,
-      })
-      .then((ret) => {
-        console.log("ret", ret);
-      });
-  } catch (error) {
-    console.log("entre al catch");
-    console.warn(error.message);
-  }
+  // try {
+  //   console.log("entre al try");
+  //   storage
+  //     .load({
+  //       key: "loggedUser",
+  //       autoSync: true,
+  //       syncInBackground: true,
+  //     })
+  //     .then((ret) => {
+  //       console.log("ret", ret);
+  //     });
+  // } catch (error) {
+  //   console.log("entre al catch");
+  //   console.warn(error.message);
+  // }
 
-  const logoutHandler = () => {
-    try {
-      storage.remove({
-        key: "loggedUser",
-      });
-    } catch (error) {
-      console.log("logoutHandler Error:", error);
-    }
-    navigation.replace("Inicio");
-    // console.log("logout")
-  };
+  // const logoutHandler = () => {
+  //   try {
+  //     storage.remove({
+  //       key: "loggedUser",
+  //     });
+  //   } catch (error) {
+  //     console.log("logoutHandler Error:", error);
+  //   }
+  //   navigation.replace("Inicio");
+  //   // console.log("logout")
+  // };
 
   return (
     <ScrollView style={styles.container}>

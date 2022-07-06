@@ -1,31 +1,38 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import {View,Text,Image,Button,StyleSheet,TextInput,} from "react-native";
-
+import { View, Text, Image, Button, StyleSheet, TextInput } from "react-native";
+import storage from "../../storage/storage";
 
 import logo from "../../assets/gnlogogrande-01.png";
 import { sendLoginRequest } from "../../store/user";
 
-
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      email:"",
-      password:"",
+      email: "",
+      password: "",
     },
   });
 
   const dispatch = useDispatch();
-  
-  const onSubmit = (info) =>{
-  dispatch(sendLoginRequest (info))
-  navigation.navigate('Pantalla Principal')
-    }
+
+  const onSubmit = (info) => {
+    dispatch(sendLoginRequest(info));
+    console.log("🚀 ~ file: Login.jsx ~ line 26 ~ onSubmit ~ info", info)
+    
+    storage.save({
+      key: "loggedUser",
+      id: "1",
+      data: info,
+      // expires: 1000 * 3600,
+    });
+    navigation.replace("Pantalla Principal");
+  };
 
   return (
     <View style={styles.container}>
@@ -42,7 +49,7 @@ export default function Login({navigation}) {
             style={styles.input}
             onBlur={onBlur}
             onChangeText={onChange}
-            value={value}
+            value={value.toLowerCase()}
             placeholder="Email"
           />
         )}
@@ -68,9 +75,7 @@ export default function Login({navigation}) {
       />
       {errors.password && <Text>Campo requerido.</Text>}
 
-      <Button title="Submit" 
-      onPress={  handleSubmit(onSubmit) }
-      />
+      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
     </View>
   );
 }

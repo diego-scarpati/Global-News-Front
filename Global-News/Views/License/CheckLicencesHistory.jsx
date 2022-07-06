@@ -9,38 +9,30 @@ import {
   StatusBar,
   Button
 } from "react-native";
-import { rrhhReviewLicense, rrhhChangeLicenseStatus } from "../../store/license";
+import { rrhhReviewLicense, rrhhChangeLicenseStatus, rrhhLicenseBySearch } from "../../store/license";
+import SearchInput from "../Search/SearchInput";
 
-export default function ManagerLicencesRequest() {
+export default function HRLicencesHistory() {
   const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.user);
   const licencias = useSelector((state) => state.license);
+  const user = useSelector((state) => state.license);
+  
 
-  useEffect(() => {
-    dispatch(rrhhReviewLicense());
-  }, []);
-
-  const handleApprove = (licenceId) => {
-    dispatch(rrhhChangeLicenseStatus( {id: licenceId, bossApproval: 'approved'}))
-    dispatch(rrhhReviewLicense());
-  }
-
-  const handleReject = (licenceId) => {
-    dispatch(rrhhChangeLicenseStatus( {id: licenceId, bossApproval: 'rejected'}))
-    dispatch(rrhhReviewLicense());
-  };
+  // useEffect(() => {
+  //   dispatch(rrhhReviewLicense({id:user.id}));
+  // }, []);
 
   return (
+      
     <SafeAreaView style={styles.container}>
-    <Text style={styles.mainText}>Licencias</Text>
+    <SearchInput dispatchInput={rrhhLicenseBySearch}/>
       <SectionList
         sections={[{ title: "Licencias", data: licencias }]}
-        renderItem={({ item }) => (  
-            item.positionId !== 4      
-          &&<View style={styles.row}>
+        renderItem={({ item }) => (
+          
+            <View style={styles.row}>
             <Text style={styles.text}>
-              Solicitante: {item.user?.firstName} {item.user?.lastName}
+            Solicitante: {item.user?.firstName} {item.user?.lastName}
             </Text>
             <Text>Legajo: {item.employeeId}</Text>
             <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
@@ -50,19 +42,7 @@ export default function ManagerLicencesRequest() {
             <Text>Observaciones: {item.observations}</Text>
             <Text>Estado Jefe: {item.bossApproval}</Text>
             <Text>Estado RRHH: {item.HRApproval}</Text>
-            {item.bossApproval === 'pending' &&
-            <View style={styles.buttomView}>
-              <Button
-                style={styles.button}
-                title="Aprobar"
-                onPress={()=>handleApprove(item.id)}
-              ></Button>
-              <Button
-                style={styles.button}
-                title="Rechazar"
-                onPress={()=>handleReject(item.id)}
-              ></Button>
-            </View>}
+            
           </View>
         )}
         keyExtractor={(item) => item.id}
@@ -115,8 +95,5 @@ const styles = StyleSheet.create({
   },
   text:{
     fontSize: 20
-  },
-  mainText:{
-    fontSize: 30
   }
 });

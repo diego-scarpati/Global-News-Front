@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, Image, Button, Alert, StyleSheet } from "react-native";
-
 import logo from "../../assets/gnlogogrande-01.png";
 
 export default function StartScreen({ navigation }) {
@@ -16,8 +15,14 @@ export default function StartScreen({ navigation }) {
         />
       </View>
       <View style={styles.button}>
-        <Button  title="Login" onPress={() => navigation.navigate("Inicio Sesion")} />
-        <Button title="Register" onPress={() => navigation.navigate("Registro")}/>
+        <Button
+          title="Login"
+          onPress={() => navigation.navigate("Inicio Sesion")} //navigation.navigate("Inicio Sesion")
+        />
+        <Button
+          title="Register"
+          onPress={() => navigation.navigate("Registro")}
+        />
       </View>
     </View>
   );
@@ -30,8 +35,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  button:{
+  button: {
     margin: 10,
-    
-  }
+  },
 });

@@ -110,7 +110,7 @@ export default function Register({navigation}) {
               style={styles.input}
               onBlur={onBlur}
               onChangeText={onChange}
-              value={value}
+              value={value.toLowerCase()}
               placeholder="Email"
             />
           )}

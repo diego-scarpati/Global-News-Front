@@ -11,39 +11,38 @@ import {
   Pressable
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
-import { searchAllUsers } from "../../store/user";
-import { attendaceControl } from "../../store/attendance"
+import { teamRequest } from "../../store/team"
+import { addUserToTeam } from "../../store/team"
 import { searchUsersByInput } from "../../store/user";
 
 
-export default function BossAttendanceControl({navigation}) {
+export default function SelectTeam({navigation}) {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.user);
-   
-    const handlePress = (id)=>{
-    dispatch(attendaceControl({id:id}))
-    navigation.navigate("Control Asistencias")
-    }
+  const user = useSelector((state) => state.user);
+  const team = useSelector((state) => state.team)
+ 
 
+  
+  
+  const handlePress = (name)=>{
+    dispatch(addUserToTeam({id:user[0].id, name:name}))
+    navigation.navigate("Sumar Empleado al Equipo")
+  }
+  
+  useEffect(() => {
+    dispatch(teamRequest())
+  }, [])
   
   return (
     <SafeAreaView style={styles.container}>
     <Text style={styles.mainText}>Busqueda por Empleado</Text>
-      <SearchInput dispatchInput={searchUsersByInput}/>
+      {/* <SearchInput dispatchInput={searchUsersByInput}/> */}
       <SectionList
-        sections={[{ title: "Promover Empleados", data: users}]}
+        sections={[{ title: "Sumar empleado al equipo", data: team}]}
         renderItem={({ item }) => (
-           <Pressable onPress={() =>handlePress(item.id)}>
+           <Pressable onPress={() =>handlePress(item.name)}>
           <View style={styles.row}>
-            <Text style={styles.text}>Solicitante: {item.firstName} {item.lastName}</Text>
-            <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
-            <Text>Legajo: {item.employeeId}</Text>
-            <Text>Nombre: {item.firstName}</Text>
-            <Text>Apellido: {item.lastName}</Text>
-            <Text>Email: {item.email}</Text>
-            <Text>Dias Laborales: {item.workingDays}</Text>
-            <Text>Turnos: {item.shift}</Text>
-            <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2)&&"Disponible: No"}</Text>
+            <Text style={styles.text}>Nombre del Equipo: {item.name}</Text>
           </View>
           </Pressable>
         )}

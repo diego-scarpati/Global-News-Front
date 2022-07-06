@@ -11,9 +11,7 @@ export default function Attendance({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const attendance = useSelector((state) => state.attendance);
-
-  console.log("attendance", attendance);
-
+  
   const date = () => {
     const fecha = new Date();
     return `${fecha.getDate()}/${

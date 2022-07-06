@@ -42,6 +42,8 @@ export default function ManagerLicencesRequest() {
             <Text style={styles.text}>
               Solicitante: {item.user?.firstName} {item.user?.lastName}
             </Text>
+            <Text>Legajo: {item.employeeId}</Text>
+            <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
             <Text>Tipo de licencia: {item.type}</Text>
             <Text>Inicio: {item.startDate}</Text>
             <Text>Fin: {item.endDate}</Text>

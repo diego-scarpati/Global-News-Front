@@ -18,7 +18,6 @@ export const sendRegisterRequest = createAsyncThunk(
 );
 
 export const sendLoginRequest = createAsyncThunk("LOGIN", async (data) => {
-  console.log("🚀 ~ file: user.js ~ line 21 ~ sendLoginRequest ~ data", data);
   try {
     //despues invertir el orden de las rutas MARIANO I
     const user = await axios.get(

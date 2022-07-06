@@ -9,7 +9,7 @@ export default function CoordinatorHomeScreen({ navigation }) {
     <ScrollView style={styles.container}>
       <View style={styles.body}>
         <HomeButton
-          text="Coordinador Licencias de Equipo"
+          text="Licencias de Equipo"
           onPress={() => navigation.navigate("Coordinador Licencias de Equipo")}
         />
        

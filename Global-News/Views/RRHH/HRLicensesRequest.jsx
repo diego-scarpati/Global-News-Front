@@ -44,12 +44,7 @@ export default function HRLicensesRequest() {
           &&<View style={styles.row}>
             <Text style={styles.text}>Solicitante: {item.user?.firstName} {item.user?.lastName}</Text>
             <Text>Legajo: {item.employeeId}</Text>
-            {/* <Text>Rango: {
-              (item.user?.positionId === 4)&& "Empleado"
-              (item.user?.positionId === 3)&& "Coordinador"
-              (item.user?.positionId === 2)&& "Jefe"
-              (item.user?.positionId === 1)&& "Gerente"
-              }</Text> */}
+            <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
             <Text>Tipo de licencia: {item.type}</Text>
             <Text>Inicio: {item.startDate}</Text>
             <Text>Fin: {item.endDate}</Text>

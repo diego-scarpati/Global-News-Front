@@ -7,38 +7,35 @@ import {
   SafeAreaView,
   SectionList,
   StatusBar,
-  Button
+  Button,
+  Pressable
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
 import { searchAllUsers } from "../../store/user";
-import { rrhhGiveRol } from "../../store/position"
+import { attendaceControl } from "../../store/attendance"
 import { searchUsersByInput } from "../../store/user";
 
 
-export default function HRGiveRol() {
+export default function BossAttendanceControl({navigation}) {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user);
-  
-  useEffect(() => {
-    dispatch(searchAllUsers())
-  }, []);
+   
+    const handlePress = (id)=>{
+    dispatch(attendaceControl({id:id}))
+    navigation.navigate("Control Asistencias")
+    }
 
-  const handlePromote = (userId,position) => {
-  dispatch(rrhhGiveRol( {userId: userId, position: position}))
-  dispatch(searchAllUsers());
-  }
- 
+  
   return (
     <SafeAreaView style={styles.container}>
+    <Text style={styles.mainText}>Busqueda por Empleado</Text>
       <SearchInput dispatchInput={searchUsersByInput}/>
-    <Text style={styles.mainText}>Promover Empleados</Text>
       <SectionList
         sections={[{ title: "Promover Empleados", data: users}]}
         renderItem={({ item }) => (
+           <Pressable onPress={() =>handlePress(item.id)}>
           <View style={styles.row}>
-            <Text style={styles.text}>
-              Solicitante: {item.firstName} {item.lastName}
-            </Text>
+            <Text style={styles.text}>Solicitante: {item.firstName} {item.lastName}</Text>
             <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
             <Text>Legajo: {item.employeeId}</Text>
             <Text>Nombre: {item.firstName}</Text>
@@ -46,34 +43,9 @@ export default function HRGiveRol() {
             <Text>Email: {item.email}</Text>
             <Text>Dias Laborales: {item.workingDays}</Text>
             <Text>Turnos: {item.shift}</Text>
-            <View style={styles.buttomView}>
-
-            {(item.positionId != 1)
-              &&<Button
-                style={styles.button}
-                title="Gerente"
-                onPress={()=>handlePromote(item.id,"Gerente")}
-              />}
-              {(item.positionId != 2)
-              &&<Button
-                style={styles.button}
-                title="Jefe"
-                onPress={()=>handlePromote(item.id,"Jefe")}
-              />}
-              {(item.positionId != 3)
-              &&<Button
-                style={styles.button}
-                title="Coordinador"
-                onPress={()=>handlePromote(item.id,"Coordinador")}
-              />}
-              {(item.positionId != 4)
-              &&<Button
-                style={styles.button}
-                title="Empleado"
-                onPress={()=>handlePromote(item.id,"Empleado")}
-              />}
-            </View>
+            <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2)&&"Disponible: No"}</Text>
           </View>
+          </Pressable>
         )}
         
         keyExtractor={(item) => item.id}

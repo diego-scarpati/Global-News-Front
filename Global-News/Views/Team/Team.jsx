@@ -8,10 +8,11 @@ import { teamRequest } from "../../store/team";
 const optionsPerPage = [2, 3, 4];
 
 export default function Team() {
+  
+  const dispatch = useDispatch()
+  
   const user = useSelector((state) => state.user);
   const team = useSelector((state)=> state.team)
-
-  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(teamRequest());
@@ -19,7 +20,7 @@ export default function Team() {
 
   console.log("user", user);
   console.log("user name", user.firstName);
-  console.log("team", team)
+  console.log("team view", team)
 
 
   // const [page, setPage] = React.useState(0);
@@ -29,15 +30,23 @@ export default function Team() {
   // setPage(0);
   // }, [itemsPerPage]);
 
+const teamByUser = team.map((data)=> data.users)
+const userByTeam = teamByUser.map((userInfo)=>userInfo)
+
+console.log("TeamByUserrr",teamByUser)
+console.log("userByTeam", userByTeam)
+
+
   return (
+
     <SafeAreaView style={styles.container}>
-    <Text style={styles.mainText}>Mi Equipo</Text>
+    {/* <Text style={styles.mainText}>Mi Equipo</Text>
       <SectionList
         sections={[{ title: "Mi Equipo", data: team}]}
         renderItem={({ item }) => (
           <View style={styles.row}>
             <Text style={styles.text}>
-              Nombre: {item.team.firstName} {item.team.lastName}
+              Nombre: {item.users.firstName} {item.users.lastName}
             </Text>
             <Text>Email: {item.users.email}</Text>
             <Text>Puesto: {item.users.positionId}</Text>
@@ -46,7 +55,7 @@ export default function Team() {
         )}
         
         keyExtractor={(item) => item.id}
-      /> 
+      />  */}
     </SafeAreaView>
   );
 }

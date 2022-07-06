@@ -10,7 +10,6 @@ import Constants from "expo-constants";
 import Team from "./Views/Team/Team";
 import Login from "./Views/Login/Login";
 import HRGiveRol from "./Views/RRHH/HRGiveRol";
-import HREditUser from "./Views/RRHH/HREditUser";
 import Calendar from "./Views/Calendar/Calendar";
 import Register from "./Views/Register/Register";
 import MyProfile from "./Views/MyProfile/MyProfile";
@@ -27,8 +26,6 @@ import SearchUserAttendanceControl from "./Views/Attendance/SearchUserAttendance
 import AttendanceControler from "./Views/Attendance/AttendanceControler"
 import HREditUser from "./Views/RRHH/HREditUser"; // queda
 import { userRequest, sendLoginRequest } from "./store/user"; // queda
-import LicensesHomeScreen from "./Views/License/LicensesHomeScreen";
-import AttendanceControler from "./Views/Attendance/AttendanceControler";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,50 +33,50 @@ function App() {
   const [route, setRoute] = useState("Inicio");
   const [userEmail, setUserEmail] = useState("");
 
-  useEffect(() => {
-    try {
-      console.log("entre al try");
-      storage
-        .load({
-          key: "loggedUser",
-          id: "1",
-          autoSync: false,
-          syncInBackground: false,
-        })
-        .then((ret) => {
-          console.log("estoy en el then");
-          setUserEmail(ret.email);
-          setRoute("Pantalla Principal");
-        });
-    } catch (error) {
-      console.log("entre al catch");
-      console.warn(error.message);
-    }
+  // useEffect(() => {
+  //   // try {
+  //   //   console.log("entre al try");
+  //   //   storage
+  //   //     .load({
+  //   //       key: "loggedUser",
+  //   //       id: "1",
+  //   //       autoSync: false,
+  //   //       syncInBackground: false,
+  //   //     })
+  //   //     .then((ret) => {
+  //   //       console.log("estoy en el then");
+  //   //       setUserEmail(ret.email);
+  //   //       setRoute("Pantalla Principal");
+  //   //     });
+  //   // } catch (error) {
+  //   //   console.log("entre al catch");
+  //   //   console.warn(error.message);
+  //   // }
 
-    // No logueo nada este
-    try {
-      // NO tira error
-      storage.getIdsForKey("loggedUser").then((ids) => {
-        console.log(ids);
-      });
+  //   // No logueo nada este
+  //   // try {
+  //   //   // NO tira error
+  //   //   storage.getIdsForKey("loggedUser").then((ids) => {
+  //   //     console.log(ids);
+  //   //   });
 
-      // Tiran error
-      // storage.getAllDataForKey('loggedUser').then(users => {
-      //   console.log("Users:", users);
-      // });
-      // storage.getAllDataForKey('1').then(users => {
-      //   console.log("Users:", users);
-      // });
-      // storage.getIdsForKey('1').then(ids => {
-      //   console.log(ids);
-      // });
-    } catch (error) {
-      console.log("getAllDataForKey", error);
-    }
-  }, []);
-  console.log("Constants.platform", Constants.platform);
-  console.log("route", route);
-  console.log("userEmail", userEmail);
+  //     // Tiran error
+  //     // storage.getAllDataForKey('loggedUser').then(users => {
+  //     //   console.log("Users:", users);
+  //     // });
+  //     // storage.getAllDataForKey('1').then(users => {
+  //     //   console.log("Users:", users);
+  //     // });
+  //     // storage.getIdsForKey('1').then(ids => {
+  //     //   console.log(ids);
+  //     // });
+  //   } catch (error) {
+  //     console.log("getAllDataForKey", error);
+  //   }
+  // }, []);
+  // console.log("Constants.platform", Constants.platform);
+  // console.log("route", route);
+  // console.log("userEmail", userEmail);
 
   function Loading({ navigation }) {
     const dispatch = useDispatch();

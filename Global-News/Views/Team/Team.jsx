@@ -1,102 +1,59 @@
 import React, { Component, useEffect } from "react";
-import { StyleSheet, View, Text, StatusBar, SafeAreaView, SectionList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  StatusBar,
+  SafeAreaView,
+  SectionList,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
 import { DataTable } from "react-native-paper";
 import { teamRequest } from "../../store/team";
+import { searchAllUsers } from "../../store/user";
 
-const optionsPerPage = [2, 3, 4];
+export default function Team({route}) {
+  const dispatch = useDispatch();
 
-export default function Team() {
   const user = useSelector((state) => state.user);
-  const team = useSelector((state)=> state.team)
+  const team = useSelector((state) => state.team);
+  const usersList = route.params.users
 
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(teamRequest());
-  }, []);
-
+console.log(route)
   console.log("user", user);
-  console.log("user name", user.firstName);
-  console.log("team", team)
-
-
-  // const [page, setPage] = React.useState(0);
-  // const [itemsPerPage, setItemsPerPage] = React.useState(optionsPerPage[0]);
-
-  // React.useEffect(() => {
-  // setPage(0);
-  // }, [itemsPerPage]);
+  console.log("team view", team);
 
   return (
     <SafeAreaView style={styles.container}>
-    <Text style={styles.mainText}>Mi Equipo</Text>
-      <SectionList
-        sections={[{ title: "Mi Equipo", data: team}]}
-        renderItem={({ item }) => (
-          <View style={styles.row}>
-            <Text style={styles.text}>
-              Nombre: {item.team.firstName} {item.team.lastName}
-            </Text>
-            <Text>Email: {item.users.email}</Text>
-            <Text>Puesto: {item.users.positionId}</Text>
-            <Text>Conectado: {item.users.availability}</Text>
-          </View>
-        )}
-        
-        keyExtractor={(item) => item.id}
-      /> 
+      <View style={styles.container}>
+        <DataTable>
+                <Text>Equipo: {route.params.name}</Text>
+                  <View>
+                    <DataTable.Header>
+                      <DataTable.Title>Nombre</DataTable.Title>
+                      <DataTable.Title>Apellido</DataTable.Title>
+                      <DataTable.Title>Email</DataTable.Title>
+                      <DataTable.Title>Puesto</DataTable.Title>
+                    </DataTable.Header>
+                    {usersList.map((data)=>{
+                      return(
+                    <DataTable.Row key={data.id}>
+                      <DataTable.Cell>{data.firstName} </DataTable.Cell>
+                      <DataTable.Cell>{data.lastName}</DataTable.Cell>
+                      <DataTable.Cell>{data.email}</DataTable.Cell>
+                      <DataTable.Cell>Puesto</DataTable.Cell>
+                    </DataTable.Row>)})}
+                  </View>
+        </DataTable>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingTop: StatusBar.currentHeight,
-      marginHorizontal: 16,
-      justifyContent: "center",
-      alignContent: "center",
-      padding: 5,
-      margin: 5,
-     
-    },
-    item: {
-      backgroundColor: "#f9c2ff",
-      padding: 20,
-      marginVertical: 8,
-    },
-    title: {
-      fontSize: 24,
-    },
-    row: {
-      paddingHorizontal: 20,
-      paddingVertical: 10,
-      borderColor: "#0073b7",
-      borderWidth: 2,
-      margin: 2,
-      borderRadius: 5,
-    },
-    sectionHeader: {
-      backgroundColor: "#efefef",
-      paddingHorizontal: 20,
-      paddingVertical: 10,
-    },
-    button: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "center",
-      margin: 10,
-      padding: 10
-    },
-    buttomView: {
-      margin: 10
-    },
-    text:{
-      fontSize: 20
-    },
-    mainText:{
-      fontSize: 30
-    }
-  });
+  container: {
+    paddingTop: 100,
+    paddingHorizontal: 30,
+  },
+});

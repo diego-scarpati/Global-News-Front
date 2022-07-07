@@ -7,45 +7,49 @@ import {
   SafeAreaView,
   SectionList,
   StatusBar,
-  Button
+  Button,
+  Pressable
 } from "react-native";
-import { rrhhReviewLicense, rrhhChangeLicenseStatus, rrhhLicenseBySearch } from "../../store/license";
 import SearchInput from "../Search/SearchInput";
 
-export default function HRLicencesHistory() {
+import { searchUsersByInput } from "../../store/user";
+import { teamRequest } from "../../store/team"
+
+
+export default function AddUserTeam({navigation}) {
   const dispatch = useDispatch();
-  const licencias = useSelector((state) => state.license);
+  const users = useSelector((state) => state.user);
+  console.log(users)
+   
+    const handlePress = (id)=>{
+    navigation.navigate("Elegir Equipo")
+    }
+
   
-
-  useEffect(() => {
-    dispatch(rrhhReviewLicense());
-  }, []);
-
   return (
-      
     <SafeAreaView style={styles.container}>
-    <SearchInput dispatchInput={rrhhLicenseBySearch}/>
+    <Text style={styles.mainText}>Busqueda por Empleado</Text>
+      <SearchInput dispatchInput={searchUsersByInput}/>
       <SectionList
-        sections={[{ title: "Licencias", data: licencias }]}
+        sections={[{ title: "Promover Empleados", data: users}]}
         renderItem={({ item }) => (
-          
+           <Pressable onPress={() =>handlePress(item.id)}>
             <View style={styles.row}>
-            <Text style={styles.text}>
-            Solicitante: {item.user?.firstName} {item.user?.lastName}
-            </Text>
-            <Text>Legajo: {item.employeeId}</Text>
+            <Text style={styles.text}>Nombre : {item.firstName} {item.lastName}</Text>
             <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
-            <Text>Tipo de licencia: {item.type}</Text>
-            <Text>Inicio: {item.startDate}</Text>
-            <Text>Fin: {item.endDate}</Text>
-            <Text>Observaciones: {item.observations}</Text>
-            <Text>Estado Jefe: {item.bossApproval}</Text>
-            <Text>Estado RRHH: {item.HRApproval}</Text>
-            
+            <Text>Legajo: {item.employeeId}</Text>
+            <Text>Email: {item.email}</Text>
+            <Text>Dias Laborales: {item.workingDays}</Text>
+            <Text>Turnos: {item.shift}</Text>
+            <Text>Equipos: </Text>
+            {item.teams.map((team,i)=>{return(<Text> {i+1}-{team.name}</Text>)})}
+            <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2)&&"Disponible: No"}</Text>
           </View>
+          </Pressable>
         )}
+        
         keyExtractor={(item) => item.id}
-      />
+      /> 
     </SafeAreaView>
   );
 }
@@ -94,5 +98,8 @@ const styles = StyleSheet.create({
   },
   text:{
     fontSize: 20
+  },
+  mainText:{
+    fontSize: 30
   }
 });

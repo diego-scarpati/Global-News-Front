@@ -7,44 +7,49 @@ import {
   SafeAreaView,
   SectionList,
   StatusBar,
-  Button
+  Button,
+  Pressable
 } from "react-native";
-import { rrhhReviewLicense, rrhhChangeLicenseStatus } from "../../store/license";
+import SearchInput from "../Search/SearchInput";
+import { searchAllUsers } from "../../store/user";
+import { attendaceControl } from "../../store/attendance"
+import { searchUsersByInput } from "../../store/user";
 
-export default function CoordinadorLicenses() {
+
+export default function SearchUser({navigation}) {
   const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.user);
-  const licencias = useSelector((state) => state.license);
-
-  useEffect(() => {
-    dispatch(rrhhReviewLicense());
-  }, []);
+  const users = useSelector((state) => state.user);
+   
+    const handlePress = (id)=>{
+    dispatch(attendaceControl({id:id}))
+    navigation.navigate("Control Asistencias")
+    }
 
   
-
   return (
     <SafeAreaView style={styles.container}>
-    <Text style={styles.mainText}>Licencias</Text>
+    <Text style={styles.mainText}>Busqueda por Empleado</Text>
+      <SearchInput dispatchInput={searchUsersByInput}/>
       <SectionList
-        sections={[{ title: "Licencias", data: licencias }]}
-        renderItem={({ item }) => (       
+        sections={[{ title: "Promover Empleados", data: users}]}
+        renderItem={({ item }) => (
+           <Pressable onPress={() =>handlePress(item.id)}>
           <View style={styles.row}>
-            <Text style={styles.text}>
-              Solicitante: {item.user?.firstName} {item.user?.lastName}
-            </Text>
-            <Text>Legajo: {item.employeeId}</Text>
+            <Text style={styles.text}>Solicitante: {item.firstName} {item.lastName}</Text>
             <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
-            <Text>Tipo de licencia: {item.type}</Text>
-            <Text>Inicio: {item.startDate}</Text>
-            <Text>Fin: {item.endDate}</Text>
-            <Text>Observaciones: {item.observations}</Text>
-            <Text>Estado Jefe: {item.bossApproval}</Text>
-            <Text>Estado RRHH: {item.HRApproval}</Text>
+            <Text>Legajo: {item.employeeId}</Text>
+            <Text>Nombre: {item.firstName}</Text>
+            <Text>Apellido: {item.lastName}</Text>
+            <Text>Email: {item.email}</Text>
+            <Text>Dias Laborales: {item.workingDays}</Text>
+            <Text>Turnos: {item.shift}</Text>
+            <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2)&&"Disponible: No"}</Text>
           </View>
+          </Pressable>
         )}
+        
         keyExtractor={(item) => item.id}
-      />
+      /> 
     </SafeAreaView>
   );
 }

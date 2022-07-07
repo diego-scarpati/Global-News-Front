@@ -20,7 +20,9 @@ const SearchInput = ({dispatchInput}) => {
         placeholder="Buscar Empleado"
         onChangeText={onChangeSearch}
       />
-      <Button title='Buscar' onPress={()=> handleSearch()}/>
+      <Button title='Buscar' 
+      onPress={()=> handleSearch()}
+      />
     </View>
   );
 };

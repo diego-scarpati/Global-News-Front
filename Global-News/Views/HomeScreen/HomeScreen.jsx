@@ -4,17 +4,9 @@ import { StyleSheet, View, ScrollView, Platform } from "react-native";
 import storage from "../../storage/storage";
 import Profile from "./components/Profile";
 import HomeButton from "./components/HomeButtons";
-import { userRequest } from "../../store/user";
-import StartScreen from "../StartScreen/StartScreen";
-import Constants from "expo-constants";
 
 export default function UserProfileView({ navigation }) {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  console.log(
-    "🚀 ~ file: HomeScreen.jsx ~ line 10 ~ UserProfileView ~ user",
-    user
-  );
 
   const logoutHandler = () => {
     if (Platform.OS === "web") {
@@ -29,7 +21,6 @@ export default function UserProfileView({ navigation }) {
       }
     }
     navigation.replace("Inicio");
-    // console.log("logout")
   };
 
   return (
@@ -46,7 +37,7 @@ export default function UserProfileView({ navigation }) {
         />
         <HomeButton
           text="Equipos"
-          onPress={() => navigation.navigate("Equipo")}
+          onPress={() => navigation.navigate("Equipos")}
         />
         <HomeButton
           text="Dar Presente"
@@ -55,26 +46,26 @@ export default function UserProfileView({ navigation }) {
 
         {user.positionId === 3 && (
           <HomeButton
-            text="Coordinador"
-            onPress={() => navigation.navigate("Coordinador")}
+            text="Vista Principal"
+            onPress={() => navigation.navigate("Vista Principal")}
           />
+          
         )}
 
         {user.positionId === 2 && (
-          <HomeButton text="Jefe" onPress={() => navigation.navigate("Jefe")} />
+          <HomeButton text="Vista Principal" onPress={() => navigation.navigate("Vista Principal")} />
         )}
 
         {user.positionId === 1 && (
-          <HomeButton
-            text="Gerente"
-            onPress={() => navigation.navigate("Gerente")}
-          />
+
+          <HomeButton text="Vista Principal" onPress={() => navigation.navigate("Vista Principal")} />
+
         )}
 
         {user.RRHH && (
           <HomeButton
-            text="Recursos Humanos"
-            onPress={() => navigation.navigate("Recursos Humanos")}
+            text="Vista Principal"
+            onPress={() => navigation.navigate("Vista Principal")}
           />
         )}
         <HomeButton text="Logout" onPress={() => logoutHandler()} />

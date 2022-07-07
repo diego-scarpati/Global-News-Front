@@ -11,38 +11,39 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
 import { DataTable } from "react-native-paper";
-import { teamRequestByUser, teamRequest } from "../../store/team";
+import { teamRequestByUser, teamRequest, searchTeamById } from "../../store/team";
 import { searchAllUsers } from "../../store/user";
 import HomeButton from "../HomeScreen/components/HomeButtons";
 
 export default function TeamsHome({ navigation }) {
   const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.user);
   const team = useSelector((state) => state.team);
 
+  const onPress=(item)=>{
+    const request = async () => {
+     const team = await dispatch(searchTeamById(item))
+     navigation.navigate("Equipo", item)
+    }
+    request()
+  }
   useEffect(() => {
-    // dispatch(searchAllUsers());
     dispatch(teamRequestByUser());
-    // dispatch(teamRequest())
   }, []);
-
-  console.log("user", user);
-  console.log("team view", team);
-
+  
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        {team.map((data, i) => {
-          return (
-            <View style={styles.list} key={i}>
-              <Pressable onPress={() => navigation.navigate("Equipo", data)}>
-                <Text>Equipo: {data.name}</Text>
-              </Pressable>
-            </View>
-          );
-        })}
-      </View>
+    <Text style={styles.mainText}>Equipos</Text>
+      <SectionList
+        sections={[{ title: "Equipos", data: team}]}
+        renderItem={({ item }) => (
+            <View style={styles.row}>
+           <Pressable onPress={() =>onPress(item.id)}>
+            <Text style={styles.text}>{item.name}</Text>
+          </Pressable>
+          </View>
+        )}
+        keyExtractor={(item) => item.id}
+      /> 
     </SafeAreaView>
   );
 }
@@ -53,4 +54,28 @@ const styles = StyleSheet.create({
     height: 1000,
     alignItems: "center",
   },
+  container: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+    marginHorizontal: 16,
+    justifyContent: "center",
+    alignContent: "center",
+    padding: 5,
+    margin: 5,
+   
+  },
+  row: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderColor: "#0073b7",
+    borderWidth: 2,
+    margin: 2,
+    borderRadius: 5,
+  },
+  text:{
+    fontSize: 20
+  },
+  mainText:{
+    fontSize: 30
+  }
 });

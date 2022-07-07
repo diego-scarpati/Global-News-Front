@@ -23,8 +23,14 @@ import AttendanceControler from "./Views/Attendance/AttendanceControler"
 import TeamsHome from "./Views/Team/TeamsHome";
 import AddUserTeam from "./Views/Team/AddUserTeam";
 import SelectTeam from "./Views/Team/SelectTeam"
+
+//import { userRequest, sendLoginRequest } from "./store/user"; // queda
+import CreateOffice from "./Views/Offices/CreateOffice";
+import SelectOffice from "./Views/Offices/SelectOffice"
+import AddUserOffice from "./Views/Offices/AddUserOffice"
 import HREditUser from "./Views/RRHH/HREditUser";
 import Loading from "./Views/Login/Loading";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -48,6 +54,11 @@ function App() {
           <Stack.Screen name="Crear Equipo" component={CreateTeam} />
           <Stack.Screen name="Sumar Empleado al Equipo" component={AddUserTeam} />
           <Stack.Screen name="Elegir Equipo" component={SelectTeam} />
+
+          <Stack.Screen name="Crear Oficina" component={CreateOffice} />
+          <Stack.Screen name="Sumar Empleado ala Oficina" component={AddUserOffice} />
+          <Stack.Screen name="Elegir Oficina" component={SelectOffice} />
+          
           <Stack.Screen name="Calendario" component={Calendar} />
           <Stack.Screen name="Control Asistencias" component={AttendanceControler} />
           <Stack.Screen name="Control Solicitud de Licencias" component={CheckLicenseRequest}/>

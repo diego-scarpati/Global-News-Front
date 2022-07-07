@@ -31,7 +31,6 @@ export default function Register({navigation}) {
   const dispatch = useDispatch();
 
   const selectedDay = useSelector((state) => state.calendar);
-  console.log(selectedDay.start)
 
   const [showModalDate, setShowModalDate] = useState(false);
 

@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView, Platform } from "react-native";
 import storage from "../../storage/storage";
 import Profile from "./components/Profile";
 import HomeButton from "./components/HomeButtons";
 import { userRequest } from "../../store/user";
 import StartScreen from "../StartScreen/StartScreen";
+import Constants from "expo-constants";
 
 export default function UserProfileView({ navigation }) {
   const dispatch = useDispatch();
@@ -15,41 +16,17 @@ export default function UserProfileView({ navigation }) {
     user
   );
 
-  // useEffect(()=>{
-  //   dispatch(userRequest(userId));
-  // },[])
-
-  try {
-    storage.getAllDataForKey("loggedUser").then((users) => {
-      console.log("Users:", users);
-    });
-  } catch (error) {
-    console.log("getAllDataForKey", error);
-  }
-
-  try {
-    console.log("entre al try");
-    storage
-      .load({
-        key: "loggedUser",
-        autoSync: true,
-        syncInBackground: true,
-      })
-      .then((ret) => {
-        console.log("ret", ret);
-      });
-  } catch (error) {
-    console.log("entre al catch");
-    console.warn(error.message);
-  }
-
   const logoutHandler = () => {
-    try {
-      storage.remove({
-        key: "loggedUser",
-      });
-    } catch (error) {
-      console.log("logoutHandler Error:", error);
+    if (Platform.OS === "web") {
+      localStorage.setItem("email", null)
+    } else {
+      try {
+        storage.remove({
+          key: "loggedUser",
+        });
+      } catch (error) {
+        console.log("logoutHandler Error:", error);
+      }
     }
     navigation.replace("Inicio");
     // console.log("logout")

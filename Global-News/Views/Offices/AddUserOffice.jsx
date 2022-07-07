@@ -16,13 +16,13 @@ import { searchUsersByInput } from "../../store/user";
 import { teamRequest } from "../../store/team"
 
 
-export default function AddUserTeam({navigation}) {
+export default function AddUserOffice({navigation}) {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user);
 
    
     const handlePress = (id)=>{
-    navigation.navigate("Elegir Equipo")
+    navigation.navigate("Elegir Oficina")
     }
 
   
@@ -31,7 +31,7 @@ export default function AddUserTeam({navigation}) {
     <Text style={styles.mainText}>Busqueda por Empleado</Text>
       <SearchInput dispatchInput={searchUsersByInput}/>
       <SectionList
-        sections={[{ title: "Promover Empleados", data: users}]}
+        sections={[{ title: "Buscar Empleado", data: users}]}
         renderItem={({ item }) => (
            <Pressable onPress={() =>handlePress(item.id)}>
             <View style={styles.row}>

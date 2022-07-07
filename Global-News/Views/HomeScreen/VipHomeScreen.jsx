@@ -52,6 +52,18 @@ export default function HRHomeScreen({ navigation }) {
                 navigation.navigate("Recursos Humanos Editar Usuario")
               }
             />
+             <HomeButton
+              text="Crear Oficina"
+              onPress={() =>
+                navigation.navigate("Crear Oficina")
+              }
+            />
+            <HomeButton
+              text="Sumar Empleado ala Oficina"
+              onPress={() =>
+                navigation.navigate("Sumar Empleado ala Oficina")
+              }
+            />
           </View>
         )}
       </View>

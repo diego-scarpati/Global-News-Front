@@ -30,6 +30,9 @@ import AddUserTeam from "./Views/Team/AddUserTeam";
 import SelectTeam from "./Views/Team/SelectTeam"
 import HREditUser from "./Views/RRHH/HREditUser"; // queda
 import { userRequest, sendLoginRequest } from "./store/user"; // queda
+import CreateOffice from "./Views/Offices/CreateOffice";
+import SelectOffice from "./Views/Offices/SelectOffice"
+import AddUserOffice from "./Views/Offices/AddUserOffice"
 
 const Stack = createNativeStackNavigator();
 
@@ -120,6 +123,11 @@ function App() {
           <Stack.Screen name="Crear Equipo" component={CreateTeam} />
           <Stack.Screen name="Sumar Empleado al Equipo" component={AddUserTeam} />
           <Stack.Screen name="Elegir Equipo" component={SelectTeam} />
+
+          <Stack.Screen name="Crear Oficina" component={CreateOffice} />
+          <Stack.Screen name="Sumar Empleado ala Oficina" component={AddUserOffice} />
+          <Stack.Screen name="Elegir Oficina" component={SelectOffice} />
+          
           <Stack.Screen name="Calendario" component={Calendar} />
           <Stack.Screen name="Control Asistencias" component={AttendanceControler} />
           <Stack.Screen name="Control Solicitud de Licencias" component={CheckLicenseRequest}/>

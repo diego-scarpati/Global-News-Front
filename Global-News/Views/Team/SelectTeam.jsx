@@ -10,10 +10,9 @@ import {
   Button,
   Pressable
 } from "react-native";
-import SearchInput from "../Search/SearchInput";
 import { teamRequest } from "../../store/team"
 import { addUserToTeam } from "../../store/team"
-import { searchUsersByInput } from "../../store/user";
+
 
 
 export default function SelectTeam({navigation}) {
@@ -36,7 +35,6 @@ export default function SelectTeam({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
     <Text style={styles.mainText}>Busqueda por Empleado</Text>
-      {/* <SearchInput dispatchInput={searchUsersByInput}/> */}
       <SectionList
         sections={[{ title: "Sumar empleado al equipo", data: team}]}
         renderItem={({ item }) => (

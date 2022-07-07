@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { View, Text, Image, Button, StyleSheet, TextInput } from "react-native";
 import storage from "../../storage/storage";
-
+import Constants from "expo-constants";
 import logo from "../../assets/gnlogogrande-01.png";
 import { sendLoginRequest } from "../../store/user";
 
@@ -21,16 +21,20 @@ export default function Login({ navigation }) {
 
   const dispatch = useDispatch();
 
+  console.log("Web", Constants.platform.web != null)
   const onSubmit = (info) => {
     dispatch(sendLoginRequest(info));
-    console.log("🚀 ~ file: Login.jsx ~ line 26 ~ onSubmit ~ info", info)
     
-    storage.save({
-      key: "loggedUser",
-      id: "1",
-      data: info,
-      // expires: 1000 * 3600,
-    });
+    if (Constants.platform?.web) {
+      localStorage.setItem("email", JSON.stringify(info.email))
+    } else {
+      storage.save({
+        key: "loggedUser",
+        id: "1",
+        data: info,
+        // expires: 1000 * 3600,
+      });
+    }
     navigation.replace("Pantalla Principal");
   };
 

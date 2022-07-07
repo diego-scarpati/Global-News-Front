@@ -33,7 +33,7 @@ export const addUserToTeam = createAsyncThunk("ADD_USER_TO_TEAM", async (data)=>
     }catch(error){console.log(error)}
 });
 
-const teamReducer = createReducer({}, {
+const teamReducer = createReducer([], {
     [teamRequest.fulfilled]: (state,action)=>action.payload,
     [teamRequest.rejected]: (state,action)=>action.payload,
 

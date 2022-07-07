@@ -1,7 +1,7 @@
 import { Provider, useDispatch } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Pressable, Text, View, ActivityIndicator } from "react-native";
 
 import storage from "./storage/storage";
@@ -30,12 +30,20 @@ import AddUserTeam from "./Views/Team/AddUserTeam";
 import SelectTeam from "./Views/Team/SelectTeam"
 import HREditUser from "./Views/RRHH/HREditUser"; // queda
 import { userRequest, sendLoginRequest } from "./store/user"; // queda
+import { startNotifications } from "./utils/notifications";
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   const [route, setRoute] = useState("Inicio");
   const [userEmail, setUserEmail] = useState("");
+
+  const notificationListener = useRef()
+  const responseListener = useRef()
+
+  useEffect(()=> {
+    startNotifications(notificationListener, responseListener)
+  },[])
 
   // useEffect(() => {
   //   // try {

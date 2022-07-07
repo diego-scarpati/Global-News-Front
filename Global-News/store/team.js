@@ -14,17 +14,37 @@ export const teamRequestByUser = createAsyncThunk("TEAM_REQUEST_BY_USER", async 
     try{ 
     const team = await axios.get(`http://localhost:3001/api/teams/user/${user.id}`)
     console.log("store teamRequestByUser", team.data)
+     return team.data
+    }catch(error){console.log(error)}
+});
+
+export const teamCreate = createAsyncThunk("CREATE_TEAM", async (data)=>{
+    try{ 
+         const team = await axios.post(`http://localhost:3001/api/teams/addTeam`,data)
+
         return team.data
     }catch(error){console.log(error)}
 });
 
-const teamReducer = createReducer([], {
+export const addUserToTeam = createAsyncThunk("ADD_USER_TO_TEAM", async (data)=>{
+    try{ 
+         const team = await axios.post(`http://localhost:3001/api/teams/user/addTeam`,data)
+        return team.data
+    }catch(error){console.log(error)}
+});
+
+const teamReducer = createReducer({}, {
     [teamRequest.fulfilled]: (state,action)=>action.payload,
     [teamRequest.rejected]: (state,action)=>action.payload,
+
+    [teamCreate.fulfilled]: (state,action)=>action.payload,
+    [teamCreate.rejected]: (state,action)=>action.payload,
+
+    [addUserToTeam.fulfilled]: (state,action)=>action.payload,
+    [addUserToTeam.rejected]: (state,action)=>action.payload,
+    
     [teamRequestByUser.fulfilled]: (state,action)=>action.payload,
     [teamRequestByUser.rejected]: (state,action)=>action.payload,
 });
-
-
 
 export default teamReducer

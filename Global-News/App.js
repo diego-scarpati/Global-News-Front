@@ -25,6 +25,7 @@ import CheckLicenseRequest from "./Views/License/CheckLicensesRequest";
 import LicensesHomeScreen from "./Views/License/LicensesHomeScreen"
 import SearchUser from "./Views/Attendance/SearchUser"
 import AttendanceControler from "./Views/Attendance/AttendanceControler"
+import TeamsHome from "./Views/Team/TeamsHome";
 import AddUserTeam from "./Views/Team/AddUserTeam";
 import SelectTeam from "./Views/Team/SelectTeam"
 import HREditUser from "./Views/RRHH/HREditUser"; // queda
@@ -114,6 +115,7 @@ function App() {
           <Stack.Screen name="Historial Licencias" component={LicenseHistory} />
           <Stack.Screen name="Mi Perfil" component={MyProfile} />
           <Stack.Screen name="Dar Presente" component={Attendance} />
+          <Stack.Screen name="Equipos" component={TeamsHome} />
           <Stack.Screen name="Equipo" component={Team} />
           <Stack.Screen name="Crear Equipo" component={CreateTeam} />
           <Stack.Screen name="Sumar Empleado al Equipo" component={AddUserTeam} />

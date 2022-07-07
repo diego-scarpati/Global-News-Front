@@ -6,22 +6,25 @@ import {
   StatusBar,
   SafeAreaView,
   SectionList,
+  Pressable,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
 import { DataTable } from "react-native-paper";
-import { teamRequest } from "../../store/team";
+import { teamRequestByUser, teamRequest } from "../../store/team";
 import { searchAllUsers } from "../../store/user";
+import HomeButton from "../HomeScreen/components/HomeButtons";
 
-export default function Team() {
+export default function TeamsHome({ navigation }) {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
   const team = useSelector((state) => state.team);
 
   useEffect(() => {
-    dispatch(searchAllUsers());
-    dispatch(teamRequest());
+    // dispatch(searchAllUsers());
+    dispatch(teamRequestByUser());
+    // dispatch(teamRequest())
   }, []);
 
   console.log("user", user);
@@ -33,7 +36,9 @@ export default function Team() {
         {team.map((data, i) => {
           return (
             <View style={styles.list} key={i}>
-              <Text>Equipo: {data.name}</Text>
+              <Pressable onPress={() => navigation.navigate("Equipo", data)}>
+                <Text>Equipo: {data.name}</Text>
+              </Pressable>
             </View>
           );
         })}

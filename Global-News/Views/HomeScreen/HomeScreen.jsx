@@ -69,7 +69,7 @@ export default function UserProfileView({ navigation }) {
         />
         <HomeButton
           text="Equipos"
-          onPress={() => navigation.navigate("Equipo")}
+          onPress={() => navigation.navigate("Equipos")}
         />
         <HomeButton
           text="Dar Presente"

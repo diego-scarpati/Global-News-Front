@@ -24,6 +24,7 @@ import CheckLicenseRequest from "./Views/License/CheckLicensesRequest";
 import LicensesHomeScreen from "./Views/License/LicensesHomeScreen"
 import SearchUserAttendanceControl from "./Views/Attendance/SearchUserAttendanceControl"
 import AttendanceControler from "./Views/Attendance/AttendanceControler"
+import TeamsHome from "./Views/Team/TeamsHome";
 import HREditUser from "./Views/RRHH/HREditUser"; // queda
 import { userRequest, sendLoginRequest } from "./store/user"; // queda
 
@@ -114,6 +115,7 @@ function App() {
           <Stack.Screen name="Historial Licencias" component={LicenseHistory} />
           <Stack.Screen name="Mi Perfil" component={MyProfile} />
           <Stack.Screen name="Dar Presente" component={Attendance} />
+          <Stack.Screen name="Equipos" component={TeamsHome} />
           <Stack.Screen name="Equipo" component={Team} />
           <Stack.Screen name="Calendario" component={Calendar} />
           <Stack.Screen name="Control Asistencias" component={AttendanceControler} />

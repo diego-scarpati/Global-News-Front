@@ -16,10 +16,6 @@ export default function Team() {
   const user = useSelector((state) => state.user);
   const team = useSelector((state) => state.team);
 
-  useEffect(() => {
-    dispatch(searchTeamById());
-  }, []);
-
   const textStyle = { color: "#fff", fontSize: 15, textAlign: "center" };
   return (
     <SafeAreaView>

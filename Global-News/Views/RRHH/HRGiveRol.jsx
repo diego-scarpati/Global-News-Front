@@ -10,27 +10,27 @@ import {
   Button
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
-import { searchAllUsers } from "../../store/user";
+import { hrAllUsers } from "../../store/hhrr";
 import { rrhhGiveRol } from "../../store/position"
-import { searchUsersByInput } from "../../store/user";
+import { hrSearchUsersByInput } from "../../store/hhrr";
 
 
 export default function HRGiveRol() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.user);
+  const users = useSelector((state) => state.hhrr);
   
   useEffect(() => {
-    dispatch(searchAllUsers())
+    dispatch(hrAllUsers())
   }, []);
 
   const handlePromote = (userId,position) => {
   dispatch(rrhhGiveRol( {userId: userId, position: position}))
-  dispatch(searchAllUsers());
+  dispatch(hrAllUsers());
   }
  
   return (
     <SafeAreaView style={styles.container}>
-      <SearchInput dispatchInput={searchUsersByInput}/>
+      <SearchInput dispatchInput={hrSearchUsersByInput}/>
     <Text style={styles.mainText}>Promover Empleados</Text>
       <SectionList
         sections={[{ title: "Promover Empleados", data: users}]}

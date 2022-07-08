@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { StyleSheet, View, ScrollView } from "react-native";
 
 import HomeButton from "./components/HomeButtons";
@@ -8,6 +8,7 @@ export default function HRHomeScreen({ navigation }) {
   const user = useSelector((state) => state.user);
   console.log("UserVipScreen",user)
   //chequear si con la persistencia de usuario, tambien persiten los botones
+ 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.body}>
@@ -59,7 +60,7 @@ export default function HRHomeScreen({ navigation }) {
               }
             />
             <HomeButton
-              text="Sumar Empleado ala Oficina"
+              text="Sumar Empleado a la Oficina"
               onPress={() =>
                 navigation.navigate("Sumar Empleado ala Oficina")
               }

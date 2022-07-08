@@ -17,7 +17,7 @@ import { addUserToOffice } from "../../store/office"
 
 export default function SelectOffice({navigation}) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.hhrr);
   const office = useSelector((state) => state.office)
  
   const handlePress = (name)=>{

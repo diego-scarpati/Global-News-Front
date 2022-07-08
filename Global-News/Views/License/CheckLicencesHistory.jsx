@@ -9,23 +9,23 @@ import {
   StatusBar,
   Button
 } from "react-native";
-import { rrhhReviewLicense, rrhhChangeLicenseStatus, rrhhLicenseBySearch } from "../../store/license";
+import { hrReviewLicense, hrChangeLicenseStatus, hrLicenseBySearch } from "../../store/hhrr";
 import SearchInput from "../Search/SearchInput";
 
 export default function HRLicencesHistory() {
   const dispatch = useDispatch();
-  const licencias = useSelector((state) => state.license);
+  const licencias = useSelector((state) => state.hhrr);
   const user = useSelector((state) => state.license);
   
 
   // useEffect(() => {
-  //   dispatch(rrhhReviewLicense({id:user.id}));
+  //   dispatch(hrReviewLicense({id:user.id}));
   // }, []);
 
   return (
       
     <SafeAreaView style={styles.container}>
-    <SearchInput dispatchInput={rrhhLicenseBySearch}/>
+    <SearchInput dispatchInput={hrLicenseBySearch}/>
       <SectionList
         sections={[{ title: "Licencias", data: licencias }]}
         renderItem={({ item }) => (

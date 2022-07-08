@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "Global-News",
-    "slug": "Global-News",
+    "slug": "globalNews",
+    "username": "@diegoscarpati",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/gnlogogrande-01",
@@ -9,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

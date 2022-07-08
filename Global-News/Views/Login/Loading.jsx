@@ -17,9 +17,7 @@ const Loading = ({ navigation }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (Platform.OS === "web") {
-      console.log("Es web");
-      if (localStorage.getItem("email")) {
-        console.log("Existe un email");
+      if (JSON.parse(localStorage.getItem("email")) !== null) {
         dispatch(setUser());
         navigation.replace("Pantalla Principal");
       } else {
@@ -31,10 +29,11 @@ const Loading = ({ navigation }) => {
           .load({
             key: "loggedUser",
             id: "1",
-            autoSync: false,
-            syncInBackground: false,
+            // autoSync: false,
+            // syncInBackground: false,
           })
           .then((ret) => {
+            console.log("ret", ret)
             dispatch(sendLoginRequest({ email: ret.email }));
             navigation.replace("Pantalla Principal");
           });
@@ -43,6 +42,7 @@ const Loading = ({ navigation }) => {
         console.warn(error.message);
         navigation.replace("Inicio");
       }
+      // navigation.replace("Inicio");
       try {
         // NO tira error
         storage.getIdsForKey("loggedUser").then((ids) => {
@@ -60,7 +60,7 @@ const Loading = ({ navigation }) => {
         <Image source={logo} style={styles.logo} />
       </View>
       <View>
-        <ActivityIndicator size="large" color="blue" />
+        <ActivityIndicator size="large" color="#0073b7" />
       </View>
     </View>
   );

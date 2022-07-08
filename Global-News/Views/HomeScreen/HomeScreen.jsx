@@ -25,7 +25,7 @@ export default function UserProfileView({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <Profile />
+      {/* <Profile /> */}
       <View style={styles.body}>
         <HomeButton
           text="Perfil"
@@ -44,7 +44,7 @@ export default function UserProfileView({ navigation }) {
           onPress={() => navigation.navigate("Dar Presente")}
         />
 
-        {user.positionId === 3 && (
+        {/* {user.positionId === 3 && (
           <HomeButton
             text="Vista Principal"
             onPress={() => navigation.navigate("Vista Principal")}
@@ -67,7 +67,7 @@ export default function UserProfileView({ navigation }) {
             text="Vista Principal"
             onPress={() => navigation.navigate("Vista Principal")}
           />
-        )}
+        )} */}
         <HomeButton text="Logout" onPress={() => logoutHandler()} />
       </View>
     </ScrollView>

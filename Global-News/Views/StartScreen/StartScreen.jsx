@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image, Button, Alert, StyleSheet } from "react-native";
 import logo from "../../assets/gnlogogrande-01.png";
+import GoogleLogin from "../Login/GoogleLogin";
 
 export default function StartScreen({ navigation }) {
   return (
@@ -23,6 +24,9 @@ export default function StartScreen({ navigation }) {
           title="Register"
           onPress={() => navigation.navigate("Registro")}
         />
+      </View>
+      <View>
+        <GoogleLogin/>
       </View>
     </View>
   );

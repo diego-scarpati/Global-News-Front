@@ -1,9 +1,8 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { View, Text, Image, Button, StyleSheet, TextInput } from "react-native";
+import { View, Text, Image, Button, StyleSheet, TextInput, Platform } from "react-native";
 import storage from "../../storage/storage";
-import Constants from "expo-constants";
 import logo from "../../assets/gnlogogrande-01.png";
 import { sendLoginRequest } from "../../store/user";
 
@@ -21,11 +20,10 @@ export default function Login({ navigation }) {
 
   const dispatch = useDispatch();
 
-  console.log("Web", Constants.platform.web != null)
   const onSubmit = (info) => {
     dispatch(sendLoginRequest(info));
     
-    if (Constants.platform?.web) {
+    if (Platform.OS === "web") {
       localStorage.setItem("email", JSON.stringify(info.email))
     } else {
       storage.save({

@@ -1,8 +1,7 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-//import { ScrollView } from "react-native-gesture-handler";
-import {View,Text,Button,StyleSheet,TextInput,Modal,ScrollView} from "react-native";
+import {View,Text,Button,StyleSheet,TextInput,ScrollView} from "react-native";
 import { teamCreate } from "../../store/team"
 
 
@@ -12,7 +11,6 @@ export default function CreateTeam({ navigation }) {
     control,
     handleSubmit,
     formState: { errors },
-    setValue,
   } = useForm({
     defaultValues: {
     name: "",

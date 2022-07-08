@@ -6,7 +6,6 @@ import HomeButton from "./components/HomeButtons";
 
 export default function HRHomeScreen({ navigation }) {
   const user = useSelector((state) => state.user);
-  console.log("UserVipScreen",user)
   //chequear si con la persistencia de usuario, tambien persiten los botones
  
   return (

@@ -1,13 +1,5 @@
-import React, { Component, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  StatusBar,
-  SafeAreaView,
-  SectionList,
-  Pressable,
-} from "react-native";
+import React, { useEffect } from "react";
+import {StyleSheet,View,Text,StatusBar,SafeAreaView,SectionList,Pressable} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { teamRequestByUser, teamRequest, searchTeamById } from "../../store/team";
 

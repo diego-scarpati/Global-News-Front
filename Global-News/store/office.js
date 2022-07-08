@@ -10,7 +10,6 @@ export const officeRequest = createAsyncThunk("OFFICE_REQUEST", async ()=>{
 
 export const officeCreate= createAsyncThunk("CREATE_OFFICE", async (data)=>{
     try{ 
-        console.log(data)
          const ofice = await axios.post(`http://localhost:3001/api/offices/addOffice`,data)
 
         return ofice.data

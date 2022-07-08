@@ -1,15 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  SectionList,
-  StatusBar,
-  Button,
-  Pressable
-} from "react-native";
+import {StyleSheet,Text,View,SafeAreaView,SectionList,StatusBar,Pressable} from "react-native";
 import { teamRequest } from "../../store/team"
 import { addUserToTeam } from "../../store/team"
 
@@ -20,9 +11,6 @@ export default function SelectTeam({navigation}) {
   const user = useSelector((state) => state.hhrr);
   const team = useSelector((state) => state.team)
  
-
-  
-  
   const handlePress = (name)=>{
     dispatch(addUserToTeam({id:user[0].id, name:name}))
     navigation.navigate("Sumar Empleado al Equipo")

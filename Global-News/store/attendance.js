@@ -3,7 +3,6 @@ import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const attendaceStartRequest = createAsyncThunk("ATTENDANCE", async (data)=>{
     try{
-        console.log(data)
           const info = await axios.post("http://localhost:3001/api/attendance/workDayStart", data)
           return info.data
     }catch(error){console.log(error)}
@@ -18,7 +17,6 @@ export const attendaceEndRequest = createAsyncThunk("ATTENDANCE", async (data)=>
 
 export const attendaceControl = createAsyncThunk("ATTENDANCE", async (data)=>{
     try{
-        console.log(data.id)
           const info = await axios.get(`http://localhost:3001/api/attendance/search/${data.id}`)
           return info.data
     }catch(error){console.log(error)}

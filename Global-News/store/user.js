@@ -78,7 +78,7 @@ export const searchUsersByInput = createAsyncThunk(
 );
 
 const userReducer = createReducer(
-  {},
+  [],
   {
     [sendRegisterRequest.fulfilled]: (state, action) => {
       action.payload;

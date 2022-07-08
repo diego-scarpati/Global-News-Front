@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
 import {View,Text,Image,Button,StyleSheet,TextInput} from "react-native";
+import styles from "../../styles/RRHH/hrEditUser";
 
 import logo from "../../assets/gnlogogrande-01.png";
 import SearchInput from "../Search/SearchInput";
@@ -281,30 +282,4 @@ export default function HREditUser() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  input: {
-    borderColor: "gray",
-    width: "80%",
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 10,
-    margin: 10,
-  },
-  logo: {
-    height: 100,
-    width: 200,
-    justifyContent: "center",
-  },
-  editar: {
-    flex: 1,
-    flexWrap: "nowrap",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-});
+

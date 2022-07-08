@@ -6,13 +6,13 @@ import {
   attendaceStartRequest,
   attendaceEndRequest,
 } from "../../store/attendance";
+import HomeButton from "../HomeScreen/components/HomeButtons";
+import styles from "../../styles/Attendance/attendance";
 
 export default function Attendance({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const attendance = useSelector((state) => state.attendance);
-
-  console.log("attendance", attendance);
 
   const date = () => {
     const fecha = new Date();
@@ -29,10 +29,7 @@ export default function Attendance({ navigation }) {
       dispatch(attendaceStartRequest({ workDayStart: date(), id: userId }));
     } else {
       dispatch(
-        attendaceEndRequest({
-          workDayEnd: date(),
-          id: attendance.id,
-        })
+        attendaceEndRequest({ workDayEnd: date(), id: attendance.id })
       );
     }
     navigation.navigate("Pantalla Principal");
@@ -41,25 +38,17 @@ export default function Attendance({ navigation }) {
   return (
     <View style={styles.item}>
       <View>
-        <Button title="Check In" onPress={() => handlePress(user.id, true)} />
+      <HomeButton
+          text="Check In" 
+          onPress={() => handlePress(user.id, true)}
+        />
       </View>
       <View>
-        <Button title="Check Out" onPress={() => handlePress(user.id, false)} />
+      <HomeButton
+          text="Check Out"
+          onPress={() => handlePress(user.id, false)}
+        />
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  item: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    margin: 10,
-  },
-  infoContent: {
-    flex: 1,
-    alignItems: "flex-start",
-  },
-});

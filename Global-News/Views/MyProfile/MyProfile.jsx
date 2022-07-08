@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
-import {View,Text,Image,Button,StyleSheet,TextInput} from "react-native";
-
+import { View,Text,Image,Button,StyleSheet,TextInput, Pressable } from "react-native";
+import styles from "../../styles/myProfile";
 import logo from "../../assets/gnlogogrande-01.png";
 
 export default function Register() {
@@ -270,37 +270,14 @@ export default function Register() {
           />
           {errors.available && <Text>This is required.</Text>}
         </View>
-
+        {/* <Pressable
+          style={styles.button}
+          onPress={handleSubmit(onSubmit)}
+        >
+          <Text style={styles.text}>Submit</Text>
+        </Pressable> */}
         <Button title="Submit" onPress={handleSubmit(onSubmit)} />
       </View>
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  input: {
-    borderColor: "gray",
-    width: "80%",
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 10,
-    margin: 10,
-  },
-  logo: {
-    height: 100,
-    width: 200,
-    justifyContent: "center",
-  },
-  editar: {
-    flex: 1,
-    flexWrap: "nowrap",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-});

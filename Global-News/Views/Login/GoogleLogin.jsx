@@ -8,6 +8,7 @@ import axios from "axios";
 import storage from "../storage/storage";
 import googleLogo from "../assets/google-logo.png";
 import getGoogleOAuthURL from "../utils/getGoogleOAuthURL";
+import styles from '../../styles/Login/googleLogin';
 
 export default function GoogleLogin(props) {
   
@@ -36,7 +37,7 @@ export default function GoogleLogin(props) {
 */
 
   useEffect(() => {
-    console.log(pedido);
+    // console.log(pedido);
   }, [result]);
 
   // // Prueba con linkingHandler
@@ -76,7 +77,7 @@ export default function GoogleLogin(props) {
 
   const handleGoogle = async () => {
     const user = await axios.get("http://localhost:3001/api/auth/login");
-    console.log("user:", user);
+    // console.log("user:", user);
   };
 
   const promesaPress = () => {
@@ -87,13 +88,13 @@ export default function GoogleLogin(props) {
     );
     // setPedido(Linking.openURL(url)
   };
-  console.log(pedido);
+  // console.log(pedido);
 
-  console.log("Constants.experienceUrl", Constants.experienceUrl)
-  console.log("Constants.intentUri", Constants.intentUri)
-  console.log("Constants.linkingUri", Constants.linkingUri)
-  console.log("Constants.platform", Constants.platform)
-  console.log("Constants.sessionId", Constants.sessionId)
+  // console.log("Constants.experienceUrl", Constants.experienceUrl)
+  // console.log("Constants.intentUri", Constants.intentUri)
+  // console.log("Constants.linkingUri", Constants.linkingUri)
+  // console.log("Constants.platform", Constants.platform)
+  // console.log("Constants.sessionId", Constants.sessionId)
 
   return (
     <View style={styles.gView}>
@@ -124,37 +125,3 @@ export default function GoogleLogin(props) {
   );
 }
 
-const styles = StyleSheet.create({
-  gView: {
-    height: 65,
-    width: 200,
-    justifyContent: "center",
-  },
-  gButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    borderRadius: 25,
-    borderWidth: 1,
-    borderColor: "white",
-    backgroundColor: "white",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 2,
-      height: 5,
-    },
-    shadowRadius: 5,
-    shadowOpacity: 0.5,
-  },
-  gImage: {
-    height: 50,
-    width: 50,
-    marginLeft: 6,
-  },
-  gText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    margin: 6,
-    padding: 6,
-  },
-});

@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { rrhhReviewLicense, rrhhChangeLicenseStatus, rrhhLicenseBySearch } from "../../store/license";
 import SearchInput from "../Search/SearchInput";
+import styles from "../../styles/RRHH/hrLicencesHistory";
 
 export default function HRLicencesHistory() {
   const dispatch = useDispatch();
@@ -49,50 +50,3 @@ export default function HRLicencesHistory() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    marginHorizontal: 16,
-    justifyContent: "center",
-    alignContent: "center",
-    padding: 5,
-    margin: 5,
-   
-  },
-  item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-  },
-  title: {
-    fontSize: 24,
-  },
-  row: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderColor: "#0073b7",
-    borderWidth: 2,
-    margin: 2,
-    borderRadius: 5,
-  },
-  sectionHeader: {
-    backgroundColor: "#efefef",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-  },
-  button: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 10,
-    padding: 10
-  },
-  buttomView: {
-    margin: 10
-  },
-  text:{
-    fontSize: 20
-  }
-});

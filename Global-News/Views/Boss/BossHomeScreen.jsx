@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { StyleSheet, View, ScrollView } from "react-native";
-
+import styles from "../../styles/Boss/bossHomeScreen";
 import HomeButton from "../HomeScreen/components/HomeButtons";
 
 export default function BossHomeScreen({ navigation }) {
@@ -21,10 +21,3 @@ export default function BossHomeScreen({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  body: {
-    backgroundColor: "#f89d1e",
-    height: 1000,
-    alignItems: "center",
-  },
-});

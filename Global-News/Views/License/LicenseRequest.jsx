@@ -6,6 +6,7 @@ import { sendLicenseRequest } from "../../store/license";
 import { ScrollView } from "react-native-gesture-handler";
 import {View,Text,Button,StyleSheet,TextInput,Modal,} from "react-native";
 import Calendar from "../Calendar/Calendar";
+import styles from "../../styles/License/licenseRequest";
 
 
 export default function License({ navigation }) {
@@ -166,27 +167,3 @@ export default function License({ navigation }) {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 10,
-  },
-  input: {
-    borderColor: "gray",
-    width: "80%",
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 10,
-    margin: 10,
-    flexDirection: 'row'
-  },
-  error: {
-    color: "#ff0000",
-    fontSize: 9,
-    marginBottom: 8,
-    marginLeft: 6,
-  },
-});

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { StyleSheet, View, ScrollView } from "react-native";
-
+import styles from "../../styles/Coordinator/coordinatorHomeScreen";
 import HomeButton from "../HomeScreen/components/HomeButtons";
 
 export default function CoordinatorHomeScreen({ navigation }) {
@@ -18,10 +18,3 @@ export default function CoordinatorHomeScreen({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  body: {
-    backgroundColor: "#f89d1e",
-    height: 1000,
-    alignItems: "center",
-  },
-});

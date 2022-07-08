@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
-import {View,Text,Image,Button,StyleSheet,TextInput} from "react-native";
-
+import {View,Text,Image,Button,StyleSheet,TextInput,ImageBackground} from "react-native";
+import image from "../../assets/background-startScreen-02.png";
 import logo from "../../assets/gnlogogrande-01.png";
 
 export default function Register() {
@@ -34,6 +34,7 @@ export default function Register() {
 
   return (
     <ScrollView>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <View style={styles.container}>
         <View>
           <Image source={logo} style={styles.logo} />
@@ -273,6 +274,7 @@ export default function Register() {
 
         <Button title="Submit" onPress={handleSubmit(onSubmit)} />
       </View>
+      </ImageBackground>
     </ScrollView>
   );
 }
@@ -280,12 +282,12 @@ export default function Register() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
   input: {
-    borderColor: "gray",
+    borderColor: "#ffff",
+    color: "#fff",
     width: "80%",
     borderWidth: 1,
     borderRadius: 10,
@@ -302,5 +304,12 @@ const styles = StyleSheet.create({
     flexWrap: "nowrap",
     flexDirection: "row",
     alignItems: "center",
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    width: "100%",
   },
 });

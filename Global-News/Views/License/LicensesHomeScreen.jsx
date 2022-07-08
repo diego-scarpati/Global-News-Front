@@ -26,7 +26,7 @@ export default function ManagerHomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   body: {
     alignItems: "center",
-    marginTop: "50%"
+    margin: "50%"
   },
   image: {
     flex: 1,

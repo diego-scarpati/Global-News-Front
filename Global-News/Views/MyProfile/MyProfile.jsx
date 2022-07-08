@@ -285,9 +285,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   input: {
-    borderColor: "#ffff",
-    color: "#fff",
+    borderColor: "gray",
+    backgroundColor: "#ffff",
     width: "80%",
     borderWidth: 1,
     borderRadius: 10,

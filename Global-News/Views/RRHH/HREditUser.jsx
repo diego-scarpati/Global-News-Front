@@ -11,7 +11,6 @@ import { hrSearchUsersByInput } from "../../store/hhrr"
 export default function HREditUser() {
   const user = useSelector((state) => state.hhrr);
   
-  console.log(user)
 
   const {
     control,

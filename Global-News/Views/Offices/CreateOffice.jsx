@@ -1,7 +1,6 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-//import { ScrollView } from "react-native-gesture-handler";
 import {View,Text,Button,StyleSheet,TextInput,Modal,ScrollView} from "react-native";
 import { officeCreate } from "../../store/office"
 

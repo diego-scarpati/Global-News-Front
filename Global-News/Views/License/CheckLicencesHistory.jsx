@@ -9,19 +9,14 @@ import {
   StatusBar,
   Button
 } from "react-native";
-import { hrReviewLicense, hrChangeLicenseStatus, hrLicenseBySearch } from "../../store/hhrr";
+import { hrLicenseBySearch } from "../../store/hhrr";
 import SearchInput from "../Search/SearchInput";
 
 export default function HRLicencesHistory() {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const licencias = useSelector((state) => state.hhrr);
-  const user = useSelector((state) => state.license);
+  //const user = useSelector((state) => state.license);
   
-
-  // useEffect(() => {
-  //   dispatch(hrReviewLicense({id:user.id}));
-  // }, []);
-
   return (
       
     <SafeAreaView style={styles.container}>

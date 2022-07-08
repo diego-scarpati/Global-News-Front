@@ -1,18 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  SectionList,
-  StatusBar,
-  Button,
-} from "react-native";
-import {
-  hrReviewLicense,
-  hrChangeLicenseStatus,
-} from "../../../store/hhrr";
+import { Text,SectionList } from "react-native";
+import { hrReviewLicense } from "../../../store/hhrr";
 import SectionRender from "./SectionRender";
 
 export default function Section() {
@@ -23,7 +12,7 @@ export default function Section() {
   useEffect(() => {
     dispatch(hrReviewLicense({id:user.id}));
   }, []);
-
+                  
   return (
     <SectionList
       sections={[{ title: "Licencias", data: licencias }]}

@@ -28,8 +28,6 @@ const useInitialURL = () => {
 const Prueba = () => {
   const { url: initialUrl, processing } = useInitialURL();
 
-  console.log("Initial URL de Prueba.js", initialUrl)
-
   return (
     <View style={styles.container}>
       <Text>

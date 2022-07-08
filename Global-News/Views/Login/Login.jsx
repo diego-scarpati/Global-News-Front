@@ -31,7 +31,7 @@ export default function Login({ navigation }) {
 
   const dispatch = useDispatch();
 
-  console.log("Web", Constants.platform.web != null);
+  
   const onSubmit = (info) => {
     dispatch(sendLoginRequest(info));
 

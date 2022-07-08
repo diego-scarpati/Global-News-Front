@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { View, Button, StyleSheet } from "react-native";
+import { View, Button, StyleSheet, ImageBackground } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { availabilityRequest } from "../../store/availability";
 import {
   attendaceStartRequest,
   attendaceEndRequest,
 } from "../../store/attendance";
+import image from "../../assets/background-startScreen-02.png";
+import HomeButton from "../HomeScreen/components/HomeButtons";
 
 export default function Attendance({ navigation }) {
   const dispatch = useDispatch();
@@ -38,12 +40,20 @@ export default function Attendance({ navigation }) {
 
   return (
     <View style={styles.item}>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <View>
-        <Button title="Check In" onPress={() => handlePress(user.id, true)} />
+      <HomeButton
+          text="Check In" 
+          onPress={() => handlePress(user.id, true)}
+        />
       </View>
       <View>
-        <Button title="Check Out" onPress={() => handlePress(user.id, false)} />
+      <HomeButton
+          text="Check Out"
+          onPress={() => handlePress(user.id, false)}
+        />
       </View>
+      </ImageBackground>
     </View>
   );
 }
@@ -60,4 +70,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "flex-start",
   },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 600,
+    width: "100%",
+  }
 });

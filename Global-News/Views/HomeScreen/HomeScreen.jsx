@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, View, ScrollView, Platform } from "react-native";
+import { StyleSheet, View, ScrollView, Platform, ImageBackground } from "react-native";
 import storage from "../../storage/storage";
 import Profile from "./components/Profile";
 import HomeButton from "./components/HomeButtons";
+import image from "../../assets/background-startScreen-02.png";
 
 export default function UserProfileView({ navigation }) {
   const user = useSelector((state) => state.user);
@@ -25,6 +26,7 @@ export default function UserProfileView({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <Profile />
       <View style={styles.body}>
         <HomeButton
@@ -70,14 +72,20 @@ export default function UserProfileView({ navigation }) {
         )}
         <HomeButton text="Logout" onPress={() => logoutHandler()} />
       </View>
+      </ImageBackground>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   body: {
-    backgroundColor: "#f89d1e",
-    height: 1000,
     alignItems: "center",
   },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    width: "100%",
+  }
 });

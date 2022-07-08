@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { StyleSheet, View, ScrollView } from "react-native";
-
+import { StyleSheet, View, ScrollView, ImageBackground } from "react-native";
+import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "./components/HomeButtons";
 
 export default function HRHomeScreen({ navigation }) {
@@ -10,6 +10,7 @@ export default function HRHomeScreen({ navigation }) {
  
   return (
     <ScrollView style={styles.container}>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <View style={styles.body}>
         <HomeButton
           text="Control solicitud de licencias"
@@ -67,14 +68,20 @@ export default function HRHomeScreen({ navigation }) {
           </View>
         )}
       </View>
+      </ImageBackground>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   body: {
-    backgroundColor: "#f89d1e",
-    height: 1000,
     alignItems: "center",
   },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 600,
+    width: "100%",
+  }
 });

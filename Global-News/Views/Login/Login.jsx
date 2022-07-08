@@ -1,11 +1,21 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { View, Text, Image, Button, StyleSheet, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Button,
+  StyleSheet,
+  TextInput,
+  ImageBackground,
+  Pressable,
+} from "react-native";
 import storage from "../../storage/storage";
 import Constants from "expo-constants";
 import logo from "../../assets/gnlogogrande-01.png";
 import { sendLoginRequest } from "../../store/user";
+import image from "../../assets/background-startScreen-02.png";
 
 export default function Login({ navigation }) {
   const {
@@ -24,9 +34,9 @@ export default function Login({ navigation }) {
   
   const onSubmit = (info) => {
     dispatch(sendLoginRequest(info));
-    
+
     if (Constants.platform?.web) {
-      localStorage.setItem("email", JSON.stringify(info.email))
+      localStorage.setItem("email", JSON.stringify(info.email));
     } else {
       storage.save({
         key: "loggedUser",
@@ -40,46 +50,50 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Image source={logo} style={styles.logo} />
-      </View>
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value.toLowerCase()}
-            placeholder="Email"
-          />
-        )}
-        name="email"
-      />
-      {errors.email && <Text>Campo requerido.</Text>}
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-            placeholder="Password"
-            secureTextEntry={true}
-          />
-        )}
-        name="password"
-      />
-      {errors.password && <Text>Campo requerido.</Text>}
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+        <View>
+          <Image source={logo} style={styles.logo} />
+        </View>
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value.toLowerCase()}
+              placeholder="Email"
+            />
+          )}
+          name="email"
+        />
+        {errors.email && <Text>Campo requerido.</Text>}
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              placeholder="Password"
+              secureTextEntry={true}
+            />
+          )}
+          name="password"
+        />
+        {errors.password && <Text>Campo requerido.</Text>}
 
-      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+        <Pressable style={styles.button} onPress={handleSubmit(onSubmit)}>
+          <Text style={styles.text}>SUBMIT</Text>
+        </Pressable>
+      </ImageBackground>
     </View>
   );
 }
@@ -103,5 +117,29 @@ const styles = StyleSheet.create({
     height: 100,
     width: 250,
     justifyContent: "center",
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    width: "100%",
+  },
+  button: {
+    margin: 2,
+    backgroundColor: "#0073b7",
+    borderColor: "white",
+    borderRadius: 30,
+    width: 170,
+    height: 35,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    fontSize: 18,
+    lineHeight: 21,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
+    color: "white",
   },
 });

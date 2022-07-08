@@ -2,16 +2,15 @@ import React,{ useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { StyleSheet, Text, View, SafeAreaView, SectionList, StatusBar} from "react-native";
 import { sendHistoyLicensesRequest } from "../../store/license"
-import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
-
 
 
 export default function RrHh() {
   const dispatch = useDispatch();
   const licencias = useSelector((state) => state.license);
-  // useEffect(() => {dispatch(sendHistoyLicensesRequest())},[])
-
+  useEffect(() => {dispatch(sendHistoyLicensesRequest())},[])
+  
 console.log(licencias)
+
   return (
     <SafeAreaView style={styles.container}>
       <SectionList

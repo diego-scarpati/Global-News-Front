@@ -73,7 +73,8 @@ export const userRequest = createAsyncThunk("USER_REQUEST", async (data) => {
   }
 });
 
-export const searchAllUsers = createAsyncThunk("USER_REQUEST", async () => {
+//no tiene uso aparentemente
+export const searchAllUsers = createAsyncThunk("SEARCH_ALL_REQUEST", async () => {
   try {
     const user = await axios.get(`http://localhost:3001/api/users/`);
     return user.data;
@@ -82,26 +83,12 @@ export const searchAllUsers = createAsyncThunk("USER_REQUEST", async () => {
   }
 });
 
-export const searchUsersByInput = createAsyncThunk(
-  "USER_BY_INPUT",
-  async (data) => {
-    try {
-      const userSearch = await axios.get(
-        `http://localhost:3001/api/users/search/${data}`
-      );
-      return userSearch.data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-);
+
 
 const userReducer = createReducer(
   {},
   {
-    [sendRegisterRequest.fulfilled]: (state, action) => {
-      action.payload;
-    },
+    [sendRegisterRequest.fulfilled]: (state, action) => {action.payload;},
     [sendRegisterRequest.rejected]: (state, action) => action.payload,
 
     [sendLoginRequest.fulfilled]: (state, action) => action.payload,
@@ -115,9 +102,6 @@ const userReducer = createReducer(
 
     [searchAllUsers.fulfilled]: (state, action) => action.payload,
     [searchAllUsers.rejected]: (state, action) => action.payload,
-
-    [searchUsersByInput.fulfilled]: (state, action) => action.payload,
-    [searchUsersByInput.rejected]: (state, action) => action.payload,
 
     [setUser.fulfilled]: (state, action) => action.payload,
     [setUser.rejected]: (state, action) => action.payload,

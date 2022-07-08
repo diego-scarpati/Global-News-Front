@@ -9,11 +9,8 @@ import {
   Pressable,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { ScrollView } from "react-native-gesture-handler";
-import { DataTable } from "react-native-paper";
 import { teamRequestByUser, teamRequest, searchTeamById } from "../../store/team";
-import { searchAllUsers } from "../../store/user";
-import HomeButton from "../HomeScreen/components/HomeButtons";
+
 
 export default function TeamsHome({ navigation }) {
   const dispatch = useDispatch();
@@ -26,6 +23,7 @@ export default function TeamsHome({ navigation }) {
     }
     request()
   }
+  
   useEffect(() => {
     dispatch(teamRequestByUser());
   }, []);

@@ -11,14 +11,13 @@ import {
   Pressable
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
-import { searchAllUsers } from "../../store/user";
 import { attendaceControl } from "../../store/attendance"
-import { searchUsersByInput } from "../../store/user";
+import { hrSearchUsersByInput } from "../../store/hhrr";
 
 
 export default function SearchUser({navigation}) {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.user);
+  const users = useSelector((state) => state.hhrr);
    
     const handlePress = (id)=>{
     dispatch(attendaceControl({id:id}))
@@ -29,7 +28,7 @@ export default function SearchUser({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
     <Text style={styles.mainText}>Busqueda por Empleado</Text>
-      <SearchInput dispatchInput={searchUsersByInput}/>
+      <SearchInput dispatchInput={hrSearchUsersByInput}/>
       <SectionList
         sections={[{ title: "Promover Empleados", data: users}]}
         renderItem={({ item }) => (

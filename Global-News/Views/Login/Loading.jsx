@@ -17,9 +17,7 @@ const Loading = ({ navigation }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (Platform.OS === "web") {
-      console.log("Es web");
-      if (localStorage.getItem("email")) {
-        console.log("Existe un email");
+      if (JSON.parse(localStorage.getItem("email")) !== null) {
         dispatch(setUser());
         navigation.replace("Pantalla Principal");
       } else {

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {StyleSheet,View,Text,StatusBar,SafeAreaView,SectionList,Pressable} from "react-native";
+import {StyleSheet,View,Text,StatusBar,SafeAreaView,SectionList,Pressable, ImageBackground} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import {
   teamRequestByUser,
@@ -28,6 +28,7 @@ export default function TeamsHome({ navigation }) {
     <SafeAreaView style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <Text style={styles.mainText}>Equipos</Text>
+        {(team.length == 0) && <Text>No estas en ningun equipo</Text>}
         <SectionList
           sections={[{ title: "Equipos", data: team }]}
           renderItem={({ item }) => (

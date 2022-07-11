@@ -2,7 +2,7 @@ import axios from "axios";
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
 
-export const availabilityRequest = createAsyncThunk("AVAILABILITY", async (data)=>{
+export const availabilityRequest = createAsyncThunk("AVAILABILITY_REQUEST", async (data)=>{
     try{
          const info = await axios.put("http://localhost:3001/api/availability/user", data)
          return info.data

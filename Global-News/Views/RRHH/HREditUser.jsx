@@ -6,11 +6,11 @@ import {View,Text,Image,Button,StyleSheet,TextInput} from "react-native";
 
 import logo from "../../assets/gnlogogrande-01.png";
 import SearchInput from "../Search/SearchInput";
-import { searchUsersByInput } from "../../store/user"
+import { hrSearchUsersByInput } from "../../store/hr"
 
 export default function HREditUser() {
-  const user = useSelector((state) => state.user);
-  console.log(user)
+  const user = useSelector((state) => state.hr);
+  
 
   const {
     control,
@@ -37,7 +37,7 @@ export default function HREditUser() {
 
   return (
     <ScrollView>
-    <SearchInput dispatchInput={searchUsersByInput}/>
+    <SearchInput dispatchInput={hrSearchUsersByInput}/>
       <View style={styles.container}>
         <View>
           <Image source={logo} style={styles.logo} />

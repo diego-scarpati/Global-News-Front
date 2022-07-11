@@ -1,15 +1,16 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { StyleSheet, View, ScrollView } from "react-native";
-
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { StyleSheet, View, ScrollView, ImageBackground } from "react-native";
+import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "./components/HomeButtons";
 
 export default function HRHomeScreen({ navigation }) {
   const user = useSelector((state) => state.user);
-  console.log("UserVipScreen",user)
   //chequear si con la persistencia de usuario, tambien persiten los botones
+ 
   return (
     <ScrollView style={styles.container}>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <View style={styles.body}>
         <HomeButton
           text="Control solicitud de licencias"
@@ -52,17 +53,35 @@ export default function HRHomeScreen({ navigation }) {
                 navigation.navigate("Recursos Humanos Editar Usuario")
               }
             />
+             <HomeButton
+              text="Crear Oficina"
+              onPress={() =>
+                navigation.navigate("Crear Oficina")
+              }
+            />
+            <HomeButton
+              text="Sumar Empleado a la Oficina"
+              onPress={() =>
+                navigation.navigate("Sumar Empleado ala Oficina")
+              }
+            />
           </View>
         )}
       </View>
+      </ImageBackground>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   body: {
-    backgroundColor: "#f89d1e",
-    height: 1000,
     alignItems: "center",
   },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 600,
+    width: "100%",
+  }
 });

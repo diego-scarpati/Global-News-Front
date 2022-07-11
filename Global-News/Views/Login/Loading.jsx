@@ -38,7 +38,7 @@ const Loading = ({ navigation }) => {
             navigation.replace("Pantalla Principal");
           });
       } catch (error) {
-        console.log("entre al catch");
+        
         console.warn(error.message);
         navigation.replace("Inicio");
       }
@@ -46,7 +46,7 @@ const Loading = ({ navigation }) => {
       try {
         // NO tira error
         storage.getIdsForKey("loggedUser").then((ids) => {
-          console.log(ids);
+         
         });
       } catch (error) {
         console.log("getAllDataForKey", error);

@@ -4,8 +4,9 @@ import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLicenseRequest } from "../../store/license";
 import { ScrollView } from "react-native-gesture-handler";
-import {View,Text,Button,StyleSheet,TextInput,Modal,} from "react-native";
+import {View,Text,Button,StyleSheet,TextInput,Modal,ActivityIndicator, Alert} from "react-native";
 import Calendar from "../Calendar/Calendar";
+import { sendPushNotification, setNotificationMessage } from "../../utils/notifications";
 
 
 export default function License({ navigation }) {
@@ -36,8 +37,35 @@ export default function License({ navigation }) {
     info.startDate = selectedDay.start
     info.endDate = selectedDay.end
     dispatch(sendLicenseRequest(info));
+    sendNotification()
     navigation.navigate("Pantalla Principal");
+    return (
+      <View>
+        <ActivityIndicator size="large" color="blue" />
+      </View>
+    ); 
   };
+
+const sendNotification = async () => {
+  const resultToken = user.expoToken
+  if(!resultToken){
+    Alert.alert('No se pudo obtener el token del usuario')
+    return
+  }
+  const messageNotification = setNotificationMessage(
+    resultToken,
+    'Nueva Licencia Solicitada',
+    'Licencia',
+    {data: 'Licencia de Prueba'}
+  )
+    const response = await sendPushNotification(messageNotification)
+
+    if (response) { 
+      Alert.alert('Licencia enviada')
+    } else {
+      Alert.alert('Ocurrio un problema enviando la Licencia')
+    }
+}
 
   return (
     <ScrollView>

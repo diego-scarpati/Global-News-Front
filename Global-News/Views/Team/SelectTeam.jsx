@@ -1,29 +1,16 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  SectionList,
-  StatusBar,
-  Button,
-  Pressable
-} from "react-native";
-import SearchInput from "../Search/SearchInput";
+import {StyleSheet,Text,View,SafeAreaView,SectionList,StatusBar,Pressable} from "react-native";
 import { teamRequest } from "../../store/team"
 import { addUserToTeam } from "../../store/team"
-import { searchUsersByInput } from "../../store/user";
+
 
 
 export default function SelectTeam({navigation}) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.hr);
   const team = useSelector((state) => state.team)
  
-
-  
-  
   const handlePress = (name)=>{
     dispatch(addUserToTeam({id:user[0].id, name:name}))
     navigation.navigate("Sumar Empleado al Equipo")
@@ -36,7 +23,6 @@ export default function SelectTeam({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
     <Text style={styles.mainText}>Busqueda por Empleado</Text>
-      {/* <SearchInput dispatchInput={searchUsersByInput}/> */}
       <SectionList
         sections={[{ title: "Sumar empleado al equipo", data: team}]}
         renderItem={({ item }) => (

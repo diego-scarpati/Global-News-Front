@@ -25,9 +25,6 @@ const user = useSelector((state) => state.user)
 }
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: "#0073b7",
-  },
   headerContent: {
     padding: 30,
     alignItems: "center",

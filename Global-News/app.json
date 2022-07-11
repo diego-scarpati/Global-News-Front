@@ -15,9 +15,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.GlobalNews.app",
@@ -29,8 +27,16 @@
         "backgroundColor": "#FFFFFF"
       }
     },
+    "permissions": [
+      "CAMERA_ROLL",
+      "READ_EXTERNAL_STORAGE",
+      "WRITE_EXTERNAL_STORAGE",
+      "LOCATION",
+      "USER_FACING_NOTIFICATION"
+    ],
+    "useNextNotificationApi": true,
     "web": {
       "favicon": "./assets/favicon.png"
     }
   }
-}
+} 

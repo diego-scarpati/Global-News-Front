@@ -1,6 +1,10 @@
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import { useEffect, useState, useRef } from "react";
+import { Pressable, Text, View, ActivityIndicator } from "react-native";
+
 import store from "./store/store";
 import Team from "./Views/Team/Team";
 import Login from "./Views/Login/Login";
@@ -23,12 +27,29 @@ import AttendanceControler from "./Views/Attendance/AttendanceControler"
 import TeamsHome from "./Views/Team/TeamsHome";
 import AddUserTeam from "./Views/Team/AddUserTeam";
 import SelectTeam from "./Views/Team/SelectTeam"
+
+
+import { userRequest, sendLoginRequest } from "./store/user"; // queda
+import { startNotifications } from "./utils/notifications";
+import CreateOffice from "./Views/Offices/CreateOffice";
+import SelectOffice from "./Views/Offices/SelectOffice"
+import AddUserOffice from "./Views/Offices/AddUserOffice"
 import HREditUser from "./Views/RRHH/HREditUser";
 import Loading from "./Views/Login/Loading";
+
 
 const Stack = createNativeStackNavigator();
 
 function App() {
+  const [route, setRoute] = useState("Inicio");
+  const [userEmail, setUserEmail] = useState("");
+
+  const notificationListener = useRef()
+  const responseListener = useRef()
+
+  useEffect(()=> {
+    startNotifications(notificationListener, responseListener)
+  },[])
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -48,6 +69,11 @@ function App() {
           <Stack.Screen name="Crear Equipo" component={CreateTeam} />
           <Stack.Screen name="Sumar Empleado al Equipo" component={AddUserTeam} />
           <Stack.Screen name="Elegir Equipo" component={SelectTeam} />
+
+          <Stack.Screen name="Crear Oficina" component={CreateOffice} />
+          <Stack.Screen name="Sumar Empleado ala Oficina" component={AddUserOffice} />
+          <Stack.Screen name="Elegir Oficina" component={SelectOffice} />
+          
           <Stack.Screen name="Calendario" component={Calendar} />
           <Stack.Screen name="Control Asistencias" component={AttendanceControler} />
           <Stack.Screen name="Control Solicitud de Licencias" component={CheckLicenseRequest}/>

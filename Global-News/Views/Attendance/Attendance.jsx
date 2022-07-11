@@ -43,13 +43,13 @@ export default function Attendance({ navigation }) {
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <View>
       <HomeButton
-          text="Check In" 
+          text="Ingreso" 
           onPress={() => handlePress(user.id, true)}
         />
       </View>
       <View>
       <HomeButton
-          text="Check Out"
+          text="Egreso"
           onPress={() => handlePress(user.id, false)}
         />
       </View>

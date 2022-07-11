@@ -2,7 +2,16 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
-import {View,Text,Image,Button,StyleSheet,TextInput,ImageBackground} from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Button,
+  StyleSheet,
+  TextInput,
+  ImageBackground,
+} from "react-native";
+import HomeButton from "../HomeScreen/components/HomeButtons";
 import image from "../../assets/background-startScreen-02.png";
 import logo from "../../assets/gnlogogrande-01.png";
 
@@ -35,245 +44,250 @@ export default function Register() {
   return (
     <ScrollView>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-      <View style={styles.container}>
-        <View>
-          <Image source={logo} style={styles.logo} />
+        <View style={styles.container}>
+          <View>
+            <Image source={logo} style={styles.logo} />
+          </View>
+          <Text style={styles.title}>Mis datos</Text>
+          <View style={styles.editar}>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Nombre"
+                  editable={user.RRHH}
+                />
+              )}
+              name="firstName"
+            />
+            {errors.firstName && <Text>This is required.</Text>}
+          </View>
+          <View style={styles.editar}>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Apellido"
+                  editable={user.RRHH}
+                />
+              )}
+              name="lastName"
+            />
+            {errors.lastName && <Text>This is required.</Text>}
+          </View>
+          <View style={styles.editar}>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="DNI"
+                  editable={user.RRHH}
+                />
+              )}
+              name="nationalId"
+            />
+            {errors.nationalId && <Text>This is required.</Text>}
+          </View>
+          <View style={styles.editar}>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Fecha de Nacimiento"
+                  editable={user.RRHH}
+                />
+              )}
+              name="birthday"
+            />
+            {errors.birthday && <Text>This is required.</Text>}
+          </View>
+          <View style={styles.editar}>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="email"
+                  editable={user.RRHH}
+                />
+              )}
+              name="email"
+            />
+            {errors.email && <Text>This is required.</Text>}
+          </View>
+          <View style={styles.editar}>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  defaultValue={value}
+                  placeholder="Telefono"
+                />
+              )}
+              name="phoneNumber"
+            />
+            {errors.phoneNumber && <Text>This is required.</Text>}
+          </View>
+          <View style={styles.editar}>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Pais"
+                  editable={user.RRHH}
+                />
+              )}
+              name="countryOfResidence"
+            />
+            {errors.countryOfResidence && <Text>This is required.</Text>}
+          </View>
+          <View style={styles.editar}>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Ciudad"
+                  editable={user.RRHH}
+                />
+              )}
+              name="city"
+            />
+            {errors.city && <Text>This is required.</Text>}
+          </View>
+          <View style={styles.editar}>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  defaultValue={value}
+                  placeholder="Direccion"
+                />
+              )}
+              name="address"
+            />
+            {errors.address && <Text>This is required.</Text>}
+          </View>
+          <View style={styles.editar}>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Dias Laborales"
+                  editable={user.RRHH}
+                />
+              )}
+              name="workingDays"
+            />
+            {errors.workingDays && <Text>This is required.</Text>}
+          </View>
+          <View style={styles.editar}>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Turno Laboral"
+                  editable={user.RRHH}
+                />
+              )}
+              name="shift"
+            />
+            {errors.shift && <Text>This is required.</Text>}
+          </View>
+          <View style={styles.editar}>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Inicio Laboral"
+                  editable={user.RRHH}
+                />
+              )}
+              name="startDate"
+            />
+          </View>
+          <HomeButton text="Enviar" onPress={handleSubmit(onSubmit)} />
         </View>
-        <Text>Mis datos</Text>
-        <View style={styles.editar}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                defaultValue={value}
-                placeholder="Direccion"
-              />
-            )}
-            name="address"
-          />
-          {errors.address && <Text>This is required.</Text>}
-          <Button title="editar" />
-        </View>
-        <View style={styles.editar}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                defaultValue={value}
-                placeholder="Telefono"
-              />
-            )}
-            name="phoneNumber"
-          />
-          {errors.phoneNumber && <Text>This is required.</Text>}
-          <Button title="editar" />
-        </View>
-        <View style={styles.editar}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Nombre"
-              />
-            )}
-            name="firstName"
-          />
-          {errors.firstName && <Text>This is required.</Text>}
-        </View>
-        <View style={styles.editar}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Apellido"
-              />
-            )}
-            name="lastName"
-          />
-          {errors.lastName && <Text>This is required.</Text>}
-        </View>
-        <View style={styles.editar}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="DNI"
-              />
-            )}
-            name="nationalId"
-          />
-          {errors.nationalId && <Text>This is required.</Text>}
-        </View>
-
-        <View style={styles.editar}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Cumpleaños"
-              />
-            )}
-            name="birthday"
-          />
-          {errors.birthday && <Text>This is required.</Text>}
-        </View>
-        <View style={styles.editar}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Pais"
-              />
-            )}
-            name="countryOfResidence"
-          />
-          {errors.countryOfResidence && <Text>This is required.</Text>}
-        </View>
-        <View style={styles.editar}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Ciudad"
-              />
-            )}
-            name="city"
-          />
-          {errors.city && <Text>This is required.</Text>}
-        </View>
-        <View style={styles.editar}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Turno Laboral"
-              />
-            )}
-            name="shift"
-          />
-          {errors.shift && <Text>This is required.</Text>}
-        </View>
-        <View style={styles.editar}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Inicio Laboral"
-              />
-            )}
-            name="startDate"
-          />
-          {errors.startDate && <Text>This is required.</Text>}
-        </View>
-        <View style={styles.editar}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Dias Laborales"
-              />
-            )}
-            name="workingDays"
-          />
-          {errors.workingDays && <Text>This is required.</Text>}
-        </View>
-        <View style={styles.editar}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Disponibilidad"
-              />
-            )}
-            name="available"
-          />
-          {errors.available && <Text>This is required.</Text>}
-        </View>
-
-        <Button title="Submit" onPress={handleSubmit(onSubmit)} />
-      </View>
       </ImageBackground>
     </ScrollView>
   );
@@ -312,5 +326,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     width: "100%",
+  },
+  title: {
+    fontSize: 17,
+    color: "#ffff",
+    fontWeight: "bold",
   },
 });

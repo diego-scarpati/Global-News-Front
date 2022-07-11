@@ -12,13 +12,13 @@ import {
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
 
-import { hrSearchUsersByInput } from "../../store/hhrr";
+import { hrSearchUsersByInput } from "../../store/hr";
 import { teamRequest } from "../../store/team"
 
 
 export default function AddUserTeam({navigation}) {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.hhrr);
+  const users = useSelector((state) => state.hr);
 
    
     const handlePress = (id)=>{

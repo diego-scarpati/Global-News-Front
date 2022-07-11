@@ -6,10 +6,10 @@ import {View,Text,Image,Button,StyleSheet,TextInput} from "react-native";
 
 import logo from "../../assets/gnlogogrande-01.png";
 import SearchInput from "../Search/SearchInput";
-import { hrSearchUsersByInput } from "../../store/hhrr"
+import { hrSearchUsersByInput } from "../../store/hr"
 
 export default function HREditUser() {
-  const user = useSelector((state) => state.hhrr);
+  const user = useSelector((state) => state.hr);
   
 
   const {

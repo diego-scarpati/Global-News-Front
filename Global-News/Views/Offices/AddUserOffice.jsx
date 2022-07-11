@@ -11,17 +11,18 @@ import {
   Pressable
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
-import { attendaceControl } from "../../store/attendance"
+
 import { hrSearchUsersByInput } from "../../store/hr";
+import { teamRequest } from "../../store/team"
 
 
-export default function SearchUser({navigation}) {
+export default function AddUserOffice({navigation}) {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.hr);
+
    
     const handlePress = (id)=>{
-    dispatch(attendaceControl({id:id}))
-    navigation.navigate("Control Asistencias")
+    navigation.navigate("Elegir Oficina")
     }
 
   
@@ -30,18 +31,18 @@ export default function SearchUser({navigation}) {
     <Text style={styles.mainText}>Busqueda por Empleado</Text>
       <SearchInput dispatchInput={hrSearchUsersByInput}/>
       <SectionList
-        sections={[{ title: "Promover Empleados", data: users}]}
+        sections={[{ title: "Buscar Empleado", data: users}]}
         renderItem={({ item }) => (
            <Pressable onPress={() =>handlePress(item.id)}>
-          <View style={styles.row}>
-            <Text style={styles.text}>Solicitante: {item.firstName} {item.lastName}</Text>
+            <View style={styles.row}>
+            <Text style={styles.text}>Nombre : {item.firstName} {item.lastName}</Text>
             <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
             <Text>Legajo: {item.employeeId}</Text>
-            <Text>Nombre: {item.firstName}</Text>
-            <Text>Apellido: {item.lastName}</Text>
             <Text>Email: {item.email}</Text>
             <Text>Dias Laborales: {item.workingDays}</Text>
             <Text>Turnos: {item.shift}</Text>
+            <Text>Equipos: </Text>
+            {item.teams.map((team,i)=>{return(<Text> {i+1}-{team.name}</Text>)})}
             <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2)&&"Disponible: No"}</Text>
           </View>
           </Pressable>

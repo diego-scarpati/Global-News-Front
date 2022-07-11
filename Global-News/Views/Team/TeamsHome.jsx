@@ -1,48 +1,46 @@
-import React, { Component, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  StatusBar,
-  SafeAreaView,
-  SectionList,
-  Pressable,
-} from "react-native";
+import React, { useEffect } from "react";
+import {StyleSheet,View,Text,StatusBar,SafeAreaView,SectionList,Pressable, ImageBackground} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { ScrollView } from "react-native-gesture-handler";
-import { DataTable } from "react-native-paper";
-import { teamRequestByUser, teamRequest } from "../../store/team";
-import { searchAllUsers } from "../../store/user";
-import HomeButton from "../HomeScreen/components/HomeButtons";
+import {
+  teamRequestByUser,
+  teamRequest,
+  searchTeamById,
+} from "../../store/team";
+import image from "../../assets/background-startScreen-02.png";
 
 export default function TeamsHome({ navigation }) {
   const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.user);
   const team = useSelector((state) => state.team);
 
-  useEffect(() => {
-    // dispatch(searchAllUsers());
-    dispatch(teamRequestByUser());
-    // dispatch(teamRequest())
-  }, []);
+  const onPress = (item) => {
+    const request = async () => {
+      const team = await dispatch(searchTeamById(item));
+      navigation.navigate("Equipo", item);
+    };
+    request();
+  };
 
-  console.log("user", user);
-  console.log("team view", team);
+  useEffect(() => {
+    dispatch(teamRequestByUser());
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        {team.map((data, i) => {
-          return (
-            <View style={styles.list} key={i}>
-              <Pressable onPress={() => navigation.navigate("Equipo", data)}>
-                <Text>Equipo: {data.name}</Text>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+        <Text style={styles.mainText}>Equipos</Text>
+        {(team.length == 0) && <Text>No estas en ningun equipo</Text>}
+        <SectionList
+          sections={[{ title: "Equipos", data: team }]}
+          renderItem={({ item }) => (
+            <View style={styles.row}>
+              <Pressable onPress={() => onPress(item.id)}>
+                <Text style={styles.text}>{item.name}</Text>
               </Pressable>
             </View>
-          );
-        })}
-      </View>
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      </ImageBackground>
     </SafeAreaView>
   );
 }
@@ -53,4 +51,34 @@ const styles = StyleSheet.create({
     height: 1000,
     alignItems: "center",
   },
+  container: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+    marginHorizontal: 16,
+    justifyContent: "center",
+    alignContent: "center",
+    padding: 5,
+    margin: 5,
+  },
+  row: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderColor: "#0073b7",
+    borderWidth: 2,
+    margin: 2,
+    borderRadius: 5,
+  },
+  text: {
+    fontSize: 20,
+  },
+  mainText: {
+    fontSize: 30,
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    width: "100%",
+  }
 });

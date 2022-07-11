@@ -10,43 +10,39 @@ import {
   Button,
   Pressable
 } from "react-native";
-import SearchInput from "../Search/SearchInput";
-import { attendaceControl } from "../../store/attendance"
-import { hrSearchUsersByInput } from "../../store/hr";
+import { officeRequest } from "../../store/office"
+import { addUserToOffice } from "../../store/office"
 
 
-export default function SearchUser({navigation}) {
+
+export default function SelectOffice({navigation}) {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.hr);
-   
-    const handlePress = (id)=>{
-    dispatch(attendaceControl({id:id}))
-    navigation.navigate("Control Asistencias")
-    }
-
+  const user = useSelector((state) => state.hr);
+  const office = useSelector((state) => state.office)
+ 
+  const handlePress = (name)=>{
+    dispatch(addUserToOffice({id:user[0].id, name:name}))
+    //navigation.navigate("Sumar Empleado al Equipo")
+  }
+  
+  useEffect(() => {
+    dispatch(officeRequest())
+  }, [])
   
   return (
     <SafeAreaView style={styles.container}>
     <Text style={styles.mainText}>Busqueda por Empleado</Text>
-      <SearchInput dispatchInput={hrSearchUsersByInput}/>
       <SectionList
-        sections={[{ title: "Promover Empleados", data: users}]}
+        sections={[{ title: "Sumar empleado a la oficina", data: office}]}
         renderItem={({ item }) => (
-           <Pressable onPress={() =>handlePress(item.id)}>
+           <Pressable onPress={() =>handlePress(item.name)}>
           <View style={styles.row}>
-            <Text style={styles.text}>Solicitante: {item.firstName} {item.lastName}</Text>
-            <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
-            <Text>Legajo: {item.employeeId}</Text>
-            <Text>Nombre: {item.firstName}</Text>
-            <Text>Apellido: {item.lastName}</Text>
-            <Text>Email: {item.email}</Text>
-            <Text>Dias Laborales: {item.workingDays}</Text>
-            <Text>Turnos: {item.shift}</Text>
-            <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2)&&"Disponible: No"}</Text>
+            <Text style={styles.text}>Nombre de la oficina: {item.name}</Text>
+            <Text style={styles.text}>Ciudad: {item.city}</Text>
+            <Text style={styles.text}>Pais: {item.country}</Text>
           </View>
           </Pressable>
         )}
-        
         keyExtractor={(item) => item.id}
       /> 
     </SafeAreaView>

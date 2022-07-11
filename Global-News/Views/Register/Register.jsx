@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
-import { View, Text, Image, Button, StyleSheet, TextInput, Modal } from "react-native";
+import { View, Text, Image, Button, StyleSheet, TextInput, Modal, ImageBackground } from "react-native";
 import logo from "../../assets/gnlogogrande-01.png";
 import { sendRegisterRequest } from "../../store/user";
 import Calendar from "../Calendar/Calendar";
+
 import { getToken } from "../../utils/notifications";
+
+import image from "../../assets/background-startScreen-02.png";
+
 
 export default function Register({navigation}) {
 
@@ -32,7 +36,6 @@ export default function Register({navigation}) {
   const dispatch = useDispatch();
 
   const selectedDay = useSelector((state) => state.calendar);
-  console.log(selectedDay.start)
 
   const [showModalDate, setShowModalDate] = useState(false);
 
@@ -51,6 +54,7 @@ export default function Register({navigation}) {
 
   return (
     <ScrollView>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <View style={styles.container}>
         <View>
           <Image source={logo} style={styles.logo} />
@@ -257,6 +261,7 @@ export default function Register({navigation}) {
 
         <Button title="Submit" onPress={handleSubmit(onSubmit)} />
       </View>
+      </ImageBackground>
     </ScrollView>
   );
 }
@@ -264,12 +269,12 @@ export default function Register({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
   input: {
     borderColor: "gray",
+    backgroundColor: "#ffff",
     width: "80%",
     borderWidth: 1,
     borderRadius: 10,
@@ -282,5 +287,12 @@ const styles = StyleSheet.create({
     width: 200,
     justifyContent: "center",
   },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    width: "100%",
+  }
   
 });

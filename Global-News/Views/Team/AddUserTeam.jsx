@@ -12,14 +12,14 @@ import {
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
 
-import { searchUsersByInput } from "../../store/user";
+import { hrSearchUsersByInput } from "../../store/hr";
 import { teamRequest } from "../../store/team"
 
 
 export default function AddUserTeam({navigation}) {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.user);
-  console.log(users)
+  const users = useSelector((state) => state.hr);
+
    
     const handlePress = (id)=>{
     navigation.navigate("Elegir Equipo")
@@ -29,7 +29,7 @@ export default function AddUserTeam({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
     <Text style={styles.mainText}>Busqueda por Empleado</Text>
-      <SearchInput dispatchInput={searchUsersByInput}/>
+      <SearchInput dispatchInput={hrSearchUsersByInput}/>
       <SectionList
         sections={[{ title: "Promover Empleados", data: users}]}
         renderItem={({ item }) => (

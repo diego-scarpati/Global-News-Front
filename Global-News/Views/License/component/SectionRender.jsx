@@ -1,23 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {StyleSheet,Text,View,StatusBar,Button} from "react-native";
-import { rrhhReviewLicense, rrhhChangeLicenseStatus } from "../../../store/license";
+import { hrReviewLicense, hrChangeLicenseStatus } from "../../../store/hr";
 
 export default function SectionRender({item}) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  console.log(item)
+  
 
   const handleApprove = (licenceId) => {
-    if(user.positionId === 1 || user.positionId === 2){dispatch(rrhhChangeLicenseStatus( {id: licenceId, bossApproval: 'approved'}))}
-    else{dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'approved'}))}
-    dispatch(rrhhReviewLicense({id:user.id}));
+    if(user.positionId === 1 || user.positionId === 2){dispatch(hrChangeLicenseStatus( {id: licenceId, bossApproval: 'approved'}))}
+    else{dispatch(hrChangeLicenseStatus( {id: licenceId, HRApproval: 'approved'}))}
+    dispatch(hrReviewLicense({id:user.id}));
   }
 
   const handleReject = (licenceId) => {
-    if(user.positionId === 1 || user.positionId === 2){dispatch(rrhhChangeLicenseStatus( {id: licenceId, bossApproval: 'rejected'}))}
-    else{dispatch(rrhhChangeLicenseStatus( {id: licenceId, HRApproval: 'rejected'}))}
-    dispatch(rrhhReviewLicense({id:user.id}));
+    if(user.positionId === 1 || user.positionId === 2){dispatch(hrChangeLicenseStatus( {id: licenceId, bossApproval: 'rejected'}))}
+    else{dispatch(hrChangeLicenseStatus( {id: licenceId, HRApproval: 'rejected'}))}
+    dispatch(hrReviewLicense({id:user.id}));
   };
 
   

@@ -4,7 +4,13 @@ import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 export const teamRequest = createAsyncThunk("TEAM_REQUEST", async ()=>{
     try{ 
     const team = await axios.get("http://localhost:3001/api/teams/")
-    console.log("store teamRequest", team.data)
+        return team.data
+    }catch(error){console.log(error)}
+});
+
+export const searchTeamById = createAsyncThunk("SEARCH_TEAM_BY_ID", async (data)=>{
+    try{ 
+    const team = await axios.get(`http://localhost:3001/api/teams/${data}`)
         return team.data
     }catch(error){console.log(error)}
 });
@@ -13,7 +19,6 @@ export const teamRequestByUser = createAsyncThunk("TEAM_REQUEST_BY_USER", async 
     const {user} = thunkAPI.getState()
     try{ 
     const team = await axios.get(`http://localhost:3001/api/teams/user/${user.id}`)
-    console.log("store teamRequestByUser", team.data)
      return team.data
     }catch(error){console.log(error)}
 });
@@ -36,6 +41,9 @@ export const addUserToTeam = createAsyncThunk("ADD_USER_TO_TEAM", async (data)=>
 const teamReducer = createReducer([], {
     [teamRequest.fulfilled]: (state,action)=>action.payload,
     [teamRequest.rejected]: (state,action)=>action.payload,
+
+    [searchTeamById.fulfilled]: (state,action)=>action.payload,
+    [searchTeamById.rejected]: (state,action)=>action.payload,
 
     [teamCreate.fulfilled]: (state,action)=>action.payload,
     [teamCreate.rejected]: (state,action)=>action.payload,

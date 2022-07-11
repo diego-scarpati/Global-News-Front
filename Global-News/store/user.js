@@ -5,7 +5,6 @@ export const sendRegisterRequest = createAsyncThunk(
   "REGISTER",
   async (data) => {
     try {
-      console.log("DATA: ", data);
       const info = await axios.post(
         "http://localhost:3001/api/users/register",
         data
@@ -17,19 +16,34 @@ export const sendRegisterRequest = createAsyncThunk(
   }
 );
 
-export const sendLoginRequest = createAsyncThunk("LOGIN", async (data) => {
-  try {
-    //despues invertir el orden de las rutas MARIANO I
+export const setUser = createAsyncThunk("SET_USER", async () => {
+  const localUser = JSON.parse(localStorage.getItem("email"));
+
+  if (localUser !== null) {
     const user = await axios.get(
-      `http://localhost:3001/api/users/email/${data.email}`
+      `http://localhost:3001/api/users/email/${localUser}`
     );
-    return user.data;
-    // const info = await axios.post("http://localhost:3001/api/users/login",data)
-    // return info.data
-  } catch (error) {
-    console.log(error);
+    // (localUser === response.data.email ? localUser = user.data : null)
+    return user.data
+  } else {
+    return null;
   }
 });
+
+export const sendLoginRequest = createAsyncThunk(
+  "LOGIN",
+  async (data, thunkAPI) => {
+    try {
+        const loggedUser = await axios.get(
+          `http://localhost:3001/api/users/email/${data.email}`
+        );
+        return loggedUser.data;
+      }
+    catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 export const sendLogoutRequest = createAsyncThunk("LOGOUT", async (data) => {
   try {
@@ -54,7 +68,8 @@ export const userRequest = createAsyncThunk("USER_REQUEST", async (data) => {
   }
 });
 
-export const searchAllUsers = createAsyncThunk("USER_REQUEST", async () => {
+//no tiene uso aparentemente
+export const searchAllUsers = createAsyncThunk("SEARCH_ALL_REQUEST", async () => {
   try {
     const user = await axios.get(`http://localhost:3001/api/users/`);
     return user.data;
@@ -63,26 +78,12 @@ export const searchAllUsers = createAsyncThunk("USER_REQUEST", async () => {
   }
 });
 
-export const searchUsersByInput = createAsyncThunk(
-  "USER_BY_INPUT",
-  async (data) => {
-    try {
-      const userSearch = await axios.get(
-        `http://localhost:3001/api/users/search/${data}`
-      );
-      return userSearch.data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-);
+
 
 const userReducer = createReducer(
   {},
   {
-    [sendRegisterRequest.fulfilled]: (state, action) => {
-      action.payload;
-    },
+    [sendRegisterRequest.fulfilled]: (state, action) => {action.payload;},
     [sendRegisterRequest.rejected]: (state, action) => action.payload,
 
     [sendLoginRequest.fulfilled]: (state, action) => action.payload,
@@ -97,8 +98,8 @@ const userReducer = createReducer(
     [searchAllUsers.fulfilled]: (state, action) => action.payload,
     [searchAllUsers.rejected]: (state, action) => action.payload,
 
-    [searchUsersByInput.fulfilled]: (state, action) => action.payload,
-    [searchUsersByInput.rejected]: (state, action) => action.payload,
+    [setUser.fulfilled]: (state, action) => action.payload,
+    [setUser.rejected]: (state, action) => action.payload,
   }
 );
 

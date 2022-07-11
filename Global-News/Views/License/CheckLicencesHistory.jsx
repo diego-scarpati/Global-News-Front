@@ -9,12 +9,12 @@ import {
   StatusBar,
   Button
 } from "react-native";
-import { hrLicenseBySearch } from "../../store/hhrr";
+import { hrLicenseBySearch } from "../../store/hr";
 import SearchInput from "../Search/SearchInput";
 
 export default function HRLicencesHistory() {
   //const dispatch = useDispatch();
-  const licencias = useSelector((state) => state.hhrr);
+  const licencias = useSelector((state) => state.hr);
   //const user = useSelector((state) => state.license);
   
   return (

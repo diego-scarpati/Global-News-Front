@@ -12,12 +12,12 @@ import {
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
 import { attendaceControl } from "../../store/attendance"
-import { hrSearchUsersByInput } from "../../store/hhrr";
+import { hrSearchUsersByInput } from "../../store/hr";
 
 
 export default function SearchUser({navigation}) {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.hhrr);
+  const users = useSelector((state) => state.hr);
    
     const handlePress = (id)=>{
     dispatch(attendaceControl({id:id}))

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {StyleSheet,Text,View,StatusBar,Button} from "react-native";
-import { hrReviewLicense, hrChangeLicenseStatus } from "../../../store/hhrr";
+import { hrReviewLicense, hrChangeLicenseStatus } from "../../../store/hr";
 
 export default function SectionRender({item}) {
   const dispatch = useDispatch();

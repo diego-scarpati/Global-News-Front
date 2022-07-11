@@ -13,7 +13,7 @@ import {
 
 
 export default function AttendanceControler() {
-  const users = useSelector((state) => state.hhrr);
+  const users = useSelector((state) => state.hr);
   const attendance = useSelector((state) => state.attendance);
 
   return (

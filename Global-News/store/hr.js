@@ -2,7 +2,7 @@ import axios from "axios";
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
 
-export const hrAllUsers = createAsyncThunk("HHRR_ALL_USERS", async (data)=>{
+export const hrAllUsers = createAsyncThunk("hr_ALL_USERS", async (data)=>{
     try{
         const user = await axios.get(`http://localhost:3001/api/users/`);
         return user.data;
@@ -40,7 +40,7 @@ export const hrSearchUsersByInput = createAsyncThunk(
   ); //trae las licencias
   
   export const hrChangeLicenseStatus = createAsyncThunk(
-    "RRHH_CHANGE_STATUS_LICENCE",
+    "HR_CHANGE_STATUS_LICENCE",
     async (data, thunkAPI) => {
       try {
         const licences = await axios.put(`http://localhost:3001/api/workLicenses/${data.id}`,data)
@@ -51,7 +51,7 @@ export const hrSearchUsersByInput = createAsyncThunk(
     }
   );
   
-  export const hrLicenseBySearch = createAsyncThunk("USER_BY_NAME", async (data) => {
+  export const hrLicenseBySearch = createAsyncThunk("HR_LICENSE_BY_SEARCH", async (data) => {
     try {
         const userSearch = await axios.get(`http://localhost:3001/api/workLicenses/search/${data}`)
         return userSearch.data

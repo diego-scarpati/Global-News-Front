@@ -26,6 +26,7 @@ export default function Register({ navigation }) {
       countryOfResidence:"",
       city:"",
       address:"",
+      password:"",
     },
   });
 
@@ -45,6 +46,13 @@ export default function Register({ navigation }) {
   };
 
 
+  const allowOnlyNumbers = (value) => {
+    return value.replace(/[A-Za-z ]+$/g, "");
+  };
+    const allowOnlyLetters = (value) => {
+    return value.replace(/[0-9]*$/, "");
+  };
+
   return (
     <ScrollView>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
@@ -57,13 +65,12 @@ export default function Register({ navigation }) {
                 control={control}
                 rules={{
                   required: true,
-                  pattern : /[A-Za-z]{3}/
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
                     style={styles.input}
                     onBlur={onBlur}
-                    onChangeText={onChange}
+                    onChangeText={(text) => onChange(allowOnlyLetters(text))}
                     value={value}
                     placeholder="Nombre"
                   />
@@ -83,7 +90,7 @@ export default function Register({ navigation }) {
                   <TextInput
                     style={styles.input}
                     onBlur={onBlur}
-                    onChangeText={onChange}
+                    onChangeText={(text) => onChange(allowOnlyLetters(text))}
                     value={value}
                     placeholder="Apellido"
                   />
@@ -164,7 +171,7 @@ export default function Register({ navigation }) {
                   <TextInput
                     style={styles.input}
                     onBlur={onBlur}
-                    onChangeText={onChange}
+                    onChangeText={(text) => onChange(allowOnlyNumbers(text))}
                     defaultValue={value}
                     placeholder="Telefono"
                   />
@@ -185,7 +192,7 @@ export default function Register({ navigation }) {
                   <TextInput
                     style={styles.input}
                     onBlur={onBlur}
-                    onChangeText={onChange}
+                    onChangeText={(text) => onChange(allowOnlyLetters(text))}
                     value={value}
                     placeholder="Pais"
                   />
@@ -205,7 +212,7 @@ export default function Register({ navigation }) {
                   <TextInput
                     style={styles.input}
                     onBlur={onBlur}
-                    onChangeText={onChange}
+                    onChangeText={(text) => onChange(allowOnlyLetters(text))}
                     value={value}
                     placeholder="Ciudad"
                   />

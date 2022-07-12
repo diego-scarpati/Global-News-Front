@@ -15,6 +15,9 @@ import {
 import logo from "../../assets/gnlogogrande-01.png";
 import { sendRegisterRequest } from "../../store/user";
 import Calendar from "../Calendar/Calendar";
+
+import { getToken } from "../../utils/notifications";
+
 import image from "../../assets/background-startScreen-02.png";
 
 export default function Register({ navigation }) {
@@ -39,9 +42,20 @@ export default function Register({ navigation }) {
 
   const dispatch = useDispatch();
 
-  const onSubmit = (info) => {
+  const selectedDay = useSelector((state) => state.calendar);
+
+  const [showModalDate, setShowModalDate] = useState(false);
+  const [textInput, setTextInput] = useState("");
+
+  const onSubmit = async (info) => {
     info.birthday = selectedDay.start;
-    dispatch(sendRegisterRequest(info));
+
+    const token = await getToken(); //hay que usar expo start para que funcione.
+    const registerInfo = { ...info, expoToken: token };
+    dispatch(sendRegisterRequest(registerInfo));
+
+    console.log("🚀 ~ file: Register.jsx ~ line 44 ~ onSubmit ~ token", token);
+
     navigation.navigate("Inicio Sesion");
   };
 
@@ -52,7 +66,6 @@ export default function Register({ navigation }) {
   const allowOnlyNumbers = (value) => {
     return value.replace(/[A-Za-z ]+$/g, "");
   };
-
 
   return (
     <ScrollView>

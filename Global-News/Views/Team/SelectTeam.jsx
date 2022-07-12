@@ -8,7 +8,7 @@ import { addUserToTeam } from "../../store/team"
 
 export default function SelectTeam({navigation}) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.hhrr);
+  const user = useSelector((state) => state.hr);
   const team = useSelector((state) => state.team)
  
   const handlePress = (name)=>{

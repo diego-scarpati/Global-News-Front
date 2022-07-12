@@ -10,14 +10,14 @@ import {
   Button
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
-import { hrAllUsers } from "../../store/hhrr";
+import { hrAllUsers } from "../../store/hr";
 import { rrhhGiveRol } from "../../store/position"
-import { hrSearchUsersByInput } from "../../store/hhrr";
+import { hrSearchUsersByInput } from "../../store/hr";
 
 
 export default function HRGiveRol() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.hhrr);
+  const users = useSelector((state) => state.hr);
   
   useEffect(() => {
     dispatch(hrAllUsers())

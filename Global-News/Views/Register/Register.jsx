@@ -6,7 +6,6 @@ import { View, Text, Image, Button, StyleSheet, TextInput, Modal, ImageBackgroun
 import logo from "../../assets/gnlogogrande-01.png";
 import { sendRegisterRequest } from "../../store/user";
 import Calendar from "../Calendar/Calendar";
-
 import { getToken } from "../../utils/notifications";
 
 import image from "../../assets/background-startScreen-02.png";
@@ -45,6 +44,7 @@ export default function Register({navigation}) {
       const token = await getToken() //hay que usar expo start para que funcione.
       const registerInfo = {...info, expoToken: token}
       dispatch(sendRegisterRequest (registerInfo))
+      console.log("🚀 ~ file: Register.jsx ~ line 45 ~ onSubmit ~ registerInfo", registerInfo)
 
       console.log("🚀 ~ file: Register.jsx ~ line 44 ~ onSubmit ~ token", token)
     

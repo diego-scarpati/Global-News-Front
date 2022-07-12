@@ -1,5 +1,14 @@
 import React from "react";
-import { View, Text, Image, Button, Alert, StyleSheet, ImageBackground, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Button,
+  Alert,
+  StyleSheet,
+  ImageBackground,
+  Pressable,
+} from "react-native";
 import logo from "../../assets/gnlogogrande-01.png";
 import image from "../../assets/background-startScreen-02.png";
 
@@ -7,16 +16,16 @@ export default function StartScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-      <View>
-        <Image
-          source={logo}
-          style={{
-            height: 100,
-            width: 200,
-          }}
-        />
-      </View>
-      <View style={styles.containerButton}>
+        <View>
+          <Image
+            source={logo}
+            style={{
+              height: 100,
+              width: 200,
+            }}
+          />
+        </View>
+        <View style={styles.containerButton}>
           <Pressable
             style={styles.button}
             onPress={() => navigation.navigate("Inicio Sesion")} //navigation.navigate("Inicio Sesion")
@@ -55,7 +64,6 @@ const styles = StyleSheet.create({
   logo: {
     alignItems: "center",
     justifyContent: "center",
-
   },
   button: {
     margin: 2,
@@ -73,5 +81,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 0.25,
     color: "white",
-  }
+  },
 });

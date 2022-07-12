@@ -45,6 +45,21 @@ export const sendLoginRequest = createAsyncThunk(
   }
 );
 
+export const sendLoginRequestMobile = createAsyncThunk(
+  "LOGIN",
+  async (data, thunkAPI) => {
+    try {
+        const loggedUser = await axios.get(
+          `http://localhost:3001/api/users/email/${data}`
+        );
+        return loggedUser.data;
+      }
+    catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const sendLogoutRequest = createAsyncThunk("LOGOUT", async (data) => {
   try {
     const info = await axios.post(
@@ -88,6 +103,9 @@ const userReducer = createReducer(
 
     [sendLoginRequest.fulfilled]: (state, action) => action.payload,
     [sendLoginRequest.rejected]: (state, action) => action.payload,
+
+    [sendLoginRequestMobile.fulfilled]: (state, action) => action.payload,
+    [sendLoginRequestMobile.rejected]: (state, action) => action.payload,
 
     [sendLogoutRequest.fulfilled]: (state, action) => action.payload,
     [sendLogoutRequest.rejected]: (state, action) => action.payload,

@@ -32,6 +32,13 @@ export default function Register({ navigation }) {
   const dispatch = useDispatch();
   const selectedDay = useSelector((state) => state.calendar);
   const [showModalDate, setShowModalDate] = useState(false);
+  const [textInput, setTextInput] = useState("")
+
+  const handleChange = e => {
+    const result = e.target.value.replace(/[^a-z]/gi, '')
+    setTextInput(result)
+  }
+
 
   const onSubmit = async (info) => {
     info.birthday = selectedDay.start;
@@ -45,6 +52,7 @@ export default function Register({ navigation }) {
     navigation.navigate("Inicio Sesion");
   };
 
+
   return (
     <ScrollView>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
@@ -57,6 +65,7 @@ export default function Register({ navigation }) {
             control={control}
             rules={{
               required: true,
+              pattern: /[A-Za-z]{3}/
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
@@ -183,25 +192,6 @@ export default function Register({ navigation }) {
           <View style={styles.input} pointerEvents="none">
             <Text>Fecha: {selectedDay.start} </Text>
           </View>
-
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Direccion"
-              />
-            )}
-            name="address"
-          />
-
-          {errors.address && <Text>Campo requerido.</Text>}
           <Controller
             control={control}
             rules={{
@@ -236,7 +226,23 @@ export default function Register({ navigation }) {
             name="city"
           />
           {errors.city && <Text>Campo requerido.</Text>}
-
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                style={styles.input}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                placeholder="Direccion"
+              />
+            )}
+            name="address"
+          />
+          {errors.address && <Text>Campo requerido.</Text>}
           <Controller
             control={control}
             rules={{

@@ -10,9 +10,10 @@ import {
   TextInput,
   ImageBackground,
   Pressable,
+  Platform,
 } from "react-native";
 import storage from "../../storage/storage";
-import Constants from "expo-constants";
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import logo from "../../assets/gnlogogrande-01.png";
 import { sendLoginRequest } from "../../store/user";
 import image from "../../assets/background-startScreen-02.png";
@@ -28,22 +29,27 @@ export default function Login({ navigation }) {
       password: "",
     },
   });
-
+  const { setItem } = useAsyncStorage("@storage_key");
+  const writeItemToStorage = async (newValue) => {
+    const jsonValue = JSON.stringify({ "email": newValue });
+    await setItem(jsonValue);
+  };
   const dispatch = useDispatch();
 
-  
   const onSubmit = (info) => {
     dispatch(sendLoginRequest(info));
 
-    if (Constants.platform?.web) {
+    if (Platform.OS === "web") {
       localStorage.setItem("email", JSON.stringify(info.email));
     } else {
-      storage.save({
-        key: "loggedUser",
-        id: "1",
-        data: info,
-        // expires: 1000 * 3600,
-      });
+      // storage.save({
+      //   key: "user",
+      //   // id: 1,
+      //   data: info,
+      //   // expires: 1000 * 3600,
+      // });
+
+      writeItemToStorage(info.email)
     }
     navigation.replace("Pantalla Principal");
   };
@@ -91,7 +97,7 @@ export default function Login({ navigation }) {
         {errors.password && <Text>Campo requerido.</Text>}
 
         <Pressable style={styles.button} onPress={handleSubmit(onSubmit)}>
-          <Text style={styles.text}>SUBMIT</Text>
+          <Text style={styles.text}>Ingresar</Text>
         </Pressable>
       </ImageBackground>
     </View>
@@ -106,6 +112,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   input: {
+    backgroundColor: "#fff",
     borderColor: "gray",
     width: "80%",
     borderWidth: 1,

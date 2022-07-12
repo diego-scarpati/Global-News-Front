@@ -38,14 +38,13 @@ export default function License({ navigation }) {
   });
 
   const dispatch = useDispatch();
-
   const selectedDay = useSelector((state) => state.calendar);
   const user = useSelector((state) => state.user);
 
   const [showModalStart, setShowModalStart] = useState(false);
   const [showModalEnd, setShowModalEnd] = useState(false);
 
-  const onSubmit = (info) => {
+  const onSubmit = (info) => { 
     info.startDate = selectedDay.start;
     info.endDate = selectedDay.end;
     dispatch(sendLicenseRequest(info));

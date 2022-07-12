@@ -39,21 +39,20 @@ export default function Register({ navigation }) {
 
   const dispatch = useDispatch();
 
-  const selectedDay = useSelector((state) => state.calendar);
-
-  const [showModalDate, setShowModalDate] = useState(false);
-  const [textInput, setTextInput] = useState("")
-
-  const handleChange = e => {
-    const result = e.target.value.replace(/[^a-z]/gi, '')
-    setTextInput(result)
-  }
-
   const onSubmit = (info) => {
     info.birthday = selectedDay.start;
     dispatch(sendRegisterRequest(info));
     navigation.navigate("Inicio Sesion");
   };
+
+  const allowOnlyLetters = (value) => {
+    return value.replace(/[0-9]*$/, "");
+  };
+
+  const allowOnlyNumbers = (value) => {
+    return value.replace(/[A-Za-z ]+$/g, "");
+  };
+
 
   return (
     <ScrollView>
@@ -62,29 +61,23 @@ export default function Register({ navigation }) {
           <View>
             <Image source={logo} style={styles.logo} />
           </View>
-
           <Controller
             control={control}
             rules={{
               required: true,
-              pattern: /[A-Za-z]{3}/
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 style={styles.input}
                 onBlur={onBlur}
-                onChange={onChange}
+                onChangeText={(text) => onChange(allowOnlyLetters(text))}
                 value={value}
-                // onChangeText={(text) => handleChange(text)}
-                // value={textInput}
                 placeholder="Nombre"
-                
               />
             )}
             name="firstName"
           />
           {errors.firstName && <Text>Campo requerido.</Text>}
-
           <Controller
             control={control}
             rules={{
@@ -94,7 +87,7 @@ export default function Register({ navigation }) {
               <TextInput
                 style={styles.input}
                 onBlur={onBlur}
-                onChangeText={onChange}
+                onChangeText={(text) => onChange(allowOnlyLetters(text))}
                 value={value}
                 placeholder="Apellido"
               />
@@ -145,7 +138,7 @@ export default function Register({ navigation }) {
               <TextInput
                 style={styles.input}
                 onBlur={onBlur}
-                onChangeText={onChange}
+                onChangeText={(text) => onChange(allowOnlyNumbers(text))}
                 value={value}
                 placeholder="Telefono"
               />
@@ -186,7 +179,7 @@ export default function Register({ navigation }) {
               <TextInput
                 style={styles.input}
                 onBlur={onBlur}
-                onChangeText={onChange}
+                onChangeText={(text) => onChange(allowOnlyLetters(text))}
                 value={value}
                 placeholder="Pais"
               />
@@ -203,7 +196,7 @@ export default function Register({ navigation }) {
               <TextInput
                 style={styles.input}
                 onBlur={onBlur}
-                onChangeText={onChange}
+                onChangeText={(text) => onChange(allowOnlyLetters(text))}
                 value={value}
                 placeholder="Ciudad"
               />
@@ -247,7 +240,7 @@ export default function Register({ navigation }) {
           />
           {errors.password && <Text>Campo requerido.</Text>}
 
-          <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+          <Button title="Enviar" onPress={handleSubmit(onSubmit)} />
         </View>
       </ImageBackground>
     </ScrollView>

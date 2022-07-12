@@ -48,27 +48,24 @@ export default function UserProfileView({ navigation }) {
 
         {user.positionId === 3 && (
           <HomeButton
-            text="Vista Principal"
+            text="Gestión de Personal"
             onPress={() => navigation.navigate("Vista Principal")}
           />
           
         )}
 
         {user.positionId === 2 && (
-          <HomeButton text="Vista Principal" onPress={() => navigation.navigate("Vista Principal")} />
+          <HomeButton text="Gestión de Personal" onPress={() => navigation.navigate("Vista Principal")} />
         )}
 
         {user.positionId === 1 && (
 
-          <HomeButton text="Vista Principal" onPress={() => navigation.navigate("Vista Principal")} />
+          <HomeButton text="Gestión de Personal" onPress={() => navigation.navigate("Vista Principal")} />
 
         )}
 
         {user.RRHH && (
-          <HomeButton
-            text="Vista Principal"
-            onPress={() => navigation.navigate("Vista Principal")}
-          />
+          <HomeButton text="Gestión de Personal" onPress={() => navigation.navigate("Vista Principal")} />
         )}
         <HomeButton text="Logout" onPress={() => logoutHandler()} />
       </View>

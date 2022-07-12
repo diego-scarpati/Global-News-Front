@@ -48,9 +48,9 @@ export default function HRHomeScreen({ navigation }) {
               }
             />
             <HomeButton
-              text="Editar Usuario"
+              text="Seleccionar Usuario"
               onPress={() =>
-                navigation.navigate("Recursos Humanos Editar Usuario")
+                navigation.navigate("Recursos Humanos Seleccionar Usuario")
               }
             />
              <HomeButton

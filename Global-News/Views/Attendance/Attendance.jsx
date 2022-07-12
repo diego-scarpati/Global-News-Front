@@ -8,21 +8,13 @@ import {
 } from "../../store/attendance";
 import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "../HomeScreen/components/HomeButtons";
+import {date} from "../../utils/getDate"
 
 export default function Attendance({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const attendance = useSelector((state) => state.attendance);
   
-  const date = () => {
-    const fecha = new Date();
-    return `${fecha.getDate()}/${
-      fecha.getMonth() + 1
-    }/${fecha.getFullYear()}, ${fecha.getHours()}:${String(
-      fecha.getMinutes()
-    ).padStart(2, "0")}:${String(fecha.getSeconds()).padStart(2, "0")}`;
-  };
-
   const handlePress = (userId, info) => {
     dispatch(availabilityRequest({ id: userId, available: info }));
     if (info) {

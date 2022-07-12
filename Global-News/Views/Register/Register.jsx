@@ -250,6 +250,7 @@ export default function Register({ navigation }) {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
+                    secureTextEntry={true}
                     style={styles.input}
                     onBlur={onBlur}
                     onChangeText={onChange}

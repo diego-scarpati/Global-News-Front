@@ -1,25 +1,25 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet, View, ScrollView, Platform, ImageBackground } from "react-native";
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import storage from "../../storage/storage";
+
 import Profile from "./components/Profile";
 import HomeButton from "./components/HomeButtons";
 import image from "../../assets/background-startScreen-02.png";
 
 export default function UserProfileView({ navigation }) {
   const user = useSelector((state) => state.user);
+  const {removeItem} = useAsyncStorage('@storage_key')
+  const removeItemFromStorage = async () => {
+    await removeItem()
+  }
 
   const logoutHandler = () => {
     if (Platform.OS === "web") {
       localStorage.setItem("email", null)
     } else {
-      try {
-        storage.remove({
-          key: "loggedUser",
-        });
-      } catch (error) {
-        console.log("logoutHandler Error:", error);
-      }
+    removeItemFromStorage()
     }
     navigation.replace("Inicio");
   };
@@ -46,7 +46,7 @@ export default function UserProfileView({ navigation }) {
           onPress={() => navigation.navigate("Dar Presente")}
         />
 
-        {/* {user.positionId === 3 && (
+        {user.positionId === 3 && (
           <HomeButton
             text="Vista Principal"
             onPress={() => navigation.navigate("Vista Principal")}
@@ -69,7 +69,7 @@ export default function UserProfileView({ navigation }) {
             text="Vista Principal"
             onPress={() => navigation.navigate("Vista Principal")}
           />
-        )} */}
+        )}
         <HomeButton text="Logout" onPress={() => logoutHandler()} />
       </View>
       </ImageBackground>

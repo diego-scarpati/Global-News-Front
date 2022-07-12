@@ -18,7 +18,7 @@ function getWebGoogleOAuthURL() {
       "https://www.googleapis.com/auth/userinfo.email",
     ].join(" "),
   };
-  console.log("Redirect:", options.redirect_uri);
+  // console.log("Redirect:", options.redirect_uri);
   const qs = new URLSearchParams(options);
   // console.log("entre en getWebGoogleOAuthURL")
   return `${rootUrl}?${qs.toString()}`;

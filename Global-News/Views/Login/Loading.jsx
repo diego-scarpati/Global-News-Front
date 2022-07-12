@@ -8,13 +8,29 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser, sendLoginRequest } from "../../store/user";
-import logo from "../../assets/gnlogogrande-01.png";
-import storage from "../../storage/storage";
+import {
+  setUser,
+  sendLoginRequest,
+  sendLoginRequestMobile,
+} from "../../store/user";
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
 const Loading = ({ navigation }) => {
-  // const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const { getItem, setItem } = useAsyncStorage("@storage_key");
+  const readItem = () => {
+    const readItemFromStorage = async () => {
+      const jsonValue = await getItem();
+      if (jsonValue) {
+        const { email } = JSON.parse(jsonValue);
+        return email !== null ? email : null;
+      } else {
+        return null;
+      }
+    };
+    return readItemFromStorage();
+  };
+
   useEffect(() => {
     if (Platform.OS === "web") {
       if (JSON.parse(localStorage.getItem("email")) !== null) {
@@ -24,41 +40,39 @@ const Loading = ({ navigation }) => {
         navigation.replace("Inicio");
       }
     } else {
-      try {
-        storage
-          .load({
-            key: "loggedUser",
-            id: "1",
-            // autoSync: false,
-            // syncInBackground: false,
-          })
-          .then((ret) => {
-            console.log("ret", ret)
-            dispatch(sendLoginRequest({ email: ret.email }));
+      // try {
+      //   storage
+      //     .load({
+      //       key: "user",
+      //       // id: 1,
+      //       // autoSync: false,
+      //       // syncInBackground: false,
+      //     })
+      //     .then((ret) => {
+      //       console.log("ret", ret);
+      //       dispatch(sendLoginRequest({ email: ret.email }));
+      //       navigation.replace("Pantalla Principal");
+      //     });
+      //   } catch (error) {
+      //     console.warn(error.message);
+      //     navigation.replace("Inicio");
+      //   }
+      // navigation.replace("Pantalla Principal");
+      readItem()
+        .then((res) => {
+          if (!res) {
+            navigation.replace("Inicio");
+          } else {
+            dispatch(sendLoginRequestMobile(res));
             navigation.replace("Pantalla Principal");
-          });
-      } catch (error) {
-        
-        console.warn(error.message);
-        navigation.replace("Inicio");
-      }
-      // navigation.replace("Inicio");
-      try {
-        // NO tira error
-        storage.getIdsForKey("loggedUser").then((ids) => {
-         
-        });
-      } catch (error) {
-        console.log("getAllDataForKey", error);
-      }
+          }
+        })
+        .catch((error) => console.log(error));
     }
   }, []);
 
   return (
-    <View style={styles.contaier}>
-      <View>
-        <Image source={logo} style={styles.logo} />
-      </View>
+    <View style={styles.container}>
       <View>
         <ActivityIndicator size="large" color="#0073b7" />
       </View>
@@ -74,6 +88,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    alignContent: "center",
   },
   logo: {
     alignItems: "center",

@@ -21,6 +21,33 @@ const storage = new Storage({
   // the latest data.
   // sync: {
   //   // we'll talk about the details later.
+  //   async user(params) {
+  //     let {
+  //       id,
+  //       syncParams: { extraFetchOptions, someFlag }
+  //     } = params;
+  //     const response = await fetch('user/?id=' + id
+  //     // ,{...extraFetchOptions}
+  //     );
+  //     const responseText = await response.text();
+  //     console.log(`user${id} sync resp: `, responseText);
+  //     const json = JSON.parse(responseText);
+  //     if (json && json.user) {
+  //       storage.save({
+  //         key: 'user',
+  //         id,
+  //         data: json.user
+  //       });
+  //       // if (someFlag) {
+  //       //   // do something for some custom flag
+  //       // }
+  //       // return required data when succeed
+  //       return json.user;
+  //     } else {
+  //       // throw error when failed
+  //       throw new Error(`error syncing user${id}`);
+  //     }
+  //   }
   // }
 });
 

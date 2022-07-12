@@ -19,6 +19,7 @@ const handleSelect = (day) => {
       <View style={{ flex: 1, margin: 10, padding: 60 }}>
         <Calendar
           onChange={(range) => console.log(range)}
+
           startDate={ Date().toString()}
           endDate={ Date().toString()}
         

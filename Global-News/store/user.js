@@ -45,6 +45,21 @@ export const sendLoginRequest = createAsyncThunk(
   }
 );
 
+export const sendLoginRequestMobile = createAsyncThunk(
+  "LOGIN",
+  async (data, thunkAPI) => {
+    try {
+        const loggedUser = await axios.get(
+          `http://localhost:3001/api/users/email/${data}`
+        );
+        return loggedUser.data;
+      }
+    catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const sendLogoutRequest = createAsyncThunk("LOGOUT", async (data) => {
   try {
     const info = await axios.post(
@@ -78,6 +93,15 @@ export const searchAllUsers = createAsyncThunk("SEARCH_ALL_REQUEST", async () =>
   }
 });
 
+export const editUser = createAsyncThunk("EDIT_USER", async (data) => {
+  try {
+    const user = await axios.put(`http://localhost:3001/api/users/${data.id}`,data.info);
+    return user.data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 
 
 const userReducer = createReducer(
@@ -88,6 +112,9 @@ const userReducer = createReducer(
 
     [sendLoginRequest.fulfilled]: (state, action) => action.payload,
     [sendLoginRequest.rejected]: (state, action) => action.payload,
+
+    [sendLoginRequestMobile.fulfilled]: (state, action) => action.payload,
+    [sendLoginRequestMobile.rejected]: (state, action) => action.payload,
 
     [sendLogoutRequest.fulfilled]: (state, action) => action.payload,
     [sendLogoutRequest.rejected]: (state, action) => action.payload,

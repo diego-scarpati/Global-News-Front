@@ -12,7 +12,12 @@ import {
   Modal,
   ImageBackground,
   Platform,
+<<<<<<< HEAD
 } from "react-native";
+=======
+  } from "react-native";
+import logo from "../../assets/gnlogogrande-01.png";
+>>>>>>> a401cdac8bf5a09785867833ceb2984d26c65645
 import { sendRegisterRequest } from "../../store/user";
 import { getToken } from "../../utils/notifications";
 import image from "../../assets/background-startScreen-02.png";
@@ -40,9 +45,15 @@ export default function Register({ navigation }) {
   });
 
   const dispatch = useDispatch();
+<<<<<<< HEAD
 
   const onSubmit = async (info) => {
     info.birthday = setDate(info.birthday);
+=======
+  const onSubmit = async (info) => {
+    info.birthday = setDate(info.birthday);
+    console.log(info);
+>>>>>>> a401cdac8bf5a09785867833ceb2984d26c65645
     if (Platform.OS === "web") {
       dispatch(sendRegisterRequest(info));
     } else {
@@ -56,7 +67,10 @@ export default function Register({ navigation }) {
   const allowOnlyNumbers = (value) => {
     return value.replace(/[A-Za-z ]+$/g, "");
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> a401cdac8bf5a09785867833ceb2984d26c65645
   const allowOnlyLetters = (value) => {
     return value.replace(/[0-9]*$/, "");
   };

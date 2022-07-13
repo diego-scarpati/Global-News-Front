@@ -12,6 +12,7 @@ import Profile from "./components/Profile";
 import HomeButton from "./components/HomeButtons";
 import image from "../../assets/background-startScreen-02.png";
 import { Badge } from "react-native-paper";
+import { sendLogoutRequest } from "../../store/user";
 
 export default function UserProfileView({ navigation }) {
   const user = useSelector((state) => state.user);

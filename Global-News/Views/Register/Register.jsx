@@ -58,7 +58,7 @@ export default function Register({ navigation }) {
   const allowOnlyNumbers = (value) => {
     return value.replace(/[A-Za-z ]+$/g, "");
   };
-  
+
   const allowOnlyLetters = (value) => {
     return value.replace(/[0-9]*$/, "");
   };

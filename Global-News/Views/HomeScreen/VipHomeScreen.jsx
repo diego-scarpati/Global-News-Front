@@ -58,11 +58,7 @@ export default function HRHomeScreen({ navigation }) {
             <HomeButton
               text="Control solicitud de licencias"
               onPress={() =>
-<<<<<<< HEAD
-                navigation.navigate("Sumar Empleado a la Oficina")
-=======
                 navigation.navigate("Control Solicitud de Licencias")
->>>>>>> a401cdac8bf5a09785867833ceb2984d26c65645
               }
             />
           </View>
@@ -135,7 +131,7 @@ const styles = StyleSheet.create({
   algo: {
     flexDirection: "column",
     alignSelf: "center",
-    marginTop: 10
+    marginTop: 10,
   },
   badge: {
     alignItems: "center",

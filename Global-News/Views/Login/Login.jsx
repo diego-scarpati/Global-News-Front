@@ -43,18 +43,26 @@ export default function Login({ navigation }) {
 
     if (Platform.OS === "web") {
       localStorage.setItem("email", JSON.stringify(info.email));
-      if (user) {
-        navigation.replace("Pantalla Principal");
-      } else {
-        window.alert("Email o contraseña incorrectas");
-      }
+      navigation.replace("Pantalla Principal");
+      // setTimeout(() => {
+      //   if (user) {
+      //     localStorage.setItem("email", JSON.stringify(info.email));
+      //     navigation.replace("Pantalla Principal");
+      //   } else {
+      //     window.alert("Email o contraseña incorrectas");
+      //   }
+      // }, 1000);
     } else {
       writeItemToStorage(info.email);
-      if (user) {
-        navigation.replace("Pantalla Principal");
-      } else {
-        Alert.alert("Error de LogIn", "Email o contraseña incorrectas");
-      }
+      navigation.replace("Pantalla Principal");
+      // setTimeout(() => {
+      //   if (user) {
+      //     writeItemToStorage(info.email);
+      //     navigation.replace("Pantalla Principal");
+      //   } else {
+      //     Alert.alert("Error de LogIn", "Email o contraseña incorrectas");
+      //   }
+      // }, 1000);
       // {user
       //   ? navigation.replace("Pantalla Principal")
       //   : alertMobile}

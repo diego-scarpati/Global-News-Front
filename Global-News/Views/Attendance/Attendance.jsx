@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Button, StyleSheet, ImageBackground } from "react-native";
+import {
+  View,
+  Button,
+  StyleSheet,
+  ImageBackground,
+  Pressable,
+  Text,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { availabilityRequest } from "../../store/availability";
 import {
@@ -8,20 +15,13 @@ import {
 } from "../../store/attendance";
 import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "../HomeScreen/components/HomeButtons";
+import { userRequest } from "../../store/user";
+import {date} from "../../utils/getDate"
 
 export default function Attendance({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const attendance = useSelector((state) => state.attendance);
-  
-  const date = () => {
-    const fecha = new Date();
-    return `${fecha.getDate()}/${
-      fecha.getMonth() + 1
-    }/${fecha.getFullYear()}, ${fecha.getHours()}:${String(
-      fecha.getMinutes()
-    ).padStart(2, "0")}:${String(fecha.getSeconds()).padStart(2, "0")}`;
-  };
 
   const handlePress = (userId, info) => {
     dispatch(availabilityRequest({ id: userId, available: info }));
@@ -38,21 +38,37 @@ export default function Attendance({ navigation }) {
     navigation.navigate("Pantalla Principal");
   };
 
+  useEffect(() => {
+    dispatch(userRequest({userId: user.id}))
+  },[user.availabilityId])
+
   return (
     <View style={styles.item}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-      <View>
-      <HomeButton
-          text="Ingreso" 
-          onPress={() => handlePress(user.id, true)}
-        />
-      </View>
-      <View>
-      <HomeButton
-          text="Egreso"
-          onPress={() => handlePress(user.id, false)}
-        />
-      </View>
+        <View>
+          {user.availabilityId == 1 ? (
+            <Pressable style={styles.buttonOff}>
+              <Text style={styles.textButton}>Ingreso</Text>
+            </Pressable>
+          ) : (
+            <HomeButton
+              text="Ingreso"
+              onPress={() => handlePress(user.id, true)}
+            />
+          )}
+        </View>
+        <View>
+          {user.availabilityId == 2 ? (
+            <Pressable style={styles.buttonOff}>
+              <Text style={styles.textButton}>Egreso</Text>
+            </Pressable>
+          ) : (
+            <HomeButton
+              text="Egreso"
+              onPress={() => handlePress(user.id, false)}
+            />
+          )}
+        </View>
       </ImageBackground>
     </View>
   );
@@ -76,5 +92,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 600,
     width: "100%",
-  }
+  },
+  buttonOff: {
+    margin: 2,
+    backgroundColor: "#a2a2a2",
+    borderColor: "white",
+    borderRadius: 30,
+    width: 300,
+    height: 35,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textButton: {
+    fontSize: 14,
+    lineHeight: 21,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
+    color: "white",
+  },
 });

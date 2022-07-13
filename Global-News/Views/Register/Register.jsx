@@ -14,6 +14,7 @@ import {
   Platform,
   } from "react-native";
 import logo from "../../assets/gnlogogrande-01.png";
+
 import { sendRegisterRequest } from "../../store/user";
 import { getToken } from "../../utils/notifications";
 import image from "../../assets/background-startScreen-02.png";
@@ -41,9 +42,10 @@ export default function Register({ navigation }) {
   });
 
   const dispatch = useDispatch();
+
   const onSubmit = async (info) => {
     info.birthday = setDate(info.birthday);
-    console.log(info);
+
     if (Platform.OS === "web") {
       dispatch(sendRegisterRequest(info));
     } else {
@@ -57,9 +59,11 @@ export default function Register({ navigation }) {
   const allowOnlyNumbers = (value) => {
     return value.replace(/[A-Za-z ]+$/g, "");
   };
+
   const allowOnlyLetters = (value) => {
     return value.replace(/[0-9]*$/, "");
   };
+  
 
   return (
     <ScrollView>
@@ -179,7 +183,7 @@ export default function Register({ navigation }) {
                     style={styles.input}
                     onBlur={onBlur}
                     onChangeText={(text) => onChange(allowOnlyNumbers(text))}
-                    defaultValue={value}
+                    value={value}
                     placeholder="Telefono"
                   />
                 )}

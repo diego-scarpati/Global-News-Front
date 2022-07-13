@@ -71,7 +71,7 @@ function App() {
 
           <Stack.Screen name="Crear Oficina" component={CreateOffice} />
           <Stack.Screen
-            name="Sumar Empleado ala Oficina"
+            name="Sumar Empleado a la Oficina"
             component={AddUserOffice}
           />
           <Stack.Screen name="Elegir Oficina" component={SelectOffice} />

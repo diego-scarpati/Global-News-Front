@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
 import {
@@ -13,8 +13,10 @@ import {
 } from "react-native";
 import HomeButton from "../HomeScreen/components/HomeButtons";
 import image from "../../assets/background-startScreen-02.png";
+import { editUser } from "../../store/user";
 
 export default function Register() {
+  const dispatch = useDispatch
   const user = useSelector((state) => state.user);
 
   const {
@@ -38,7 +40,11 @@ export default function Register() {
       shift: user.shift || "",
     },
   });
-  const onSubmit = (data) => console.log(data);
+
+  const onSubmit = (info) => {
+    dispatch(editUser({ info, id: user.id }));
+    navigation.navigate("Pantalla Principal");
+  };
 
   return (
     <ScrollView>
@@ -55,6 +61,7 @@ export default function Register() {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
+                    editable={false}
                     style={styles.input}
                     onBlur={onBlur}
                     onChangeText={onChange}
@@ -75,6 +82,7 @@ export default function Register() {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
+                    editable={false}
                     style={styles.input}
                     onBlur={onBlur}
                     onChangeText={onChange}
@@ -95,6 +103,7 @@ export default function Register() {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
+                    editable={false}
                     style={styles.input}
                     onBlur={onBlur}
                     onChangeText={onChange}
@@ -115,6 +124,7 @@ export default function Register() {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
+                    editable={false}
                     style={styles.input}
                     onBlur={onBlur}
                     onChangeText={onChange}
@@ -135,6 +145,7 @@ export default function Register() {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
+                    editable={false}
                     style={styles.input}
                     onBlur={onBlur}
                     onChangeText={onChange}
@@ -155,6 +166,7 @@ export default function Register() {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
+                    editable={false}
                     style={styles.input}
                     onBlur={onBlur}
                     onChangeText={onChange}
@@ -176,6 +188,7 @@ export default function Register() {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
+                    editable={false}
                     style={styles.input}
                     onBlur={onBlur}
                     onChangeText={onChange}
@@ -196,6 +209,7 @@ export default function Register() {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
+                    editable={false}
                     style={styles.input}
                     onBlur={onBlur}
                     onChangeText={onChange}
@@ -216,6 +230,7 @@ export default function Register() {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
+                    editable={false}
                     style={styles.input}
                     onBlur={onBlur}
                     onChangeText={onChange}

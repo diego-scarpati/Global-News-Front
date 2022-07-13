@@ -62,7 +62,7 @@ export default function HRHomeScreen({ navigation }) {
             <HomeButton
               text="Sumar Empleado a la Oficina"
               onPress={() =>
-                navigation.navigate("Sumar Empleado ala Oficina")
+                navigation.navigate("Sumar Empleado a la Oficina")
               }
             />
           </View>

@@ -43,7 +43,6 @@ export default function Register({ navigation }) {
 
   const onSubmit = async (info) => {
     info.birthday = setDate(info.birthday);
-    console.log(info);
     if (Platform.OS === "web") {
       dispatch(sendRegisterRequest(info));
     } else {
@@ -61,6 +60,7 @@ export default function Register({ navigation }) {
   const allowOnlyLetters = (value) => {
     return value.replace(/[0-9]*$/, "");
   };
+  
 
   return (
     <ScrollView>

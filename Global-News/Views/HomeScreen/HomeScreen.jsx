@@ -7,9 +7,11 @@ import storage from "../../storage/storage";
 import Profile from "./components/Profile";
 import HomeButton from "./components/HomeButtons";
 import image from "../../assets/background-startScreen-02.png";
+import { Badge } from "react-native-paper";
 
 export default function UserProfileView({ navigation }) {
   const user = useSelector((state) => state.user);
+  const license = useSelector((state)=> state.hr)
   const {removeItem} = useAsyncStorage('@storage_key')
   const removeItemFromStorage = async () => {
     await removeItem()
@@ -29,10 +31,12 @@ export default function UserProfileView({ navigation }) {
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <Profile />
       <View style={styles.body}>
+      
         <HomeButton
           text="Perfil"
           onPress={() => navigation.navigate("Mi Perfil")}
         />
+        
         <HomeButton
           text="Licencias"
           onPress={() => navigation.navigate("Licencias")}
@@ -47,11 +51,13 @@ export default function UserProfileView({ navigation }) {
         />
 
         {user.positionId === 3 && (
+          <>
           <HomeButton
             text="Gestión de Personal"
             onPress={() => navigation.navigate("Vista Principal")}
           />
-          
+         <Badge style={styles.body} size={30}>{license.length}</Badge>
+         </>
         )}
 
         {user.positionId === 2 && (

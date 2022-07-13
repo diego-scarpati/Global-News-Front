@@ -2,13 +2,22 @@ import React, { useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
-import {View,Text,Image,Button,StyleSheet,TextInput,Modal,ImageBackground,Platform} from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Button,
+  StyleSheet,
+  TextInput,
+  Modal,
+  ImageBackground,
+  Platform,
+} from "react-native";
 import { sendRegisterRequest } from "../../store/user";
 import { getToken } from "../../utils/notifications";
 import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "../HomeScreen/components/HomeButtons";
-import { setDate } from "../../utils/getDate"
-
+import { setDate } from "../../utils/getDate";
 
 export default function Register({ navigation }) {
   const {
@@ -17,24 +26,23 @@ export default function Register({ navigation }) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      firstName:"",
-      lastName:"",
-      nationalId:"",
-      birthday:"",
-      email:"",
-      phoneNumber:"",
-      countryOfResidence:"",
-      city:"",
-      address:"",
-      password:"",
+      firstName: "",
+      lastName: "",
+      nationalId: "",
+      birthday: "",
+      email: "",
+      phoneNumber: "",
+      countryOfResidence: "",
+      city: "",
+      address: "",
+      password: "",
     },
   });
 
   const dispatch = useDispatch();
- 
   const onSubmit = async (info) => {
-    info.birthday = setDate(info.birthday)
-   console.log(info)
+    info.birthday = setDate(info.birthday);
+    console.log(info);
     if (Platform.OS === "web") {
       dispatch(sendRegisterRequest(info));
     } else {
@@ -45,11 +53,10 @@ export default function Register({ navigation }) {
     navigation.navigate("Inicio Sesion");
   };
 
-
   const allowOnlyNumbers = (value) => {
     return value.replace(/[A-Za-z ]+$/g, "");
   };
-    const allowOnlyLetters = (value) => {
+  const allowOnlyLetters = (value) => {
     return value.replace(/[0-9]*$/, "");
   };
 
@@ -137,8 +144,7 @@ export default function Register({ navigation }) {
                 )}
                 name="birthday"
               />
-              {errors.birthday && <Text>Campo Requerido.</Text>
-              }
+              {errors.birthday && <Text>Campo Requerido.</Text>}
             </View>
             <View style={styles.editar}>
               <Text style={styles.text}>Email:</Text>
@@ -242,7 +248,7 @@ export default function Register({ navigation }) {
               {errors.address && <Text>Campo Requerido.</Text>}
             </View>
             <View style={styles.editar}>
-            <Text style={styles.text}>Password:</Text>
+              <Text style={styles.text}>Password:</Text>
               <Controller
                 control={control}
                 rules={{
@@ -261,9 +267,9 @@ export default function Register({ navigation }) {
                 name="password"
               />
               {errors.password && <Text>Campo Requerido.</Text>}
-              </View>
+            </View>
           </View>
-          
+
           <HomeButton text={"Enviar"} onPress={handleSubmit(onSubmit)} />
         </View>
       </ImageBackground>
@@ -306,11 +312,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    
   },
-  text:{
+  text: {
     color: "#ffff",
     fontWeight: "bold",
   },
-  
 });

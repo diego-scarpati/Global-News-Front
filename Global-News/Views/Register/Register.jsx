@@ -12,7 +12,9 @@ import {
   Modal,
   ImageBackground,
   Platform,
-} from "react-native";
+  } from "react-native";
+import logo from "../../assets/gnlogogrande-01.png";
+
 import { sendRegisterRequest } from "../../store/user";
 import { getToken } from "../../utils/notifications";
 import image from "../../assets/background-startScreen-02.png";
@@ -43,6 +45,7 @@ export default function Register({ navigation }) {
 
   const onSubmit = async (info) => {
     info.birthday = setDate(info.birthday);
+
     if (Platform.OS === "web") {
       dispatch(sendRegisterRequest(info));
     } else {

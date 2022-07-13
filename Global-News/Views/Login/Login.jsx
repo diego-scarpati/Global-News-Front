@@ -11,6 +11,7 @@ import {
   ImageBackground,
   Pressable,
   Platform,
+  Alert,
 } from "react-native";
 import storage from "../../storage/storage";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
@@ -31,9 +32,10 @@ export default function Login({ navigation }) {
   });
   const { setItem } = useAsyncStorage("@storage_key");
   const writeItemToStorage = async (newValue) => {
-    const jsonValue = JSON.stringify({ "email": newValue });
+    const jsonValue = JSON.stringify({ email: newValue });
     await setItem(jsonValue);
   };
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const onSubmit = (info) => {
@@ -41,17 +43,22 @@ export default function Login({ navigation }) {
 
     if (Platform.OS === "web") {
       localStorage.setItem("email", JSON.stringify(info.email));
+      if (user) {
+        navigation.replace("Pantalla Principal");
+      } else {
+        window.alert("Email o contraseña incorrectas");
+      }
     } else {
-      // storage.save({
-      //   key: "user",
-      //   // id: 1,
-      //   data: info,
-      //   // expires: 1000 * 3600,
-      // });
-
-      writeItemToStorage(info.email)
+      writeItemToStorage(info.email);
+      if (user) {
+        navigation.replace("Pantalla Principal");
+      } else {
+        Alert.alert("Error de LogIn", "Email o contraseña incorrectas");
+      }
+      // {user
+      //   ? navigation.replace("Pantalla Principal")
+      //   : alertMobile}
     }
-    navigation.replace("Pantalla Principal");
   };
 
   return (

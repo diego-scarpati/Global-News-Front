@@ -12,7 +12,8 @@ import {
   Modal,
   ImageBackground,
   Platform,
-} from "react-native";
+  } from "react-native";
+import logo from "../../assets/gnlogogrande-01.png";
 import { sendRegisterRequest } from "../../store/user";
 import { getToken } from "../../utils/notifications";
 import image from "../../assets/background-startScreen-02.png";

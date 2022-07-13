@@ -104,7 +104,7 @@ export default function Login({ navigation }) {
         {errors.password && <Text>Campo requerido.</Text>}
 
         <Pressable style={styles.button} onPress={handleSubmit(onSubmit)}>
-          <Text style={styles.text}>SUBMIT</Text>
+          <Text style={styles.text}>Ingresar</Text>
         </Pressable>
       </ImageBackground>
     </View>
@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   input: {
+    backgroundColor: "#fff",
     borderColor: "gray",
     width: "80%",
     borderWidth: 1,

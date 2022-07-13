@@ -127,6 +127,17 @@ export const searchAllUsers = createAsyncThunk(
   }
 );
 
+export const editUser = createAsyncThunk("EDIT_USER", async (data) => {
+  try {
+    const user = await axios.put(`http://localhost:3001/api/users/${data.id}`,data.info);
+    return user.data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
+
 const userReducer = createReducer(
   {},
   {

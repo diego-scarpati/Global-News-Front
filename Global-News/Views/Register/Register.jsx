@@ -11,14 +11,14 @@ import {
   TextInput,
   Modal,
   ImageBackground,
-} from "react-native";
+  Platform,
+  } from "react-native";
 import logo from "../../assets/gnlogogrande-01.png";
 import { sendRegisterRequest } from "../../store/user";
-import Calendar from "../Calendar/Calendar";
-
 import { getToken } from "../../utils/notifications";
-
 import image from "../../assets/background-startScreen-02.png";
+import HomeButton from "../HomeScreen/components/HomeButtons";
+import { setDate } from "../../utils/getDate";
 
 export default function Register({ navigation }) {
   const {
@@ -30,246 +30,248 @@ export default function Register({ navigation }) {
       firstName: "",
       lastName: "",
       nationalId: "",
+      birthday: "",
       email: "",
       phoneNumber: "",
-      birthday: "",
-      address: "",
-      city: "",
-      password: "",
       countryOfResidence: "",
+      city: "",
+      address: "",
+      password: "",
     },
   });
 
   const dispatch = useDispatch();
-
-  const selectedDay = useSelector((state) => state.calendar);
-
-  const [showModalDate, setShowModalDate] = useState(false);
-
   const onSubmit = async (info) => {
-    info.birthday = selectedDay.start;
-
-    const token = await getToken(); //hay que usar expo start para que funcione.
-    const registerInfo = { ...info, expoToken: token };
-    dispatch(sendRegisterRequest(registerInfo));
-
-    console.log("🚀 ~ file: Register.jsx ~ line 44 ~ onSubmit ~ token", token);
-
+    info.birthday = setDate(info.birthday);
+    console.log(info);
+    if (Platform.OS === "web") {
+      dispatch(sendRegisterRequest(info));
+    } else {
+      const token = await getToken(); //hay que usar expo start para que funcione.
+      const registerInfo = { ...info, expoToken: token };
+      dispatch(sendRegisterRequest(registerInfo));
+    }
     navigation.navigate("Inicio Sesion");
+  };
+
+  const allowOnlyNumbers = (value) => {
+    return value.replace(/[A-Za-z ]+$/g, "");
+  };
+  const allowOnlyLetters = (value) => {
+    return value.replace(/[0-9]*$/, "");
   };
 
   return (
     <ScrollView>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <View style={styles.container}>
+          <Text style={styles.title}>Registrarse</Text>
           <View>
-            <Image source={logo} style={styles.logo} />
+            <View style={styles.editar}>
+              <Text style={styles.text}>Nombre:</Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={(text) => onChange(allowOnlyLetters(text))}
+                    value={value}
+                    placeholder="Nombre"
+                  />
+                )}
+                name="firstName"
+              />
+              {errors.firstName && <Text>Campo Requerido.</Text>}
+            </View>
+            <View style={styles.editar}>
+              <Text style={styles.text}>Apellido:</Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={(text) => onChange(allowOnlyLetters(text))}
+                    value={value}
+                    placeholder="Apellido"
+                  />
+                )}
+                name="lastName"
+              />
+              {errors.lastName && <Text>Campo Requerido.</Text>}
+            </View>
+            <View style={styles.editar}>
+              <Text style={styles.text}>DNI:</Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    placeholder="DNI"
+                  />
+                )}
+                name="nationalId"
+              />
+              {errors.nationalId && <Text>Campo Requerido.</Text>}
+            </View>
+            <View style={styles.editar}>
+              <Text style={styles.text}>Fecha de nacimiento:</Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    placeholder="DD/MM/AAAA"
+                  />
+                )}
+                name="birthday"
+              />
+              {errors.birthday && <Text>Campo Requerido.</Text>}
+            </View>
+            <View style={styles.editar}>
+              <Text style={styles.text}>Email:</Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    placeholder="Email"
+                  />
+                )}
+                name="email"
+              />
+              {errors.email && <Text>Campo Requerido.</Text>}
+            </View>
+            <View style={styles.editar}>
+              <Text style={styles.text}>Telefono:</Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={(text) => onChange(allowOnlyNumbers(text))}
+                    defaultValue={value}
+                    placeholder="Telefono"
+                  />
+                )}
+                name="phoneNumber"
+              />
+              {errors.phoneNumber && <Text>Campo Requerido.</Text>}
+            </View>
+
+            <View style={styles.editar}>
+              <Text style={styles.text}>Pais:</Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={(text) => onChange(allowOnlyLetters(text))}
+                    value={value}
+                    placeholder="Pais"
+                  />
+                )}
+                name="countryOfResidence"
+              />
+              {errors.countryOfResidence && <Text>Campo Requerido.</Text>}
+            </View>
+            <View style={styles.editar}>
+              <Text style={styles.text}>Ciudad:</Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={(text) => onChange(allowOnlyLetters(text))}
+                    value={value}
+                    placeholder="Ciudad"
+                  />
+                )}
+                name="city"
+              />
+              {errors.city && <Text>Campo Requerido.</Text>}
+            </View>
+            <View style={styles.editar}>
+              <Text style={styles.text}>Direccion:</Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    defaultValue={value}
+                    placeholder="Direccion"
+                  />
+                )}
+                name="address"
+              />
+              {errors.address && <Text>Campo Requerido.</Text>}
+            </View>
+            <View style={styles.editar}>
+              <Text style={styles.text}>Password:</Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    secureTextEntry={true}
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    defaultValue={value}
+                    placeholder="Password"
+                  />
+                )}
+                name="password"
+              />
+              {errors.password && <Text>Campo Requerido.</Text>}
+            </View>
           </View>
 
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Nombre"
-              />
-            )}
-            name="firstName"
-          />
-          {errors.firstName && <Text>Campo requerido.</Text>}
-
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Apellido"
-              />
-            )}
-            name="lastName"
-          />
-          {errors.lastName && <Text>Campo requerido.</Text>}
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="DNI"
-              />
-            )}
-            name="nationalId"
-          />
-          {errors.nationalId && <Text>Campo requerido.</Text>}
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value.toLowerCase()}
-                placeholder="Email"
-              />
-            )}
-            name="email"
-          />
-          {errors.email && <Text>Campo requerido.</Text>}
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Telefono"
-              />
-            )}
-            name="phoneNumber"
-          />
-          {errors.phoneNumber && <Text>Campo requerido.</Text>}
-          {/* <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Birth Date"
-              options={{
-                format: 'DD-MM-YYYY'
-              }}
-            />
-          )}
-          name="birthday"
-        />
-        {errors.birthday && <Text>Campo requerido.</Text>} */}
-
-          <Modal
-            animationType="slide"
-            transparent={false}
-            visible={showModalDate}
-          >
-            <Calendar text={"start"} />
-            <Button
-              title="Cerrar"
-              onPress={() => {
-                setShowModalDate(!showModalDate);
-              }}
-            />
-          </Modal>
-          <Button
-            style={{ marginBottom: 20 }}
-            title="Fecha de Nacimiento"
-            onPress={() => {
-              setShowModalDate(!showModalDate);
-            }}
-          />
-          <View style={styles.input} pointerEvents="none">
-            <Text>Fecha: {selectedDay.start} </Text>
-          </View>
-
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Direccion"
-              />
-            )}
-            name="address"
-          />
-
-          {errors.address && <Text>Campo requerido.</Text>}
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Pais"
-              />
-            )}
-            name="countryOfResidence"
-          />
-          {errors.countryOfResidence && <Text>Campo requerido.</Text>}
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Ciudad"
-              />
-            )}
-            name="city"
-          />
-          {errors.city && <Text>Campo requerido.</Text>}
-
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Contraseña"
-                secureTextEntry={true}
-              />
-            )}
-            name="password"
-          />
-          {errors.password && <Text>Campo requerido.</Text>}
-
-          <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+          <HomeButton text={"Enviar"} onPress={handleSubmit(onSubmit)} />
         </View>
       </ImageBackground>
     </ScrollView>
@@ -282,20 +284,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  input: {
-    borderColor: "gray",
-    backgroundColor: "#ffff",
-    width: "80%",
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 10,
-    margin: 10,
-    flexDirection: "row",
-  },
-  logo: {
-    height: 100,
-    width: 200,
-    justifyContent: "center",
+  title: {
+    fontSize: 17,
+    color: "#ffff",
+    fontWeight: "bold",
+    marginTop: 10,
   },
   image: {
     flex: 1,
@@ -303,5 +296,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     width: "100%",
+  },
+  input: {
+    borderColor: "gray",
+    width: "80%",
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    margin: 10,
+    width: 210,
+    backgroundColor: "#ffff",
+  },
+  editar: {
+    flex: 1,
+    flexWrap: "nowrap",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  text: {
+    color: "#ffff",
+    fontWeight: "bold",
   },
 });

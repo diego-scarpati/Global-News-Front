@@ -48,17 +48,14 @@ export default function TeamsHome({ navigation }) {
 const styles = StyleSheet.create({
   body: {
     backgroundColor: "#f89d1e",
-    height: 1000,
     alignItems: "center",
+    margin: 0
   },
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
-    marginHorizontal: 16,
     justifyContent: "center",
     alignContent: "center",
-    padding: 5,
-    margin: 5,
   },
   row: {
     paddingHorizontal: 20,
@@ -73,6 +70,7 @@ const styles = StyleSheet.create({
   },
   mainText: {
     fontSize: 30,
+    marginTop: 10
   },
   image: {
     flex: 1,
@@ -80,5 +78,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     width: "100%",
+    minHeight: 700
   }
 });

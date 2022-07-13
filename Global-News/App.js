@@ -30,6 +30,7 @@ import SelectOffice from "./Views/Offices/SelectOffice";
 import AddUserOffice from "./Views/Offices/AddUserOffice";
 import HREditUser from "./Views/RRHH/HREditUser";
 import Loading from "./Views/Login/Loading";
+import HRSelectUser from "./Views/RRHH/HRSelectUser";
 
 import { startNotifications } from "./utils/notifications";
 
@@ -94,6 +95,11 @@ function App() {
             name="Recursos Humanos Editar Usuario"
             component={HREditUser}
           />
+          <Stack.Screen
+            name="Recursos Humanos Seleccionar Usuario"
+            component={HRSelectUser}
+          />
+
           <Stack.Screen
             name="Recursos Humanos Promover Empleado"
             component={HRGiveRol}

@@ -10,8 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setUser,
-  sendLoginRequest,
-  sendLoginRequestMobile,
+  findUserByEmailMobile,
 } from "../../store/user";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
@@ -40,31 +39,23 @@ const Loading = ({ navigation }) => {
         navigation.replace("Inicio");
       }
     } else {
-      // try {
-      //   storage
-      //     .load({
-      //       key: "user",
-      //       // id: 1,
-      //       // autoSync: false,
-      //       // syncInBackground: false,
-      //     })
-      //     .then((ret) => {
-      //       console.log("ret", ret);
-      //       dispatch(sendLoginRequest({ email: ret.email }));
-      //       navigation.replace("Pantalla Principal");
-      //     });
-      //   } catch (error) {
-      //     console.warn(error.message);
-      //     navigation.replace("Inicio");
-      //   }
-      // navigation.replace("Pantalla Principal");
       readItem()
         .then((res) => {
+          console.log("🚀 ~ file: Loading.jsx ~ line 45 ~ .then ~ res", res);
           if (!res) {
             navigation.replace("Inicio");
           } else {
-            dispatch(sendLoginRequestMobile(res));
-            navigation.replace("Pantalla Principal");
+            // navigation.replace("Inicio");
+            dispatch(findUserByEmailMobile(res))
+              .then((response) => {
+                const { payload } = response;
+                if (payload !== "") {
+                  navigation.replace("Pantalla Principal");
+                } else {
+                  navigation.replace("Inicio");
+                }
+              })
+              .catch((error) => console.log(error));
           }
         })
         .catch((error) => console.log(error));

@@ -1,77 +1,89 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, View, ScrollView, Platform, ImageBackground } from "react-native";
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
-import storage from "../../storage/storage";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Platform,
+  ImageBackground,
+} from "react-native";
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+// import storage from "../../storage/storage";
 
 import Profile from "./components/Profile";
 import HomeButton from "./components/HomeButtons";
 import image from "../../assets/background-startScreen-02.png";
+import { sendLogoutRequest } from "../../store/user";
 
 export default function UserProfileView({ navigation }) {
   const user = useSelector((state) => state.user);
-  const {removeItem} = useAsyncStorage('@storage_key')
+  const dispatch = useDispatch();
+  const { removeItem } = useAsyncStorage("@storage_key");
   const removeItemFromStorage = async () => {
-    await removeItem()
-  }
+    await removeItem();
+  };
 
   const logoutHandler = () => {
     if (Platform.OS === "web") {
-      localStorage.setItem("email", null)
+      localStorage.setItem("email", null);
     } else {
-    removeItemFromStorage()
+      removeItemFromStorage();
     }
+    dispatch(sendLogoutRequest());
     navigation.replace("Inicio");
   };
 
   return (
     <ScrollView style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-      <Profile />
-      <View style={styles.body}>
-        <HomeButton
-          text="Perfil"
-          onPress={() => navigation.navigate("Mi Perfil")}
-        />
-        <HomeButton
-          text="Licencias"
-          onPress={() => navigation.navigate("Licencias")}
-        />
-        <HomeButton
-          text="Equipos"
-          onPress={() => navigation.navigate("Equipos")}
-        />
-        <HomeButton
-          text="Dar Presente"
-          onPress={() => navigation.navigate("Dar Presente")}
-        />
-
-        {user.positionId === 3 && (
+        {user && <Profile />}
+        <View style={styles.body}>
           <HomeButton
-            text="Vista Principal"
-            onPress={() => navigation.navigate("Vista Principal")}
+            text="Perfil"
+            onPress={() => navigation.navigate("Mi Perfil")}
           />
-          
-        )}
-
-        {user.positionId === 2 && (
-          <HomeButton text="Vista Principal" onPress={() => navigation.navigate("Vista Principal")} />
-        )}
-
-        {user.positionId === 1 && (
-
-          <HomeButton text="Vista Principal" onPress={() => navigation.navigate("Vista Principal")} />
-
-        )}
-
-        {user.RRHH && (
           <HomeButton
-            text="Vista Principal"
-            onPress={() => navigation.navigate("Vista Principal")}
+            text="Licencias"
+            onPress={() => navigation.navigate("Licencias")}
           />
-        )}
-        <HomeButton text="Logout" onPress={() => logoutHandler()} />
-      </View>
+          <HomeButton
+            text="Equipos"
+            onPress={() => navigation.navigate("Equipos")}
+          />
+          <HomeButton
+            text="Dar Presente"
+            onPress={() => navigation.navigate("Dar Presente")}
+          />
+
+          {user?.positionId === 3 && (
+            <HomeButton
+              text="Vista Principal"
+              onPress={() => navigation.navigate("Vista Principal")}
+            />
+          )}
+
+          {user?.positionId === 2 && (
+            <HomeButton
+              text="Vista Principal"
+              onPress={() => navigation.navigate("Vista Principal")}
+            />
+          )}
+
+          {user?.positionId === 1 && (
+            <HomeButton
+              text="Vista Principal"
+              onPress={() => navigation.navigate("Vista Principal")}
+            />
+          )}
+
+          {user?.RRHH && (
+            <HomeButton
+              text="Vista Principal"
+              onPress={() => navigation.navigate("Vista Principal")}
+            />
+          )}
+          <HomeButton text="Logout" onPress={() => logoutHandler()} />
+        </View>
       </ImageBackground>
     </ScrollView>
   );
@@ -87,5 +99,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     width: "100%",
-  }
+  },
 });

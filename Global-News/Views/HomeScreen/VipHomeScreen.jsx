@@ -41,17 +41,26 @@ export default function HRHomeScreen({ navigation }) {
     <ScrollView style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <View style={styles.body}>
-          <View style={styles.algo}>
+          <View>
+            <View style={styles.algo}>
+              {!user.RRHH && contBoss > 0 && (
+                <Badge style={styles.badge} size={30}>
+                  {contBoss}
+                </Badge>
+              )}
+
+              {user.RRHH && contHR > 0 && (
+                <Badge style={styles.badge} size={30}>
+                  {contHR}
+                </Badge>
+              )}
+            </View>
             <HomeButton
               text="Control solicitud de licencias"
               onPress={() =>
                 navigation.navigate("Control Solicitud de Licencias")
               }
             />
-            {(!user.RRHH && contBoss > 0) && <Badge style={styles.badge}size={30}>{contBoss}</Badge>}
-
-            {(user.RRHH && contHR > 0 )&& <Badge style={styles.badge} size={30}>{contHR}</Badge>}
-            
           </View>
           <HomeButton
             text="Control asistencias"
@@ -120,7 +129,9 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   algo: {
-    flexDirection: "row",
+    flexDirection: "column",
+    alignSelf: "center",
+    marginTop: 10
   },
   badge: {
     alignItems: "center",

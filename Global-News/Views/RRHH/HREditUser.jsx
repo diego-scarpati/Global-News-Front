@@ -16,6 +16,7 @@ import { editUser } from "../../store/user";
 import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "../HomeScreen/components/HomeButtons";
 import useInput from "../../utils/useInput"
+import { setDate } from "../../utils/getDate"
 
 export default function HREditUser({ navigation }) {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ export default function HREditUser({ navigation }) {
     },
   });
   const onSubmit = (info) => {
+    info.birthday = setDate(info.birthday)
     dispatch(editUser({ info, id: user.id }));
     navigation.navigate("Recursos Humanos Seleccionar Usuario");
   };

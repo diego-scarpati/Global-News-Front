@@ -1,9 +1,10 @@
 import axios from "axios";
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const officeRequest = createAsyncThunk("OFFICE_REQUEST", async ()=>{
+export const officeRequest = createAsyncThunk("OFFICE_REQUEST", async (data,thunkAPI)=>{
     try{ 
-    const offices = await axios.get("http://localhost:3001/api/offices/")
+        const { user } = thunkAPI.getState()
+    const offices = await axios.get(`http://localhost:3001/api/offices?country=${user.countryOfResidence}`)
         return offices.data
     }catch(error){console.log(error)}
 });

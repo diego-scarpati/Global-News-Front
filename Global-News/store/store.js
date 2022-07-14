@@ -12,6 +12,7 @@ import calendarReducer from "./calendar"
 import routeReducer from "./route"
 import hrReducer from "./hr"
 
+
 const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger), 
     reducer:{
@@ -25,6 +26,7 @@ const store = configureStore({
         calendar : calendarReducer,
         route : routeReducer,
         hr : hrReducer,
+        
     }
 })
 

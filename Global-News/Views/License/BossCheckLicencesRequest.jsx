@@ -13,9 +13,9 @@ import {
 import { hrLicenseBySearch } from "../../store/hr";
 import SearchInput from "../Search/SearchInput";
 import { searchTeamById } from "../../store/team"
-import { hrSendHistoyLicensesRequest } from "../../store/hr";
+import { hrReviewLicense } from "../../store/hr";
 
-export default function HRLicencesHistory({navigation}) {
+export default function BossCheckLicencesRequest({navigation}) {
   const dispatch = useDispatch();
   const licencias = useSelector((state) => state.hr);
   //const user = useSelector((state) => state.license);
@@ -24,40 +24,13 @@ export default function HRLicencesHistory({navigation}) {
 
   const onPress = (name,id) => {
     const request = async () => {
-      const team = await dispatch(searchTeamById(id));
-      const license = await dispatch(hrSendHistoyLicensesRequest({userId:id}));
-      navigation.navigate("Busqueda por Usuario", {name,LicenseHistory:true});
+      const license = await dispatch(hrReviewLicense({name:name,id}));
+      navigation.navigate("Control Solicitud de Licencias");
     };
     request();
   };
 
   return (
-    (user.RRHH)?(
-    <SafeAreaView style={styles.container}>
-    <SearchInput dispatchInput={hrLicenseBySearch}/>
-      <SectionList
-        sections={[{ title: "Licencias", data: licencias }]}
-        renderItem={({ item }) => (
-          
-            <View style={styles.row}>
-            <Text style={styles.text}>
-            Solicitante: {item.user?.firstName} {item.user?.lastName}
-            </Text>
-            <Text>Legajo: {item.employeeId}</Text>
-            <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
-            <Text>Tipo de licencia: {item.type}</Text>
-            <Text>Inicio: {item.startDate}</Text>
-            <Text>Fin: {item.endDate}</Text>
-            <Text>Observaciones: {item.observations}</Text>
-            <Text>Estado Jefe: {item.bossApproval}</Text>
-            <Text>Estado RRHH: {item.HRApproval}</Text>
-            
-          </View>
-        )}
-        keyExtractor={(item) => item.id}
-      />
-    </SafeAreaView>)
-    :(
       <SafeAreaView style={styles.container}>
       
         <Text style={styles.mainText}>Equipos</Text>
@@ -75,7 +48,7 @@ export default function HRLicencesHistory({navigation}) {
         />
       
     </SafeAreaView>
-    )
+    
   );
 }
 

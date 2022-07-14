@@ -44,6 +44,7 @@ export default function HREditUser({ navigation }) {
     },
   });
   const onSubmit = (info) => {
+    info.birthday = setDate(info.birthday)
     dispatch(editUser({ info, id: user.id }));
     navigation.navigate("Recursos Humanos Seleccionar Usuario");
   };

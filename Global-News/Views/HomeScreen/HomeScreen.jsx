@@ -33,6 +33,8 @@ export default function UserProfileView({ navigation }) {
     navigation.replace("Inicio");
   };
 
+  
+
   return (
     <ScrollView style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>

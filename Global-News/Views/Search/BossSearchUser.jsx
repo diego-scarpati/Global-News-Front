@@ -10,47 +10,58 @@ import {
   Button,
   Pressable
 } from "react-native";
-import SearchInput from "../Search/SearchInput";
+import SearchInput from "./SearchInput";
+import { attendaceControl } from "../../store/attendance"
+import { hrSearchUsersByInput } from "../../store/hr"
+import { searchTeamById } from "../../store/team"
+import { hrSendHistoyLicensesRequest } from "../../store/hr";
 
-import { hrSearchUsersByInput } from "../../store/hr";
-import { teamRequest } from "../../store/team"
 
-
-export default function AddUserTeam({navigation}) {
+export default function BossSearchUser({navigation, route}) {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.hr);
+  const searchAllUsers = useSelector((state) => state.hr);
 
-   
+  const {name, asistencia, LicenseHistory} = route.params
+  
     const handlePress = (id)=>{
-    navigation.navigate("Elegir Equipo")
+      if(asistencia){
+      dispatch(attendaceControl({id:id}))
+      navigation.navigate("Control Asistencias")}
+
+    if(LicenseHistory){
+      dispatch(hrSendHistoyLicensesRequest({userId:id}))
+      
+      navigation.navigate("Historial de Licencias",id)}
     }
 
-  
   return (
+   
     <SafeAreaView style={styles.container}>
     <Text style={styles.mainText}>Busqueda por Empleado</Text>
-      <SearchInput dispatchInput={hrSearchUsersByInput}/>
+       <SearchInput dispatchInput={(hrSearchUsersByInput) } input={name}/>
+       {(!searchAllUsers[0]?.HRApproval)&&
       <SectionList
-        sections={[{ title: "Promover Empleados", data: users}]}
+        sections={[{ title: "Promover Empleados", data: searchAllUsers}]}
         renderItem={({ item }) => (
            <Pressable onPress={() =>handlePress(item.id)}>
-            <View style={styles.row}>
-            <Text style={styles.text}>Nombre : {item.firstName} {item.lastName}</Text>
+          <View style={styles.row}>
+            <Text style={styles.text}>Solicitante: {item.firstName} {item.lastName}</Text>
             <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
             <Text>Legajo: {item.employeeId}</Text>
+            <Text>Nombre: {item.firstName}</Text>
+            <Text>Apellido: {item.lastName}</Text>
             <Text>Email: {item.email}</Text>
             <Text>Dias Laborales: {item.workingDays}</Text>
             <Text>Turnos: {item.shift}</Text>
-            <Text>Equipos: </Text>
-            {item.teams.map((team,i)=>{return(<Text key={i}> {i+1}-{team.name}</Text>)})}
-            <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2 || null)&&"Disponible: No"}</Text>
+            <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2)&&"Disponible: No"}</Text>
           </View>
           </Pressable>
         )}
         
         keyExtractor={(item) => item.id}
-      /> 
+      /> }
     </SafeAreaView>
+    
   );
 }
 

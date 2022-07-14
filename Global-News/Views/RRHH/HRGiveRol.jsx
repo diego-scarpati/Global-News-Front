@@ -18,15 +18,15 @@ import { hrSearchUsersByInput } from "../../store/hr";
 export default function HRGiveRol() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.hr);
-  const userLogged = useSelector((state) => state.user)
+  
   
   useEffect(() => {
-    dispatch(hrAllUsers(userLogged))
+    dispatch(hrAllUsers())
   }, []);
 
   const handlePromote = (userId,position) => {
   dispatch(rrhhGiveRol( {userId: userId, position: position}))
-  dispatch(hrAllUsers(userLogged));
+  dispatch(hrAllUsers());
   }
  
   return (

@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    height: 600,
+    minHeight: 700,
     width: "100%",
   },
   algo: {

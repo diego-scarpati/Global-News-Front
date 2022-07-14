@@ -76,7 +76,7 @@ export default function CreateOffice({ navigation }) {
         {errors.country && <Text>Campo requerido.</Text>}
         <Button
           style={{ padding: 10 }}
-          title="Crear Equipo"
+          title="Crear Oficina"
           onPress={handleSubmit(onSubmit)}
         />
       </View>

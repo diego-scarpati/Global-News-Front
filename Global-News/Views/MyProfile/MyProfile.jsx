@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import HomeButton from "../HomeScreen/components/HomeButtons";
 import image from "../../assets/background-startScreen-02.png";
-import { editUser } from "../../store/user";
+import { editUser } from "../../store/hrEditUser";
 
 export default function Register() {
   const dispatch = useDispatch

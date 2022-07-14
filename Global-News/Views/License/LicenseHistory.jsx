@@ -45,10 +45,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
-    marginHorizontal: 16,
     justifyContent: "center",
     alignContent: "center",
-    padding: 5,
   },
   item: {
     backgroundColor: "#f9c2ff",
@@ -63,7 +61,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderColor: "#d0d0d0",
     borderWidth: 2,
-    margin: 5,
+    margin: 10,
     borderRadius: 5,
   },
   sectionHeader: {
@@ -77,5 +75,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     width: "100%",
+    minHeight: 700,
   },
 });

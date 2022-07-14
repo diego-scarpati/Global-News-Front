@@ -42,8 +42,10 @@ export default function AddUserTeam({navigation}) {
             <Text>Dias Laborales: {item.workingDays}</Text>
             <Text>Turnos: {item.shift}</Text>
             <Text>Equipos: </Text>
+
             {item.teams.map((team,i)=>{return(<Text key={i}> {i+1}-{team.name}</Text>)})}
             <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2 || null)&&"Disponible: No"}</Text>
+
           </View>
           </Pressable>
         )}
@@ -100,6 +102,6 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   mainText:{
-    fontSize: 30
+    fontSize: 22
   }
 });

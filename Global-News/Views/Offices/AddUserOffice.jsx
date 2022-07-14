@@ -28,7 +28,6 @@ export default function AddUserOffice({navigation}) {
   
   return (
     <SafeAreaView style={styles.container}>
-    <Text style={styles.mainText}>Busqueda por Empleado</Text>
       <SearchInput dispatchInput={hrSearchUsersByInput}/>
       <SectionList
         sections={[{ title: "Buscar Empleado", data: users}]}

@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { ScrollView } from "react-native-gesture-handler";
 import {
@@ -11,12 +12,11 @@ import {
   ImageBackground,
   Pressable
 } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
 import { editUser } from "../../store/user";
 import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "../HomeScreen/components/HomeButtons";
 import useInput from "../../utils/useInput"
-import { setDate } from "../../utils/getDate"
+import { setDate } from "../../utils/getDate";
 
 export default function HREditUser({ navigation }) {
   const dispatch = useDispatch();
@@ -128,7 +128,7 @@ export default function HREditUser({ navigation }) {
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
-                    placeholder="Fecha nacimiento"
+                    placeholder="DD/MM/AAAA"
                   />
                 )}
                 name="birthday"
@@ -196,7 +196,7 @@ export default function HREditUser({ navigation }) {
               />
               {errors.countryOfResidence && <Text>Campo Requerido.</Text>}
             </View>
-            <View style={styles.editar}>
+            {/* <View style={styles.editar}>
               <Text style={styles.text}>Ciudad:</Text>
               <Controller
                 control={control}
@@ -283,9 +283,7 @@ export default function HREditUser({ navigation }) {
                 )}
                 name="workingDays"
               />
-              
 
-              
             </View>
             <View style={styles.editar}>
               <Text style={styles.text}>Turnos Laborales:</Text>
@@ -302,8 +300,8 @@ export default function HREditUser({ navigation }) {
                 )}
                 name="shift"
               />
-            </View>
-          </View>
+            </View>*/}
+          </View> 
 
           <HomeButton text={"Enviar"} onPress={handleSubmit(onSubmit)} />
         </View>

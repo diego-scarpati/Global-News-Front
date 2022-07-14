@@ -4,10 +4,36 @@ import { StyleSheet, View, ScrollView, ImageBackground } from "react-native";
 import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "./components/HomeButtons";
 import { userRequest } from "../../store/user";
+import { Badge } from "react-native-paper";
+import axios from "axios";
+import licenseReducer from "../../store/license";
+import { hrReviewLicense } from "../../store/hr";
 
 export default function HRHomeScreen({ navigation }) {
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const license = useSelector((state) => state.hr);
+  
+
+  useEffect(() => {
+    dispatch(hrReviewLicense({ id: user.id }));
+  }, []);
+  //chequear si con la persistencia de usuario, tambien persiten los botones
+
+  let contBoss = 0;
+  let contHR = 0;
+  {
+    license.length > 0 &&
+      license.map((lic) => {
+        if (lic.HRApproval === "pending" && lic.bossApproval === "approved") {
+          contHR++;
+        }
+        if (lic.bossApproval === "pending") {
+          contBoss++;
+        }
+        return contBoss, contHR;
+      });
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -17,11 +43,27 @@ export default function HRHomeScreen({ navigation }) {
             text="Control asistencias"
             onPress={() => navigation.navigate("Buscar Usuario")}
           />
-          <HomeButton
-            text="Control solicitud de licencias"
-            onPress={() =>user.RRHH? navigation.navigate("Control Solicitud de Licencias") : navigation.navigate("Solicitud Licencias") //Control Solicitud de Licencias
-            }
-          />
+         <View>
+            <View style={styles.algo}>
+              {!user.RRHH && contBoss > 0 && (
+                <Badge style={styles.badge} size={30}>
+                  {contBoss}
+                </Badge>
+              )}
+
+              {user.RRHH && contHR > 0 && (
+                <Badge style={styles.badge} size={30}>
+                  {contHR}
+                </Badge>
+              )}
+            </View>
+            <HomeButton
+              text="Control solicitud de licencias"
+              onPress={() =>
+                navigation.navigate("Control Solicitud de Licencias")
+              }
+            />
+          </View>
           <HomeButton
             text="Historial de licencias de empleados"
             onPress={() =>
@@ -70,6 +112,10 @@ export default function HRHomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignContent: "center",
+  },
   body: {
     alignItems: "center",
   },
@@ -79,5 +125,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 600,
     width: "100%",
+  },
+  algo: {
+    flexDirection: "column",
+    alignSelf: "center",
+    marginTop: 10,
+  },
+  badge: {
+    alignItems: "center",
   },
 });

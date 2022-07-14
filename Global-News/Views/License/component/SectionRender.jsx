@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet, Text, View, StatusBar, Button } from "react-native";
-import { hrReviewLicense, hrChangeLicenseStatus } from "../../../store/hr";
+import { hrChangeLicenseStatus } from "../../../store/hr";
+import { hrLicensesReviewLicense } from "../../../store/hrLicenses"
 
 export default function SectionRender({ item }) {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default function SectionRender({ item }) {
         hrChangeLicenseStatus({ id: licenceId, HRApproval: "approved" })
       );
     }
-    dispatch(hrReviewLicense({ id: user.id }));
+    dispatch(hrLicensesReviewLicense({ id: user.id }));
   };
 
 
@@ -32,7 +33,7 @@ export default function SectionRender({ item }) {
         hrChangeLicenseStatus({ id: licenceId, HRApproval: "rejected" })
       );
     }
-    dispatch(hrReviewLicense({ id: user.id }));
+    dispatch(hrLicensesReviewLicense({ id: user.id }));
   };
 
   return (

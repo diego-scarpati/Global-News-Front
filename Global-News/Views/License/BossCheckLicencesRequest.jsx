@@ -13,18 +13,18 @@ import {
 import { hrLicenseBySearch } from "../../store/hr";
 import SearchInput from "../Search/SearchInput";
 import { searchTeamById } from "../../store/team"
-import { hrReviewLicense } from "../../store/hr";
+import { hrLicensesReviewLicense } from "../../store/hrLicenses";
 
 export default function BossCheckLicencesRequest({navigation}) {
   const dispatch = useDispatch();
-  const licencias = useSelector((state) => state.hr);
+  const licencias = useSelector((state) => state.hrLicenses);
   //const user = useSelector((state) => state.license);
   const user = useSelector((state) => state.user)
 
 
   const onPress = (name,id) => {
     const request = async () => {
-      const license = await dispatch(hrReviewLicense({name:name,id}));
+      const license = await dispatch(hrLicensesReviewLicense({name:name,id}));
       navigation.navigate("Control Solicitud de Licencias");
     };
     request();

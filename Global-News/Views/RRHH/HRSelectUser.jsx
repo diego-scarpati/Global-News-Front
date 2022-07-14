@@ -51,7 +51,7 @@ export default function HRSelectUser({navigation}) {
             <Text>Dias Laborales: {item.workingDays}</Text>
             <Text>Turnos: {item.shift}</Text>
             <Text>Equipos: </Text>
-            {item.teams.map((team,i)=>{return(<Text> {i+1}-{team.name}</Text>)})}
+            {item?.teams.map((team,i)=>{return(<Text> {i+1}-{team.name}</Text>)})}
             <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2)&&"Disponible: No"}</Text>
             <Text>Oficina: </Text>
             {/* {item.offices.map((office)=>{return(<Text>{office.name}</Text>)})} */}

@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   algo: {
     flexDirection: "column",
     alignSelf: "center",
-    marginTop: 10
+    marginTop: 10,
   },
   badge: {
     alignItems: "center",

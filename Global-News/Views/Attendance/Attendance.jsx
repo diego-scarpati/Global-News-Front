@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 600,
     width: "100%",
+    minHeight: 700,
   },
   buttonOff: {
     margin: 2,

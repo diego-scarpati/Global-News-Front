@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import {View,Text,Button,StyleSheet,TextInput,ScrollView} from "react-native";
 import { teamCreate } from "../../store/team"
-
+import HomeButton from "../../Views/HomeScreen/components/HomeButtons";
 
 
 export default function CreateTeam({ navigation }) {
@@ -42,11 +42,10 @@ export default function CreateTeam({ navigation }) {
           name="name"
         />
         {errors.name && <Text>Campo requerido.</Text>}
-        <Button
-          style={{ padding: 10 }}
-          title="Crear Equipo"
-          onPress={handleSubmit(onSubmit)}
-        />
+        <HomeButton
+            text="Crear Equipo"
+            onPress={handleSubmit(onSubmit)}
+          />
       </View>
     </ScrollView>
   );

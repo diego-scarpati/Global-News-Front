@@ -6,33 +6,31 @@ import HomeButton from "../HomeScreen/components/HomeButtons";
 
 export default function ManagerHomeScreen({ navigation }) {
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.body}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <View style={styles.body}>
-          <HomeButton
-            text="Solicitud de Licencias"
-            onPress={() => navigation.navigate("Solicitud de Licencias")}
-          />
-          <HomeButton
-            text="Historial Licencias"
-            onPress={() => navigation.navigate("Historial Licencias")}
-          />
-        </View>
+        <HomeButton
+          text="Solicitud de Licencias"
+          onPress={() => navigation.navigate("Solicitud de Licencias")}
+        />
+        <HomeButton
+          text="Historial Licencias"
+          onPress={() => navigation.navigate("Historial Licencias")}
+        />
       </ImageBackground>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  body: {
-    alignItems: "center",
-    margin: "50%"
+  container: {
+    flex: 1,
+    minHeight: "100%",
   },
   image: {
-    flex: 1,
+    // flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    height: 600,
+    height: "100%",
     width: "100%",
-  }
+  },
 });

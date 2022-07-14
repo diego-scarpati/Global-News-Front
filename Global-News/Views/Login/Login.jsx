@@ -13,7 +13,7 @@ import {
   Platform,
   Alert,
 } from "react-native";
-import storage from "../../storage/storage";
+import { Constants } from "expo-constants";
 import axios from "axios";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import logo from "../../assets/gnlogogrande-01.png";
@@ -43,8 +43,8 @@ export default function Login({ navigation }) {
       const loggedUser = await axios.post(
         `http://localhost:3001/api/auth/logIn`,
         info
-      )
-      dispatch(setUserFromLogin(loggedUser?.data?.dataValues))
+      );
+      dispatch(setUserFromLogin(loggedUser?.data?.dataValues));
       if (Platform.OS === "web") {
         localStorage.setItem("email", JSON.stringify(info.email));
       } else {
@@ -61,7 +61,7 @@ export default function Login({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container]}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <View>
           <Image source={logo} style={styles.logo} />
@@ -76,8 +76,11 @@ export default function Login({ navigation }) {
               style={styles.input}
               onBlur={onBlur}
               onChangeText={onChange}
-              value={value.toLowerCase()}
+              value={value}
               placeholder="Email"
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="email-address"
             />
           )}
           name="email"

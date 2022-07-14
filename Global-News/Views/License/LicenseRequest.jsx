@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLicenseRequest } from "../../store/license";
 import { ScrollView } from "react-native-gesture-handler";
-import { sendPushNotification, setNotificationMessage } from "../../utils/notifications";
+import {
+  sendPushNotification,
+  setNotificationMessage,
+} from "../../utils/notifications";
 import {
   View,
   Text,
@@ -14,12 +17,11 @@ import {
   Modal,
   ImageBackground,
   ActivityIndicator,
-  Alert
+  Alert,
 } from "react-native";
 import Calendar from "../Calendar/Calendar";
 import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "../HomeScreen/components/HomeButtons";
-
 
 export default function License({ navigation }) {
   const {
@@ -41,42 +43,53 @@ export default function License({ navigation }) {
   const selectedDay = useSelector((state) => state.calendar);
   const user = useSelector((state) => state.user);
 
+  const [selectedValue, setSelectedValue] = useState();
   const [showModalStart, setShowModalStart] = useState(false);
   const [showModalEnd, setShowModalEnd] = useState(false);
 
-  const onSubmit = (info) => { 
+  const onSubmit = (info) => {
     info.startDate = selectedDay.start;
     info.endDate = selectedDay.end;
     dispatch(sendLicenseRequest(info));
-    sendNotification()
+    sendNotification();
     navigation.navigate("Pantalla Principal");
     return (
       <View>
         <ActivityIndicator size="large" color="blue" />
       </View>
-    ); 
+    );
   };
 
-const sendNotification = async () => {
-  const resultToken = user.expoToken
-  if(!resultToken){
-    Alert.alert('No se pudo obtener el token del usuario')
-    return
-  }
-  const messageNotification = setNotificationMessage(
-    resultToken,
-    'Nueva Licencia Solicitada',
-    'Licencia',
-    {data: 'Licencia de Prueba'}
-  )
-    const response = await sendPushNotification(messageNotification)
-
-    if (response) { 
-      Alert.alert('Licencia enviada')
-    } else {
-      Alert.alert('Ocurrio un problema enviando la Licencia')
+  const sendNotification = async () => {
+    const resultToken = user.expoToken;
+    if (!resultToken) {
+      Alert.alert("No se pudo obtener el token del usuario");
+      return;
     }
-}
+    const messageNotification = setNotificationMessage(
+      resultToken,
+      "Nueva Licencia Solicitada",
+      "Licencia",
+      { data: "Licencia de Prueba" }
+    );
+    const response = await sendPushNotification(messageNotification);
+
+    if (response) {
+      Alert.alert("Licencia enviada");
+    } else {
+      Alert.alert("Ocurrio un problema enviando la Licencia");
+    }
+  };
+
+  const pickerRef = useRef();
+
+  function open() {
+    pickerRef.current.focus();
+  }
+
+  function close() {
+    pickerRef.current.blur();
+  }
 
   return (
     <ScrollView>
@@ -89,9 +102,14 @@ const sendNotification = async () => {
             }}
             render={({ value }) => (
               <Picker
+                ref={pickerRef}
                 selectedValue={value}
-                onValueChange={(itemValue) => setValue("type", itemValue)}
-                style={styles.input}
+                // onValueChange={(itemValue) => setValue("type", itemValue)}
+                onValueChange={(itemValue, itemIndex) =>
+                  setSelectedValue(itemValue)
+                }
+                style={styles.picker}
+                mode="dropdown"
               >
                 <Picker.Item
                   label="Tipo de Licencia"
@@ -140,7 +158,9 @@ const sendNotification = async () => {
             name="type"
             defaultValue="Tipo de licencia"
           />
-          {errors.type && <Text style={styles.error}>Seleccione una opción</Text>}
+          {errors.type && (
+            <Text style={styles.error}>Seleccione una opción</Text>
+          )}
 
           <Modal
             animationType="slide"
@@ -237,10 +257,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     margin: 10,
   },
-  input: {
+  picker: {
     borderColor: "gray",
     backgroundColor: "#ffff",
-    width: "80%",
+    // position: "absolute",
+    // width: "80%",
+    width: 200,
     borderWidth: 1,
     borderRadius: 10,
     padding: 10,
@@ -252,7 +274,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginBottom: 8,
     marginLeft: 6,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   image: {
     flex: 1,
@@ -262,5 +284,4 @@ const styles = StyleSheet.create({
     width: "100%",
     minHeight: 700,
   },
-
 });

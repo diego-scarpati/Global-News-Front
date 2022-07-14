@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import {View,Text,Button,StyleSheet,TextInput,Modal,ScrollView} from "react-native";
 import { officeCreate } from "../../store/office"
+import HomeButton from "../HomeScreen/components/HomeButtons"
 
 
 
@@ -74,6 +75,7 @@ export default function CreateOffice({ navigation }) {
           name="country"
         />
         {errors.country && <Text>Campo requerido.</Text>}
+
         <Button
           style={{ padding: 10 }}
           title="Crear Oficina"

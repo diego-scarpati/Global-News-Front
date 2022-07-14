@@ -75,10 +75,12 @@ export default function CreateOffice({ navigation }) {
           name="country"
         />
         {errors.country && <Text>Campo requerido.</Text>}
-        <HomeButton
-            text="Crear Oficina"
-            onPress={handleSubmit(onSubmit)}
-          />
+
+        <Button
+          style={{ padding: 10 }}
+          title="Crear Oficina"
+          onPress={handleSubmit(onSubmit)}
+        />
       </View>
     </ScrollView>
   );

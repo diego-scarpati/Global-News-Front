@@ -15,7 +15,7 @@ import SearchInput from "../Search/SearchInput";
 
 import { hrSearchUsersByInput } from "../../store/hr";
 import { teamRequest } from "../../store/team"
-import { userRequest } from "../../store/user"
+import { userRequest } from "../../store/hrEditUser"
 import image from "../../assets/background-startScreen-02.png";
 
 

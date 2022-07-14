@@ -102,16 +102,7 @@ export const sendLogoutRequest = createAsyncThunk("LOGOUT", async () => {
   }
 });
 
-export const userRequest = createAsyncThunk("USER_REQUEST", async (data) => {
-  try {
-    const user = await axios.get(
-      `http://localhost:3001/api/users/${data.userId}`
-    );
-    return user.data;
-  } catch (error) {
-    console.log(error);
-  }
-});
+
 
 //no tiene uso aparentemente
 export const searchAllUsers = createAsyncThunk(
@@ -126,17 +117,7 @@ export const searchAllUsers = createAsyncThunk(
   }
 );
 
-export const editUser = createAsyncThunk("EDIT_USER", async (data) => {
-  try {
-    const user = await axios.put(
-      `http://localhost:3001/api/users/${data.id}`,
-      data.info
-    );
-    return user.data;
-  } catch (error) {
-    console.log(error);
-  }
-});
+
 
 const userReducer = createReducer(
   {},
@@ -155,8 +136,7 @@ const userReducer = createReducer(
     [sendLogoutRequest.fulfilled]: (state, action) => action.payload,
     [sendLogoutRequest.rejected]: (state, action) => action.payload,
 
-    [userRequest.fulfilled]: (state, action) => action.payload,
-    [userRequest.rejected]: (state, action) => action.payload,
+    
 
     [searchAllUsers.fulfilled]: (state, action) => action.payload,
     [searchAllUsers.rejected]: (state, action) => action.payload,

@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { StyleSheet, View, ScrollView, ImageBackground } from "react-native";
 import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "./components/HomeButtons";
-import { userRequest } from "../../store/user";
 import { Badge } from "react-native-paper";
 import axios from "axios";
 import licenseReducer from "../../store/license";

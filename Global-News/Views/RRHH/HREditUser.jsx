@@ -12,7 +12,7 @@ import {
   ImageBackground,
   Pressable
 } from "react-native";
-import { editUser } from "../../store/user";
+import { editUser } from "../../store/hrEditUser";
 import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "../HomeScreen/components/HomeButtons";
 import useInput from "../../utils/useInput"

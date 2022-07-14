@@ -13,6 +13,7 @@ import routeReducer from "./route"
 import hrReducer from "./hr"
 import hrLicenseReducer from "./hrLicenses"
 import hrGiveRollReducer from "./hrGiveRol"
+import hrEditUserReducer from "./hrEditUser"
 
 
 const store = configureStore({
@@ -30,6 +31,7 @@ const store = configureStore({
         hr : hrReducer,
         hrLicenses: hrLicenseReducer,
         hrGiveRoll : hrGiveRollReducer,
+        hrEditUser : hrEditUserReducer,
         
     }
 })

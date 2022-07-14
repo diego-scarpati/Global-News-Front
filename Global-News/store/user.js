@@ -5,23 +5,11 @@ import {
   createAction,
 } from "@reduxjs/toolkit";
 
-// export const setUserFromLogin = createAsyncThunk(
-//   "SET_USER_LOGIN",
-//   async (data) => {
-//     try {
-//       const info = await axios.post(
-//         "http://localhost:3001/api/users/register",
-//         data
-//       );
-//       return data;
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-// );
-
-export const setUserFromLogin = createAction("SET_USER_LOGIN", (data) => {
-  return data;
+// export const setUserFromLogin = createAction("SET_USER_LOGIN")
+export const setUserFromLogin = createAsyncThunk("SET_USER_LOGIN", (data) => {
+console.log("🚀 ~ file: user.js ~ line 24 ~ setUserFromLogin ~ data", data)
+  const loggedUser = {...data}
+  return loggedUser;
 });
 
 export const sendRegisterRequest = createAsyncThunk(

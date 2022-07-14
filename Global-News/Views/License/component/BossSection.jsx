@@ -6,7 +6,7 @@ import SectionRender from "./SectionRender";
 export default function BossSection({route}) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const licencias = useSelector((state) => state.hrLicense);
+  const licencias = useSelector((state) => state.hrLicenses);
   
   return (
     <ScrollView>

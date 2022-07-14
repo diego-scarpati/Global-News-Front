@@ -33,6 +33,7 @@ export default function UserProfileView({ navigation }) {
     navigation.replace("Inicio");
   };
 
+ 
   
 
   return (

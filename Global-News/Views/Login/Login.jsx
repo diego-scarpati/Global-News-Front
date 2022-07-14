@@ -14,9 +14,10 @@ import {
   Alert,
 } from "react-native";
 import storage from "../../storage/storage";
+import axios from "axios";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import logo from "../../assets/gnlogogrande-01.png";
-import { sendLoginRequest } from "../../store/user";
+import { sendLoginRequest, setUserFromLogin } from "../../store/user";
 import image from "../../assets/background-startScreen-02.png";
 
 export default function Login({ navigation }) {
@@ -35,37 +36,27 @@ export default function Login({ navigation }) {
     const jsonValue = JSON.stringify({ email: newValue });
     await setItem(jsonValue);
   };
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const onSubmit = (info) => {
-    dispatch(sendLoginRequest(info));
-
-    if (Platform.OS === "web") {
-      localStorage.setItem("email", JSON.stringify(info.email));
+  const onSubmit = async (info) => {
+    try {
+      const loggedUser = await axios.post(
+        `http://localhost:3001/api/auth/logIn`,
+        info
+      )
+      dispatch(setUserFromLogin(loggedUser?.data?.dataValues))
+      if (Platform.OS === "web") {
+        localStorage.setItem("email", JSON.stringify(info.email));
+      } else {
+        writeItemToStorage(info.email);
+      }
       navigation.replace("Pantalla Principal");
-      // setTimeout(() => {
-      //   if (user) {
-      //     localStorage.setItem("email", JSON.stringify(info.email));
-      //     navigation.replace("Pantalla Principal");
-      //   } else {
-      //     window.alert("Email o contraseña incorrectas");
-      //   }
-      // }, 1000);
-    } else {
-      writeItemToStorage(info.email);
-      navigation.replace("Pantalla Principal");
-      // setTimeout(() => {
-      //   if (user) {
-      //     writeItemToStorage(info.email);
-      //     navigation.replace("Pantalla Principal");
-      //   } else {
-      //     Alert.alert("Error de LogIn", "Email o contraseña incorrectas");
-      //   }
-      // }, 1000);
-      // {user
-      //   ? navigation.replace("Pantalla Principal")
-      //   : alertMobile}
+    } catch (error) {
+      if (Platform.OS === "web") {
+        window.alert("Email o contraseña incorrectas");
+      } else {
+        Alert.alert("Error de LogIn", "Email o contraseña incorrectas");
+      }
     }
   };
 

@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Text, SectionList } from "react-native";
-import { hrReviewLicense } from "../../../store/hr";
+import { hrLicensesReviewLicense } from "../../../store/hrLicenses";
 import SectionRender from "./SectionRender";
 
 export default function Section() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const licencias = useSelector((state) => state.hr);
+  const licencias = useSelector((state) => state.hrLicenses);
 
   useEffect(() => {
-    dispatch(hrReviewLicense({ id: user.id }));
+    dispatch(hrLicensesReviewLicense({ id: user.id }));
   }, []);
 
   return(

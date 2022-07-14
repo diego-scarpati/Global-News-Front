@@ -7,16 +7,16 @@ import { userRequest } from "../../store/user";
 import { Badge } from "react-native-paper";
 import axios from "axios";
 import licenseReducer from "../../store/license";
-import { hrReviewLicense } from "../../store/hr";
+import { hrLicensesReviewLicense } from "../../store/hrLicenses";
 
 export default function HRHomeScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const license = useSelector((state) => state.hr);
+  const license = useSelector((state) => state.hrLicenses);
   
 
   useEffect(() => {
-    dispatch(hrReviewLicense({ id: user.id }));
+    dispatch(hrLicensesReviewLicense({ id: user.id }));
   }, []);
   //chequear si con la persistencia de usuario, tambien persiten los botones
 
@@ -60,7 +60,7 @@ export default function HRHomeScreen({ navigation }) {
             <HomeButton
               text="Control solicitud de licencias"
               onPress={() =>
-                navigation.navigate("Control Solicitud de Licencias")
+                {navigation.navigate(user.RRHH?"Control Solicitud de Licencias":"Solicitud Licencias")}
               }
             />
           </View>
@@ -92,7 +92,7 @@ export default function HRHomeScreen({ navigation }) {
               <HomeButton
                 text="Sumar usuario a la oficina"
                 onPress={() =>
-                  navigation.navigate("Sumar Empleado ala Oficina")
+                  navigation.navigate("Sumar Empleado a la Oficina")
                 }
               />
               <HomeButton

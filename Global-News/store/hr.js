@@ -1,56 +1,59 @@
 import axios from "axios";
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const hrAllUsers = createAsyncThunk(
-  "hr_ALL_USERS",
-  async (data,thunkAPI) => {
-    try {
-      const { user } = thunkAPI.getState();
-      const users = await axios.get(`http://localhost:3001/api/users?countryOfResidence=${user.countryOfResidence}`);
-      return users.data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
+
 
 export const hrSearchUsersByInput = createAsyncThunk(
-  "USER_BY_INPUT",
+  "HR_SEARCH_USER",
   async (data, thunkAPI) => {
     try {
       const { user } = thunkAPI.getState();
-      const userSearch = await axios.get(
-        `http://localhost:3001/api/users/search/${data}?countryOfResidence=${user.countryOfResidence}`
-      );
-      return userSearch.data;
+      if (user.RRHH) {
+        const userSearch = await axios.get(
+          `http://localhost:3001/api/users/search/${data}?countryOfResidence=${user.countryOfResidence}`
+        );
+        return userSearch.data;
+      } else {
+        const userSearch = await axios.get(
+          `http://localhost:3001/api/users/search/boss/${data.searchQuery}?name=${data.input}`
+        );
+        return userSearch.data;
+      }
     } catch (error) {
       console.error(error);
     }
   }
 );
-//Arreglar este, ojo que si ponemos pais de residencia tambien limitariamos al jefe o gerente y ellos si pueden tener usuarios de varios paises
+
 export const hrReviewLicense = createAsyncThunk(
-  "RRHH_REVIEW_LICENCE",
+  "HR_REVIEW_LICENCE",
   async (data, thunkAPI) => {
     try {
       const { user } = thunkAPI.getState();
-      const licences = await axios.get(
-        `http://localhost:3001/api/workLicenses/${data.id}?countryOfResidence=${user.countryOfResidence}`
-      );
-      return licences.data;
+      if (user.RRHH) {
+        const licences = await axios.get(
+          `http://localhost:3001/api/workLicenses/${data.id}?countryOfResidence=${user.countryOfResidence}`
+        );
+        return licences.data;
+      } else {
+        const licences = await axios.get(
+          `http://localhost:3001/api/workLicenses/boss/${user.id}?name=${data.name}`
+        );
+        return licences.data;
+      }
     } catch (error) {
       console.log(error);
     }
   }
-); //trae las licencias
+);
 
 export const hrChangeLicenseStatus = createAsyncThunk(
   "HR_CHANGE_STATUS_LICENCE",
   async (data, thunkAPI) => {
     try {
-      const { user } = thunkAPI.getState();
       const licences = await axios.put(
-        `http://localhost:3001/api/workLicenses/${data.id}`,data
+        `http://localhost:3001/api/workLicenses/${data.id}`,
+        data
       );
       return licences.data;
     } catch (error) {
@@ -65,7 +68,7 @@ export const hrLicenseBySearch = createAsyncThunk(
     try {
       const { user } = thunkAPI.getState();
       const userSearch = await axios.get(
-        `http://localhost:3001/api/workLicenses/search/${data}`,
+        `http://localhost:3001/api/workLicenses/search/${data}?countryOfResidence=${user.countryOfResidence}`
       );
       return userSearch.data;
     } catch (error) {
@@ -74,12 +77,25 @@ export const hrLicenseBySearch = createAsyncThunk(
   }
 );
 
+export const hrSendHistoyLicensesRequest = createAsyncThunk(
+  "HR_HISTORY_LICENCES",
+  async (data, thunkAPI) => {
+    try {
+      const licencias = await axios.get(
+        `http://localhost:3001/api/workLicenses/user/${data.userId}`
+      );
+      return licencias.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+
+
 const hrReducer = createReducer(
   {},
   {
-    [hrAllUsers.fulfilled]: (state, action) => action.payload,
-    [hrAllUsers.rejected]: (state, action) => action.payload,
-
     [hrSearchUsersByInput.fulfilled]: (state, action) => action.payload,
     [hrSearchUsersByInput.rejected]: (state, action) => action.payload,
 
@@ -91,6 +107,9 @@ const hrReducer = createReducer(
 
     [hrLicenseBySearch.fulfilled]: (state, action) => action.payload,
     [hrLicenseBySearch.rejected]: (state, action) => action.payload,
+
+    [hrSendHistoyLicensesRequest.fulfilled]: (state, action) => action.payload,
+    [hrSendHistoyLicensesRequest.rejected]: (state, action) => action.payload,
   }
 );
 

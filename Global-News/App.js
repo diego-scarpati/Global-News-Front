@@ -31,6 +31,9 @@ import AddUserOffice from "./Views/Offices/AddUserOffice";
 import HREditUser from "./Views/RRHH/HREditUser";
 import Loading from "./Views/Login/Loading";
 import HRSelectUser from "./Views/RRHH/HRSelectUser";
+import BossSearchUser from "./Views/Search/BossSearchUser.jsx";
+import BossCheckLicencesHistory from "./Views/License/BossCheckLicencesHistory";
+import BossCheckLicencesRequest from "./Views/License/BossCheckLicencesRequest";
 
 import { startNotifications } from "./utils/notifications";
 
@@ -81,11 +84,25 @@ function App() {
             name="Control Asistencias"
             component={AttendanceControler}
           />
+          
           <Stack.Screen
             name="Control Solicitud de Licencias"
             component={CheckLicenseRequest}
           />
           <Stack.Screen name="Buscar Usuario" component={SearchUser} />
+          <Stack.Screen
+            name="Busqueda por Usuario"
+            component={BossSearchUser}
+          />
+          <Stack.Screen
+            name="Historial de Licencias"
+            component={BossCheckLicencesHistory}
+          />
+          <Stack.Screen
+            name="Solicitud Licencias"
+            component={BossCheckLicencesRequest}
+          />
+
           <Stack.Screen
             name="Historial de licencias de empleados"
             component={CheckLicensesHistory}

@@ -10,23 +10,23 @@ import {
   Button
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
-import { hrAllUsers } from "../../store/hr";
+import { hrAllUsers } from "../../store/hrGiveRol";
 import { rrhhGiveRol } from "../../store/position"
 import { hrSearchUsersByInput } from "../../store/hr";
 
 
 export default function HRGiveRol() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.hr);
-  const userLogged = useSelector((state) => state.user)
+  const users = useSelector((state) => state.hrGiveRoll);
+  
   
   useEffect(() => {
-    dispatch(hrAllUsers(userLogged))
+    dispatch(hrAllUsers())
   }, []);
 
   const handlePromote = (userId,position) => {
   dispatch(rrhhGiveRol( {userId: userId, position: position}))
-  dispatch(hrAllUsers(userLogged));
+  dispatch(hrAllUsers());
   }
  
   return (

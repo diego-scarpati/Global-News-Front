@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   StyleSheet,
@@ -7,39 +7,40 @@ import {
   SafeAreaView,
   SectionList,
   StatusBar,
-  Pressable
+  Button,
+  Pressable,
+  ScrollView
 } from "react-native";
-import SearchInput from "../Search/SearchInput";
+import SearchInput from "./SearchInput";
 import { attendaceControl } from "../../store/attendance"
 import { hrSearchUsersByInput } from "../../store/hr"
 import { searchTeamById } from "../../store/team"
+import { hrSendHistoyLicensesRequest } from "../../store/hr";
 
 
-export default function SearchUser({navigation}) {
+export default function BossSearchUser({navigation, route}) {
   const dispatch = useDispatch();
   const searchAllUsers = useSelector((state) => state.hr);
-  const user = useSelector((state) => state.user)
 
+  const {name, asistencia, LicenseHistory} = route.params
+  
     const handlePress = (id)=>{
-    dispatch(attendaceControl({id:id}))
-    navigation.navigate("Control Asistencias")
+      if(asistencia){
+      dispatch(attendaceControl({id:id}))
+      navigation.navigate("Control Asistencias")}
+
+    if(LicenseHistory){
+      dispatch(hrSendHistoyLicensesRequest({userId:id}))
+      
+      navigation.navigate("Historial de Licencias",id)}
     }
 
-    const onPress = (name,id) => {
-      const request = async () => {
-        const team = await dispatch(searchTeamById(id));
-        navigation.navigate("Busqueda por Usuario", {name,asistencia:true});
-      };
-      request();
-    };
-   
-   
-  
   return (
-    (user.RRHH)?(
+    <ScrollView>
     <SafeAreaView style={styles.container}>
     <Text style={styles.mainText}>Busqueda por Empleado</Text>
-       <SearchInput dispatchInput={(hrSearchUsersByInput)}/> 
+       <SearchInput dispatchInput={(hrSearchUsersByInput) } input={name}/>
+       {(!searchAllUsers[0]?.HRApproval)&&
       <SectionList
         sections={[{ title: "Promover Empleados", data: searchAllUsers}]}
         renderItem={({ item }) => (
@@ -59,27 +60,10 @@ export default function SearchUser({navigation}) {
         )}
         
         keyExtractor={(item) => item.id}
-      /> 
-    </SafeAreaView>)
-    :(
-      <SafeAreaView style={styles.container}>
-      
-        <Text style={styles.mainText}>Seleccionar Equipos</Text>
-        {(user.teams.length == 0) && <Text>No estas en ningun equipo</Text>}
-        <SectionList
-          sections={[{ title: "Equipos", data: user.teams }]}
-          renderItem={({ item }) => (
-            <View style={styles.row}>
-              <Pressable onPress={() => onPress(item.name,item.id)}>
-                <Text style={styles.text}>{item.name}</Text>
-              </Pressable>
-            </View>
-          )}
-          keyExtractor={(item) => item.id}
-        />
-      
+      /> }
     </SafeAreaView>
-    )
+    </ScrollView>
+    
   );
 }
 
@@ -129,6 +113,6 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   mainText:{
-    fontSize: 22
+    fontSize: 30
   }
 });

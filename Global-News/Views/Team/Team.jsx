@@ -60,8 +60,7 @@ export default function Team() {
                       {data.positionId === 1 && "Gerente"}
                     </DataTable.Cell>
                     <DataTable.Cell style={styles.text}>
-                      {data.availabilityId === 1 && "Si"}
-                      {data.availabilityId === 2 && "No"}
+                      {data.availabilityId === 1 ? "Si": "No"}
                     </DataTable.Cell>
                   </DataTable.Row>
                 );

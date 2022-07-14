@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import {
   StyleSheet,
   Text,
@@ -7,34 +7,15 @@ import {
   SafeAreaView,
   SectionList,
   StatusBar,
-  Button,
-  Pressable
 } from "react-native";
-import { hrLicenseBySearch } from "../../store/hr";
-import SearchInput from "../Search/SearchInput";
-import { searchTeamById } from "../../store/team"
-import { hrSendHistoyLicensesRequest } from "../../store/hr";
 
-export default function HRLicencesHistory({navigation}) {
-  const dispatch = useDispatch();
+
+export default function BossCheckLicencesHistory({route}) {
   const licencias = useSelector((state) => state.hr);
-  //const user = useSelector((state) => state.license);
-  const user = useSelector((state) => state.user)
-
-
-  const onPress = (name,id) => {
-    const request = async () => {
-      const team = await dispatch(searchTeamById(id));
-      const license = await dispatch(hrSendHistoyLicensesRequest({userId:id}));
-      navigation.navigate("Busqueda por Usuario", {name,LicenseHistory:true});
-    };
-    request();
-  };
 
   return (
-    (user.RRHH)?(
+    
     <SafeAreaView style={styles.container}>
-    <SearchInput dispatchInput={hrLicenseBySearch}/>
       <SectionList
         sections={[{ title: "Licencias", data: licencias }]}
         renderItem={({ item }) => (
@@ -56,26 +37,8 @@ export default function HRLicencesHistory({navigation}) {
         )}
         keyExtractor={(item) => item.id}
       />
-    </SafeAreaView>)
-    :(
-      <SafeAreaView style={styles.container}>
-      
-        <Text style={styles.mainText}>Equipos</Text>
-        {(user.teams.length == 0) && <Text>No estas en ningun equipo</Text>}
-        <SectionList
-          sections={[{ title: "Equipos", data: user.teams }]}
-          renderItem={({ item }) => (
-            <View style={styles.row}>
-              <Pressable onPress={() => onPress(item.name,item.id)}>
-                <Text style={styles.text}>{item.name}</Text>
-              </Pressable>
-            </View>
-          )}
-          keyExtractor={(item) => item.id}
-        />
-      
     </SafeAreaView>
-    )
+    
   );
 }
 

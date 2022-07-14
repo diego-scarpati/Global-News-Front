@@ -33,6 +33,8 @@ export const sendHistoyLicensesRequest = createAsyncThunk(
   }
 );
 
+
+
 const licenseReducer = createReducer(
   {},
   {
@@ -42,7 +44,6 @@ const licenseReducer = createReducer(
     [sendHistoyLicensesRequest.fulfilled]: (state, action) => action.payload,
     [sendHistoyLicensesRequest.rejected]: (state, action) => action.payload,
 
-   
   }
 );
 

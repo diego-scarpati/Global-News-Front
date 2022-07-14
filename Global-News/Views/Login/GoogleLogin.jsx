@@ -15,7 +15,7 @@
   
   
 //   const [accessToken, setAccessToken] = useState(null)
-//   const [user, setUser] = useState(null)
+//   const [user, setUserFromStorage] = useState(null)
 //   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
 //     clientId: "558789760835-323i1n243blve75l9hg3r20fm1eh1cr0.apps.googleusercontent.com",
 //     iosClientId: "558789760835-1lj3eem8sprhljffvdsrft6268hqn0bf.apps.googleusercontent.com"
@@ -33,7 +33,7 @@
 //       headers: { Authorization : `Bearer ${accessToken}`}
 //     })
 //     const userInfo = await response.json()
-//     setUser(userInfo)
+//     setUserFromStorage(userInfo)
 //   }
   
 

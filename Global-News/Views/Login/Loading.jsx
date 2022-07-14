@@ -9,7 +9,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setUser,
+  setUserFromStorage,
   findUserByEmailMobile,
 } from "../../store/user";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
@@ -33,7 +33,7 @@ const Loading = ({ navigation }) => {
   useEffect(() => {
     if (Platform.OS === "web") {
       if (JSON.parse(localStorage.getItem("email")) !== null) {
-        dispatch(setUser());
+        dispatch(setUserFromStorage());
         navigation.replace("Pantalla Principal");
       } else {
         navigation.replace("Inicio");

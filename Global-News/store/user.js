@@ -1,20 +1,28 @@
 import axios from "axios";
-import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createReducer,
+  createAsyncThunk,
+  createAction,
+} from "@reduxjs/toolkit";
 
-// export const sendRegisterRequest = createAsyncThunk(
-//   "REGISTER",
+// export const setUserFromLogin = createAsyncThunk(
+//   "SET_USER_LOGIN",
 //   async (data) => {
 //     try {
 //       const info = await axios.post(
 //         "http://localhost:3001/api/users/register",
 //         data
 //       );
-//       return info.data;
+//       return data;
 //     } catch (error) {
 //       console.log(error);
 //     }
 //   }
 // );
+
+export const setUserFromLogin = createAction("SET_USER_LOGIN", (data) => {
+  return data;
+});
 
 export const sendRegisterRequest = createAsyncThunk(
   "REGISTER",
@@ -31,19 +39,22 @@ export const sendRegisterRequest = createAsyncThunk(
   }
 );
 
-export const setUser = createAsyncThunk("SET_USER", async () => {
-  const localUser = JSON.parse(localStorage.getItem("email"));
+export const setUserFromStorage = createAsyncThunk(
+  "SET_USER_FROM_STORAGE",
+  async () => {
+    const localUser = JSON.parse(localStorage.getItem("email"));
 
-  if (localUser !== null) {
-    const user = await axios.get(
-      `http://localhost:3001/api/users/email/${localUser}`
-    );
-    // (localUser === response.data.email ? localUser = user.data : null)
-    return user.data;
-  } else {
-    return null;
+    if (localUser !== null) {
+      const user = await axios.get(
+        `http://localhost:3001/api/users/email/${localUser}`
+      );
+      // (localUser === response.data.email ? localUser = user.data : null)
+      return user.data;
+    } else {
+      return null;
+    }
   }
-});
+);
 
 export const sendLoginRequest = createAsyncThunk(
   "LOGIN",
@@ -82,7 +93,7 @@ export const sendLoginRequest = createAsyncThunk(
 // );
 
 export const findUserByEmailMobile = createAsyncThunk(
-  "LOGIN",
+  "FIND_USER_BY_EMAIL_M",
   async (data, thunkAPI) => {
     try {
       const loggedUser = await axios.get(
@@ -129,14 +140,15 @@ export const searchAllUsers = createAsyncThunk(
 
 export const editUser = createAsyncThunk("EDIT_USER", async (data) => {
   try {
-    const user = await axios.put(`http://localhost:3001/api/users/${data.id}`,data.info);
+    const user = await axios.put(
+      `http://localhost:3001/api/users/${data.id}`,
+      data.info
+    );
     return user.data;
   } catch (error) {
     console.log(error);
   }
 });
-
-
 
 const userReducer = createReducer(
   {},
@@ -161,8 +173,11 @@ const userReducer = createReducer(
     [searchAllUsers.fulfilled]: (state, action) => action.payload,
     [searchAllUsers.rejected]: (state, action) => action.payload,
 
-    [setUser.fulfilled]: (state, action) => action.payload,
-    [setUser.rejected]: (state, action) => action.payload,
+    [setUserFromStorage.fulfilled]: (state, action) => action.payload,
+    [setUserFromStorage.rejected]: (state, action) => action.payload,
+
+    [setUserFromLogin.fulfilled]: (state, action) => action.payload,
+    [setUserFromLogin.rejected]: (state, action) => action.payload,
   }
 );
 

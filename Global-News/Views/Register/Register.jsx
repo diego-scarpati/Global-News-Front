@@ -42,7 +42,6 @@ export default function Register({ navigation }) {
   });
 
   const dispatch = useDispatch();
-
   const onSubmit = async (info) => {
     info.birthday = setDate(info.birthday);
 

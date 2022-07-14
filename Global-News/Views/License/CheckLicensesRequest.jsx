@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {StyleSheet,Text,SafeAreaView,StatusBar} from "react-native";
 import Section from "./component/Section"
+import BossSection from "./component/BossSection"
+import { hrReviewLicense } from "../../store/hr"
+import { useDispatch, useSelector } from "react-redux";
 
 export default function HRLicensesRequest() {
-  
+const dispatch = useDispatch();
+const user = useSelector((state) => state.user);
+
+
   return (
     <SafeAreaView style={styles.container}>
     <Text style={styles.mainText}>Licencias</Text>
-      <Section/>
+      {user.RRHH ? <Section/> : <BossSection/> }
+      
     </SafeAreaView>
   );
 }

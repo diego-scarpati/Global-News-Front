@@ -1,17 +1,27 @@
 import  React, {useState} from "react";
 import { Searchbar } from "react-native-paper";
 import { StyleSheet, Button, View, Pressable, Text } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const SearchInput = ({dispatchInput}) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  
+const SearchInput = ({dispatchInput, input}) => {
   const dispatch = useDispatch();
+  const [searchQuery, setSearchQuery] = useState("");
+  const users = useSelector((state) => state.user);
+ 
+  
+  
 
   const onChangeSearch = (query) => {
         setSearchQuery(query)
     }
-  const handleSearch = () => dispatch(dispatchInput(searchQuery))
+
+  const handleSearch = () => {
+    if(users.positionId === 1 || users.positionId === 2 || users.positionId === 3){
+    dispatch(dispatchInput({searchQuery,input}))}
+    else{dispatch(dispatchInput(searchQuery))}
+  }
+
+   
 
   return (
     <View>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   StyleSheet,
@@ -7,30 +7,41 @@ import {
   SafeAreaView,
   SectionList,
   StatusBar,
-  Button,
   Pressable
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
 import { attendaceControl } from "../../store/attendance"
-import { hrSearchUsersByInput } from "../../store/hr";
+import { hrSearchUsersByInput } from "../../store/hr"
+import { searchTeamById } from "../../store/team"
 
 
 export default function SearchUser({navigation}) {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.hr);
-   
+  const searchAllUsers = useSelector((state) => state.hr);
+  const user = useSelector((state) => state.user)
+
     const handlePress = (id)=>{
     dispatch(attendaceControl({id:id}))
     navigation.navigate("Control Asistencias")
     }
 
+    const onPress = (name,id) => {
+      const request = async () => {
+        const team = await dispatch(searchTeamById(id));
+        navigation.navigate("Busqueda por Usuario", {name,asistencia:true});
+      };
+      request();
+    };
+   
+   
   
   return (
+    (user.RRHH)?(
     <SafeAreaView style={styles.container}>
     <Text style={styles.mainText}>Busqueda por Empleado</Text>
-      <SearchInput dispatchInput={hrSearchUsersByInput}/>
+       <SearchInput dispatchInput={(hrSearchUsersByInput)}/> 
       <SectionList
-        sections={[{ title: "Promover Empleados", data: users}]}
+        sections={[{ title: "Promover Empleados", data: searchAllUsers}]}
         renderItem={({ item }) => (
            <Pressable onPress={() =>handlePress(item.id)}>
           <View style={styles.row}>
@@ -49,7 +60,26 @@ export default function SearchUser({navigation}) {
         
         keyExtractor={(item) => item.id}
       /> 
+    </SafeAreaView>)
+    :(
+      <SafeAreaView style={styles.container}>
+      
+        <Text style={styles.mainText}>Seleccionar Equipos</Text>
+        {(user.teams.length == 0) && <Text>No estas en ningun equipo</Text>}
+        <SectionList
+          sections={[{ title: "Equipos", data: user.teams }]}
+          renderItem={({ item }) => (
+            <View style={styles.row}>
+              <Pressable onPress={() => onPress(item.name,item.id)}>
+                <Text style={styles.text}>{item.name}</Text>
+              </Pressable>
+            </View>
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      
     </SafeAreaView>
+    )
   );
 }
 

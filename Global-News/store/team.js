@@ -16,8 +16,8 @@ export const searchTeamById = createAsyncThunk("SEARCH_TEAM_BY_ID", async (data)
 });
 
 export const teamRequestByUser = createAsyncThunk("TEAM_REQUEST_BY_USER", async (data, thunkAPI)=>{
-    const {user} = thunkAPI.getState()
     try{ 
+        const {user} = thunkAPI.getState()
     const team = await axios.get(`http://localhost:3001/api/teams/user/${user.id}`)
      return team.data
     }catch(error){console.log(error)}

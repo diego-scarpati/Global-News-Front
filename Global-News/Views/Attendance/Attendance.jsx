@@ -43,9 +43,9 @@ export default function Attendance({ navigation }) {
   },[user.availabilityId])
 
   return (
-    <View style={styles.item}>
+    // <View style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <View>
+        <View style={styles.container}>
           {user.availabilityId == 1 ? (
             <Pressable style={styles.buttonOff}>
               <Text style={styles.textButton}>Ingreso</Text>
@@ -70,27 +70,29 @@ export default function Attendance({ navigation }) {
           )}
         </View>
       </ImageBackground>
-    </View>
+    // </View>
   );
 }
 
 const styles = StyleSheet.create({
-  item: {
-    flex: 1,
+  container: {
+    // flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
-    margin: 10,
+    justifyContent: "center",
+    alignContent: "center"
+    // height: "100%",
+    // margin: 10,
   },
   infoContent: {
-    flex: 1,
+    // flex: 1,
     alignItems: "flex-start",
   },
   image: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    height: 600,
+    minHeight: 600,
     width: "100%",
   },
   buttonOff: {

@@ -6,7 +6,7 @@ import HomeButton from "../HomeScreen/components/HomeButtons";
 
 export default function ManagerHomeScreen({ navigation }) {
   return (
-    <View style={styles.body}>
+    // <View style={styles.body}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <HomeButton
           text="Solicitud de Licencias"
@@ -17,7 +17,7 @@ export default function ManagerHomeScreen({ navigation }) {
           onPress={() => navigation.navigate("Historial Licencias")}
         />
       </ImageBackground>
-    </View>
+    // </View>
   );
 }
 

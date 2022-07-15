@@ -44,7 +44,7 @@ export default function Login({ navigation }) {
         `http://localhost:3001/api/auth/logIn`,
         info
       );
-      dispatch(setUserFromLogin(loggedUser?.data?.dataValues));
+      dispatch(setUserFromLogin(loggedUser?.data?.user));
       if (Platform.OS === "web") {
         localStorage.setItem("email", JSON.stringify(info.email));
       } else {

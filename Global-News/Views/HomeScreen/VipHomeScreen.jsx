@@ -35,14 +35,14 @@ export default function HRHomeScreen({ navigation }) {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+      <ScrollView style={styles.container}>
         <View style={styles.body}>
           <HomeButton
             text="Control asistencias"
             onPress={() => navigation.navigate("Buscar Usuario")}
           />
-         <View>
+          <View>
             <View style={styles.algo}>
               {!user.RRHH && contBoss > 0 && (
                 <Badge style={styles.badge} size={30}>
@@ -105,8 +105,8 @@ export default function HRHomeScreen({ navigation }) {
             </View>
           )}
         </View>
-      </ImageBackground>
-    </ScrollView>
+      </ScrollView>
+    </ImageBackground>
   );
 }
 
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignContent: "center",
+    marginVertical: 50,
   },
   body: {
     alignItems: "center",
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    minHeight: 700,
+    minHeight: 600,
     width: "100%",
   },
   algo: {

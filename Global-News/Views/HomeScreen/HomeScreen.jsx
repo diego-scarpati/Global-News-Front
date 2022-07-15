@@ -33,12 +33,9 @@ export default function UserProfileView({ navigation }) {
     navigation.replace("Inicio");
   };
 
- 
-  
-
   return (
-    <ScrollView style={styles.container}>
-      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+      <ScrollView style={styles.container}>
         {user && <Profile />}
         <View style={styles.body}>
           <HomeButton
@@ -93,8 +90,8 @@ export default function UserProfileView({ navigation }) {
           )}
           <HomeButton text="Logout" onPress={() => logoutHandler()} />
         </View>
-      </ImageBackground>
-    </ScrollView>
+      </ScrollView>
+    </ImageBackground>
   );
 }
 

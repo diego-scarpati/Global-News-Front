@@ -48,6 +48,14 @@ const styles = StyleSheet.create({
     height: 35,
     alignItems: "center",
     justifyContent: "center",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 2,
+      height: 5,
+    },
+    shadowRadius: 5,
+    shadowOpacity: 0.5,
+    elevation: 2,
   },
   text: {
     fontSize: 14,

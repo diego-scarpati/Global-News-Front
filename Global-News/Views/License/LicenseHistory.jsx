@@ -26,7 +26,7 @@ export default function RrHh() {
           sections={[{ title: "Historial licencias", data: licencias }]}
           renderItem={({ item }) => (
             <View style={styles.row}>
-              <Text>Tipo de licencia: {item.type}</Text>
+              <Text style={styles.type}>Tipo de licencia: {item.type}</Text>
               <Text>Inicio: {item.startDate}</Text>
               <Text>Fin: {item.endDate}</Text>
               <Text>Observaciones: {item.observations}</Text>
@@ -45,6 +45,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
+    // marginHorizontal: 16,
+    minHeight: 800,
     justifyContent: "center",
     alignContent: "center",
   },
@@ -63,6 +65,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     margin: 10,
     borderRadius: 5,
+    marginTop: 15,
+  },
+  type: {
+    fontWeight: "bold",
   },
   sectionHeader: {
     backgroundColor: "#efefef",

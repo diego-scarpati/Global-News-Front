@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     minHeight: 800,
     justifyContent: "center",
     alignContent: "center",
-    padding: 5,
   },
   item: {
     backgroundColor: "#f9c2ff",
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderColor: "#d0d0d0",
     borderWidth: 2,
-    margin: 5,
+    margin: 10,
     borderRadius: 5,
     marginTop: 15,
   },
@@ -82,5 +81,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     width: "100%",
+    minHeight: 700,
   },
 });

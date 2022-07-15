@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import {StyleSheet,Text,SafeAreaView,StatusBar} from "react-native";
 import Section from "./component/Section"
 import BossSection from "./component/BossSection"
-import { hrReviewLicense } from "../../store/hr"
 import { useDispatch, useSelector } from "react-redux";
 
 export default function HRLicensesRequest() {

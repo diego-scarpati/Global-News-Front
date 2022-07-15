@@ -8,7 +8,8 @@ import {
   SectionList,
   StatusBar,
   Button,
-  Pressable
+  Pressable,
+  ScrollView
 } from "react-native";
 import SearchInput from "./SearchInput";
 import { attendaceControl } from "../../store/attendance"
@@ -35,7 +36,7 @@ export default function BossSearchUser({navigation, route}) {
     }
 
   return (
-   
+    <ScrollView>
     <SafeAreaView style={styles.container}>
     <Text style={styles.mainText}>Busqueda por Empleado</Text>
        <SearchInput dispatchInput={(hrSearchUsersByInput) } input={name}/>
@@ -61,6 +62,7 @@ export default function BossSearchUser({navigation, route}) {
         keyExtractor={(item) => item.id}
       /> }
     </SafeAreaView>
+    </ScrollView>
     
   );
 }

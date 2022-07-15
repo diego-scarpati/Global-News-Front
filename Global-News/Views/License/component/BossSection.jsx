@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Text, SectionList, SafeAreaView, ScrollView } from "react-native";
-import { hrReviewLicense } from "../../../store/hr";
 import SectionRender from "./SectionRender";
 
 export default function BossSection({route}) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const licencias = useSelector((state) => state.hr);
+  const licencias = useSelector((state) => state.hrLicenses);
   
   return (
     <ScrollView>

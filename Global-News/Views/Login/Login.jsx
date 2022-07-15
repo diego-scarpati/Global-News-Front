@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     width: "100%",
+    minHeight: 700,
   },
   button: {
     margin: 2,

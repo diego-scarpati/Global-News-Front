@@ -15,14 +15,13 @@ import SearchInput from "../Search/SearchInput";
 
 import { hrSearchUsersByInput } from "../../store/hr";
 import { teamRequest } from "../../store/team"
-import { userRequest } from "../../store/user"
+import { userRequest } from "../../store/hrEditUser"
 import image from "../../assets/background-startScreen-02.png";
 
 
 export default function HRSelectUser({navigation}) {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.hr);
-  console.log(users)
 
    
     const handlePress = (id)=>{
@@ -51,7 +50,9 @@ export default function HRSelectUser({navigation}) {
             <Text>Dias Laborales: {item.workingDays}</Text>
             <Text>Turnos: {item.shift}</Text>
             <Text>Equipos: </Text>
-            {item.teams.map((team,i)=>{return(<Text> {i+1}-{team.name}</Text>)})}
+
+            {item?.teams.map((team,i)=>{return(<Text> {i+1}-{team.name}</Text>)})}
+
             <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2)&&"Disponible: No"}</Text>
             <Text>Oficina: </Text>
             {/* {item.offices.map((office)=>{return(<Text>{office.name}</Text>)})} */}
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   mainText:{
-    fontSize: 30,
+    fontSize: 22,
     marginTop: 10,
   },
   image: {
@@ -121,5 +122,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     width: "100%",
+    minHeight: 700,
   },
 });

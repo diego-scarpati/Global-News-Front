@@ -15,7 +15,7 @@ import {
 } from "../../store/attendance";
 import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "../HomeScreen/components/HomeButtons";
-import { userRequest } from "../../store/user";
+import { userRequest } from "../../store/hrEditUser";
 import {date} from "../../utils/getDate"
 
 export default function Attendance({ navigation }) {
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     minHeight: 600,
     width: "100%",
+    minHeight: 700,
   },
   buttonOff: {
     margin: 2,

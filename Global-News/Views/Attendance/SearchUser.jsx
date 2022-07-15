@@ -129,6 +129,6 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   mainText:{
-    fontSize: 30
+    fontSize: 22
   }
 });

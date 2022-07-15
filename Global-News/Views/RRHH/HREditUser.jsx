@@ -12,7 +12,7 @@ import {
   ImageBackground,
   Pressable
 } from "react-native";
-import { editUser } from "../../store/user";
+import { editUser } from "../../store/hrEditUser";
 import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "../HomeScreen/components/HomeButtons";
 import useInput from "../../utils/useInput"
@@ -44,7 +44,8 @@ export default function HREditUser({ navigation }) {
     },
   });
   const onSubmit = (info) => {
-    info.birthday = setDate(info.birthday)
+    info.startDate = setDate(info.startDate)
+    info.birthday = setDate(info.birthday);
     dispatch(editUser({ info, id: user.id }));
     navigation.navigate("Recursos Humanos Seleccionar Usuario");
   };
@@ -135,7 +136,7 @@ export default function HREditUser({ navigation }) {
               />
               {errors.birthday && <Text>Campo Requerido.</Text>}
             </View>
-            <View style={styles.editar}>
+           <View style={styles.editar}>
               <Text style={styles.text}>Email:</Text>
               <Controller
                 control={control}
@@ -196,7 +197,7 @@ export default function HREditUser({ navigation }) {
               />
               {errors.countryOfResidence && <Text>Campo Requerido.</Text>}
             </View>
-            {/* <View style={styles.editar}>
+            <View style={styles.editar}>
               <Text style={styles.text}>Ciudad:</Text>
               <Controller
                 control={control}
@@ -246,7 +247,7 @@ export default function HREditUser({ navigation }) {
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
-                    placeholder="Inicio Laboral"
+                    placeholder="DD/MM/AAAA"
                   />
                 )}
                 name="startDate"
@@ -300,7 +301,7 @@ export default function HREditUser({ navigation }) {
                 )}
                 name="shift"
               />
-            </View>*/}
+            </View>
           </View> 
 
           <HomeButton text={"Enviar"} onPress={handleSubmit(onSubmit)} />
@@ -328,6 +329,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     width: "100%",
+    minHeight: 700,
   },
   input: {
     borderColor: "gray",
@@ -336,6 +338,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     margin: 10,
+    width: 210,
     backgroundColor: "#ffff",
   },
   editar: {

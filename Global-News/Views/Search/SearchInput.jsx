@@ -1,36 +1,37 @@
-import  React, {useState} from "react";
+import React, { useState } from "react";
 import { Searchbar } from "react-native-paper";
 import { StyleSheet, Button, View, Pressable, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
-const SearchInput = ({dispatchInput, input}) => {
+const SearchInput = ({ dispatchInput, input }) => {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
   const users = useSelector((state) => state.user);
- 
-  
-  
 
   const onChangeSearch = (query) => {
-        setSearchQuery(query)
-    }
+    setSearchQuery(query);
+  };
 
   const handleSearch = () => {
-    if(users.positionId === 1 || users.positionId === 2 || users.positionId === 3){
-    dispatch(dispatchInput({searchQuery,input}))}
-    else{dispatch(dispatchInput(searchQuery))}
-  }
-
-   
+    if (
+      users.positionId === 1 ||
+      users.positionId === 2 ||
+      users.positionId === 3
+    ) {
+      dispatch(dispatchInput({ searchQuery, input }));
+    } else {
+      dispatch(dispatchInput(searchQuery));
+    }
+  };
 
   return (
     <View>
       <Searchbar
         style={styles.search}
-        placeholder="Buscar Empleado"
+        placeholder="Buscar usuario..."
         onChangeText={onChangeSearch}
       />
-      <Pressable style={styles.button} onPress={()=> handleSearch()}>
+      <Pressable style={styles.button} onPress={() => handleSearch()}>
         <Text style={styles.text}>Buscar</Text>
       </Pressable>
     </View>
@@ -45,15 +46,22 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   button: {
-    marginTop: 10,
-    marginBotton: 10,
+    marginVertical: 15,
     backgroundColor: "#0073b7",
     borderColor: "white",
     borderRadius: 30,
-    width: '100%',
+    width: "100%",
     height: 35,
     alignItems: "center",
     justifyContent: "center",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 2,
+      height: 5,
+    },
+    shadowRadius: 5,
+    shadowOpacity: 0.5,
+    elevation: 2,
   },
   text: {
     fontSize: 14,
@@ -62,5 +70,4 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: "white",
   },
-
 });

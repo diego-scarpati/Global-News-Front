@@ -7,79 +7,87 @@ import {
   SafeAreaView,
   SectionList,
   StatusBar,
-  Pressable
+  Pressable,
+  ImageBackground,
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
-import { attendaceControl } from "../../store/attendance"
-import { hrSearchUsersByInput } from "../../store/hr"
-import { searchTeamById } from "../../store/team"
+import { attendaceControl } from "../../store/attendance";
+import { hrSearchUsersByInput } from "../../store/hr";
+import { searchTeamById } from "../../store/team";
+import image from "../../assets/background-startScreen-02.png";
 
-
-export default function SearchUser({navigation}) {
+export default function SearchUser({ navigation }) {
   const dispatch = useDispatch();
   const searchAllUsers = useSelector((state) => state.hr);
-  const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.user);
 
-    const handlePress = (id)=>{
-    dispatch(attendaceControl({id:id}))
-    navigation.navigate("Control Asistencias")
-    }
+  const handlePress = (id) => {
+    dispatch(attendaceControl({ id: id }));
+    navigation.navigate("Control Asistencias");
+  };
 
-    const onPress = (name,id) => {
-      const request = async () => {
-        const team = await dispatch(searchTeamById(id));
-        navigation.navigate("Busqueda por Usuario", {name,asistencia:true});
-      };
-      request();
+  const onPress = (name, id) => {
+    const request = async () => {
+      const team = await dispatch(searchTeamById(id));
+      navigation.navigate("Busqueda por Usuario", { name, asistencia: true });
     };
-   
-   
-  
-  return (
-    (user.RRHH)?(
-    <SafeAreaView style={styles.container}>
-    <Text style={styles.mainText}>Busqueda por Empleado</Text>
-       <SearchInput dispatchInput={(hrSearchUsersByInput)}/> 
-      <SectionList
-        sections={[{ title: "Promover Empleados", data: searchAllUsers}]}
-        renderItem={({ item }) => (
-           <Pressable onPress={() =>handlePress(item.id)}>
-          <View style={styles.row}>
-            <Text style={styles.text}>Solicitante: {item.firstName} {item.lastName}</Text>
-            <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
-            <Text>Legajo: {item.employeeId}</Text>
-            <Text>Nombre: {item.firstName}</Text>
-            <Text>Apellido: {item.lastName}</Text>
-            <Text>Email: {item.email}</Text>
-            <Text>Dias Laborales: {item.workingDays}</Text>
-            <Text>Turnos: {item.shift}</Text>
-            <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2)&&"Disponible: No"}</Text>
-          </View>
-          </Pressable>
-        )}
-        
-        keyExtractor={(item) => item.id}
-      /> 
-    </SafeAreaView>)
-    :(
+    request();
+  };
+
+  return user.RRHH ? (
+    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <SafeAreaView style={styles.container}>
-      
+        <Text style={styles.mainText}>Busqueda por Usuario</Text>
+        <SearchInput dispatchInput={hrSearchUsersByInput} />
+        <SectionList
+          sections={[{ title: "Promover Empleados", data: searchAllUsers }]}
+          renderItem={({ item }) => (
+            <Pressable onPress={() => handlePress(item.id)}>
+              <View style={styles.row}>
+                <Text style={styles.text}>
+                  Solicitante: {item.firstName} {item.lastName}
+                </Text>
+                <Text>
+                  {item.user?.positionId === 4 && "Rango: Empleado"}
+                  {item.user?.positionId === 3 && "Rango: Coordinador"}
+                  {item.user?.positionId === 2 && "Rango: Jefe"}
+                  {item.user?.positionId === 1 && "Rango: Gerente"}
+                </Text>
+                <Text>Legajo: {item.employeeId}</Text>
+                <Text>Nombre: {item.firstName}</Text>
+                <Text>Apellido: {item.lastName}</Text>
+                <Text>Email: {item.email}</Text>
+                <Text>Dias Laborales: {item.workingDays}</Text>
+                <Text>Turnos: {item.shift}</Text>
+                <Text>
+                  {item.availabilityId === 1 && "Disponible: Si"}
+                  {item.availabilityId === 2 && "Disponible: No"}
+                </Text>
+              </View>
+            </Pressable>
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      </SafeAreaView>
+    </ImageBackground>
+  ) : (
+    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+      <SafeAreaView style={styles.container}>
         <Text style={styles.mainText}>Seleccionar Equipos</Text>
-        {(user.teams.length == 0) && <Text>No estas en ningun equipo</Text>}
+        {user.teams.length == 0 && <Text>No estas en ningun equipo</Text>}
         <SectionList
           sections={[{ title: "Equipos", data: user.teams }]}
           renderItem={({ item }) => (
             <View style={styles.row}>
-              <Pressable onPress={() => onPress(item.name,item.id)}>
+              <Pressable onPress={() => onPress(item.name, item.id)}>
                 <Text style={styles.text}>{item.name}</Text>
               </Pressable>
             </View>
           )}
           keyExtractor={(item) => item.id}
         />
-      
-    </SafeAreaView>
-    )
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
@@ -92,7 +100,14 @@ const styles = StyleSheet.create({
     alignContent: "center",
     padding: 5,
     margin: 5,
-   
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: 600,
+    width: "100%",
+    minHeight: 700,
   },
   item: {
     backgroundColor: "#f9c2ff",
@@ -120,15 +135,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     margin: 10,
-    padding: 10
+    padding: 10,
   },
   buttomView: {
-    margin: 10
+    margin: 10,
   },
-  text:{
-    fontSize: 20
+  text: {
+    fontSize: 20,
+    // color: "#fff",
+    // fontWeight: "600",
+    marginTop: 5,
   },
-  mainText:{
-    fontSize: 22
-  }
+  mainText: {
+    fontSize: 22,
+    color: "#fff",
+    fontWeight: "600",
+    marginTop: 5,
+  },
 });

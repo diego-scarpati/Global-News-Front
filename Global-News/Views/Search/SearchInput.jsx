@@ -30,6 +30,8 @@ const SearchInput = ({ dispatchInput, input }) => {
         style={styles.search}
         placeholder="Buscar usuario..."
         onChangeText={onChangeSearch}
+        autoCorrect={false}
+        autoCapitalize="none"
       />
       <Pressable style={styles.button} onPress={() => handleSearch()}>
         <Text style={styles.text}>Buscar</Text>

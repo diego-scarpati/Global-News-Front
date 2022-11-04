@@ -41,11 +41,10 @@ const Loading = ({ navigation }) => {
     } else {
       readItem()
         .then((res) => {
-          console.log("🚀 ~ file: Loading.jsx ~ line 45 ~ .then ~ res", res);
+          // console.log("🚀 ~ file: Loading.jsx ~ line 45 ~ .then ~ res", res);
           if (!res) {
             navigation.replace("Inicio");
           } else {
-            // navigation.replace("Inicio");
             dispatch(findUserByEmailMobile(res))
               .then((response) => {
                 const { payload } = response;

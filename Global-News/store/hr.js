@@ -25,6 +25,14 @@ export const hrSearchUsersByInput = createAsyncThunk(
   }
 );
 
+export const sendHRLogoutRequest = createAsyncThunk("LOGOUT", async () => {
+  try {
+    return null;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 export const hrReviewLicense = createAsyncThunk(
   "HR_REVIEW_LICENCE",
   async (data, thunkAPI) => {
@@ -98,6 +106,9 @@ const hrReducer = createReducer(
   {
     [hrSearchUsersByInput.fulfilled]: (state, action) => action.payload,
     [hrSearchUsersByInput.rejected]: (state, action) => action.payload,
+
+    [sendHRLogoutRequest.fulfilled]: (state, action) => action.payload,
+    [sendHRLogoutRequest.rejected]: (state, action) => action.payload,
 
     [hrReviewLicense.fulfilled]: (state, action) => action.payload,
     [hrReviewLicense.rejected]: (state, action) => action.payload,

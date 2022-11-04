@@ -16,14 +16,17 @@ import {
 import image from "../../assets/background-startScreen-02.png";
 import HomeButton from "../HomeScreen/components/HomeButtons";
 import { userRequest } from "../../store/hrEditUser";
-import {date} from "../../utils/getDate"
+import { date } from "../../utils/getDate";
 
 export default function Attendance({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const attendance = useSelector((state) => state.attendance);
-
+  console.log("🚀 ~ file: Attendance.jsx ~ line 25 ~ Attendance ~ attendance", attendance)
+  
+  // Separar la logica del handler para ingreso y egreso
   const handlePress = (userId, info) => {
+    console.log("🚀 ~ file: Attendance.jsx ~ line 27 ~ handlePress ~ info", info)
     dispatch(availabilityRequest({ id: userId, available: info }));
     if (info) {
       dispatch(attendaceStartRequest({ workDayStart: date(), id: userId }));
@@ -39,37 +42,39 @@ export default function Attendance({ navigation }) {
   };
 
   useEffect(() => {
-    dispatch(userRequest({userId: user.id}))
-  },[user.availabilityId])
+    dispatch(userRequest({ userId: user.id }));
+  }, [user.availabilityId]);
 
+
+  // Ver si habria que modificar los pressables
   return (
     // <View style={styles.container}>
-      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <View style={styles.container}>
-          {user.availabilityId == 1 ? (
-            <Pressable style={styles.buttonOff}>
-              <Text style={styles.textButton}>Ingreso</Text>
-            </Pressable>
-          ) : (
-            <HomeButton
-              text="Ingreso"
-              onPress={() => handlePress(user.id, true)}
-            />
-          )}
-        </View>
-        <View>
-          {user.availabilityId == 2 ? (
-            <Pressable style={styles.buttonOff}>
-              <Text style={styles.textButton}>Egreso</Text>
-            </Pressable>
-          ) : (
-            <HomeButton
-              text="Egreso"
-              onPress={() => handlePress(user.id, false)}
-            />
-          )}
-        </View>
-      </ImageBackground>
+    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+      <View style={styles.container}>
+        {user.availabilityId == 1 ? (
+          <Pressable style={styles.buttonOff}>
+            <Text style={styles.textButton}>Ingreso</Text>
+          </Pressable>
+        ) : (
+          <HomeButton
+            text="Ingreso"
+            onPress={() => handlePress(user.id, true)}
+          />
+        )}
+      </View>
+      <View>
+        {user.availabilityId == 2 ? (
+          <Pressable style={styles.buttonOff}>
+            <Text style={styles.textButton}>Egreso</Text>
+          </Pressable>
+        ) : (
+          <HomeButton
+            text="Egreso"
+            onPress={() => handlePress(user.id, false)}
+          />
+        )}
+      </View>
+    </ImageBackground>
     // </View>
   );
 }
@@ -80,7 +85,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    alignContent: "center"
+    alignContent: "center",
     // height: "100%",
     // margin: 10,
   },

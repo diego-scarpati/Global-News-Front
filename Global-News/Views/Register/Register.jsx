@@ -12,9 +12,8 @@ import {
   Modal,
   ImageBackground,
   Platform,
-  } from "react-native";
+} from "react-native";
 import logo from "../../assets/gnlogogrande-01.png";
-
 import { sendRegisterRequest } from "../../store/user";
 import { getToken } from "../../utils/notifications";
 import image from "../../assets/background-startScreen-02.png";
@@ -44,7 +43,7 @@ export default function Register({ navigation }) {
   const dispatch = useDispatch();
   const onSubmit = async (info) => {
     info.birthday = setDate(info.birthday);
-
+    console.log(info);
     if (Platform.OS === "web") {
       dispatch(sendRegisterRequest(info));
     } else {
@@ -58,18 +57,18 @@ export default function Register({ navigation }) {
   const allowOnlyNumbers = (value) => {
     return value.replace(/[A-Za-z ]+$/g, "");
   };
-
   const allowOnlyLetters = (value) => {
     return value.replace(/[0-9]*$/, "");
   };
-  
 
   return (
     <ScrollView>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <View style={styles.container}>
-          <Text style={styles.title}>Registrarse</Text>
           <View>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Registrarse</Text>
+            </View>
             <View style={styles.editar}>
               <Text style={styles.text}>Nombre:</Text>
               <Controller
@@ -164,6 +163,8 @@ export default function Register({ navigation }) {
                     onChangeText={onChange}
                     value={value}
                     placeholder="Email"
+                    autoCapitalize="none"
+                    autoCorrect={false}
                   />
                 )}
                 name="email"
@@ -182,7 +183,7 @@ export default function Register({ navigation }) {
                     style={styles.input}
                     onBlur={onBlur}
                     onChangeText={(text) => onChange(allowOnlyNumbers(text))}
-                    value={value}
+                    defaultValue={value}
                     placeholder="Telefono"
                   />
                 )}
@@ -190,7 +191,6 @@ export default function Register({ navigation }) {
               />
               {errors.phoneNumber && <Text>Campo Requerido.</Text>}
             </View>
-
             <View style={styles.editar}>
               <Text style={styles.text}>Pais:</Text>
               <Controller
@@ -272,9 +272,8 @@ export default function Register({ navigation }) {
               />
               {errors.password && <Text>Campo Requerido.</Text>}
             </View>
+            <HomeButton text={"Enviar"} onPress={handleSubmit(onSubmit)} />
           </View>
-
-          <HomeButton text={"Enviar"} onPress={handleSubmit(onSubmit)} />
         </View>
       </ImageBackground>
     </ScrollView>
@@ -286,6 +285,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    minHeight: 900,
+  },
+  titleContainer: {
+    alignContent: "center",
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     fontSize: 17,
@@ -297,9 +302,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    height: "100%",
+    // height: "100%",
+    minHeight: 800,
     width: "100%",
-    minHeight: 700,
   },
   input: {
     borderColor: "gray",

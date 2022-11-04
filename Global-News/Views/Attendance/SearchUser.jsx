@@ -37,7 +37,7 @@ export default function SearchUser({ navigation }) {
   return user.RRHH ? (
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.mainText}>Busqueda por Usuario</Text>
+      <Text style={styles.mainText}>   Busqueda por Usuario   </Text>
         <SearchInput dispatchInput={hrSearchUsersByInput} />
         <SectionList
           sections={[{ title: "Promover Empleados", data: searchAllUsers }]}
@@ -57,6 +57,7 @@ export default function SearchUser({ navigation }) {
                 <Text>Nombre: {item.firstName}</Text>
                 <Text>Apellido: {item.lastName}</Text>
                 <Text>Email: {item.email}</Text>
+                <Text>Pais: {item.countryOfResidence}</Text>
                 <Text>Dias Laborales: {item.workingDays}</Text>
                 <Text>Turnos: {item.shift}</Text>
                 <Text>

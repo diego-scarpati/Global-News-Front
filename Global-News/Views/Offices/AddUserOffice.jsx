@@ -8,48 +8,66 @@ import {
   SectionList,
   StatusBar,
   Button,
-  Pressable
+  Pressable,
+  ImageBackground,
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
+import image from "../../assets/background-startScreen-02.png";
 
 import { hrSearchUsersByInput } from "../../store/hr";
-import { teamRequest } from "../../store/team"
+import { teamRequest } from "../../store/team";
 
-
-export default function AddUserOffice({navigation}) {
+export default function AddUserOffice({ navigation }) {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.hr);
 
-   
-    const handlePress = (id)=>{
-    navigation.navigate("Elegir Oficina")
-    }
+  const handlePress = (id) => {
+    navigation.navigate("Elegir Oficina");
+  };
 
-  
   return (
-    <SafeAreaView style={styles.container}>
-      <SearchInput dispatchInput={hrSearchUsersByInput}/>
-      <SectionList
-        sections={[{ title: "Buscar Empleado", data: users}]}
-        renderItem={({ item }) => (
-           <Pressable onPress={() =>handlePress(item.id)}>
-            <View style={styles.row}>
-            <Text style={styles.text}>Nombre : {item.firstName} {item.lastName}</Text>
-            <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
-            <Text>Legajo: {item.employeeId}</Text>
-            <Text>Email: {item.email}</Text>
-            <Text>Dias Laborales: {item.workingDays}</Text>
-            <Text>Turnos: {item.shift}</Text>
-            <Text>Equipos: </Text>
-            {item.teams.map((team,i)=>{return(<Text> {i+1}-{team.name}</Text>)})}
-            <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2)&&"Disponible: No"}</Text>
-          </View>
-          </Pressable>
-        )}
-        
-        keyExtractor={(item) => item.id}
-      /> 
-    </SafeAreaView>
+    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+      <SafeAreaView style={styles.container}>
+        <SearchInput dispatchInput={hrSearchUsersByInput} />
+        <SectionList
+          sections={[{ title: "Buscar Empleado", data: users }]}
+          renderItem={({ item }) => (
+            <Pressable onPress={() => handlePress(item.id)}>
+              <View style={styles.row}>
+                <Text style={styles.text}>
+                  Nombre : {item.firstName} {item.lastName}
+                </Text>
+                <Text>
+                  {item.user?.positionId === 4 && "Rango: Empleado"}
+                  {item.user?.positionId === 3 && "Rango: Coordinador"}
+                  {item.user?.positionId === 2 && "Rango: Jefe"}
+                  {item.user?.positionId === 1 && "Rango: Gerente"}
+                </Text>
+                <Text>Legajo: {item.employeeId}</Text>
+                <Text>Email: {item.email}</Text>
+                <Text>Pais: {item.countryOfResidence}</Text>
+                <Text>Dias Laborales: {item.workingDays}</Text>
+                <Text>Turnos: {item.shift}</Text>
+                <Text>Equipos: </Text>
+                {item.teams.map((team, i) => {
+                  return (
+                    <Text>
+                      {" "}
+                      {i + 1}-{team.name}
+                    </Text>
+                  );
+                })}
+                <Text>
+                  {item.availabilityId === 1 && "Disponible: Si"}
+                  {item.availabilityId === 2 && "Disponible: No"}
+                </Text>
+              </View>
+            </Pressable>
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
@@ -62,7 +80,14 @@ const styles = StyleSheet.create({
     alignContent: "center",
     padding: 5,
     margin: 5,
-   
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: 600,
+    width: "100%",
+    minHeight: 700,
   },
   item: {
     backgroundColor: "#f9c2ff",
@@ -79,6 +104,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     margin: 2,
     borderRadius: 5,
+    backgroundColor: "#FFF",
   },
   sectionHeader: {
     backgroundColor: "#efefef",
@@ -90,15 +116,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     margin: 10,
-    padding: 10
+    padding: 10,
   },
   buttomView: {
-    margin: 10
+    margin: 10,
   },
-  text:{
-    fontSize: 20
+  text: {
+    fontSize: 20,
   },
-  mainText:{
-    fontSize: 30
-  }
+  mainText: {
+    fontSize: 30,
+  },
 });

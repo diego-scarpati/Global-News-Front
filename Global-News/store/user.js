@@ -7,8 +7,8 @@ import {
 
 // export const setUserFromLogin = createAction("SET_USER_LOGIN")
 export const setUserFromLogin = createAsyncThunk("SET_USER_LOGIN", (data) => {
-console.log("🚀 ~ file: user.js ~ line 24 ~ setUserFromLogin ~ data", data)
-  const loggedUser = data
+  // console.log("🚀 ~ file: user.js ~ line 24 ~ setUserFromLogin ~ data", data)
+  const loggedUser = data;
   return loggedUser;
 });
 
@@ -52,10 +52,10 @@ export const sendLoginRequest = createAsyncThunk(
         `http://localhost:3001/api/auth/logIn`,
         data
       );
-      console.log(
-        "🚀 ~ file: user.js ~ line 56 ~ loggedUser.data.dataValues",
-        loggedUser.data.dataValues
-      );
+      // console.log(
+      //   "🚀 ~ file: user.js ~ line 56 ~ loggedUser.data.dataValues",
+      //   loggedUser.data.dataValues
+      // );
       return loggedUser.data.dataValues;
     } catch (error) {
       console.log("entre en el catch");
@@ -102,8 +102,6 @@ export const sendLogoutRequest = createAsyncThunk("LOGOUT", async () => {
   }
 });
 
-
-
 //no tiene uso aparentemente
 export const searchAllUsers = createAsyncThunk(
   "SEARCH_ALL_REQUEST",
@@ -116,8 +114,6 @@ export const searchAllUsers = createAsyncThunk(
     }
   }
 );
-
-
 
 const userReducer = createReducer(
   {},
@@ -135,8 +131,6 @@ const userReducer = createReducer(
 
     [sendLogoutRequest.fulfilled]: (state, action) => action.payload,
     [sendLogoutRequest.rejected]: (state, action) => action.payload,
-
-    
 
     [searchAllUsers.fulfilled]: (state, action) => action.payload,
     [searchAllUsers.rejected]: (state, action) => action.payload,

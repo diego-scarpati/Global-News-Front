@@ -9,61 +9,77 @@ import {
   StatusBar,
   Button,
   ImageBackground,
-  Pressable
+  Pressable,
 } from "react-native";
 import SearchInput from "../Search/SearchInput";
 
 import { hrSearchUsersByInput } from "../../store/hr";
-import { teamRequest } from "../../store/team"
-import { userRequest } from "../../store/hrEditUser"
+import { teamRequest } from "../../store/team";
+import { userRequest } from "../../store/hrEditUser";
 import image from "../../assets/background-startScreen-02.png";
 
-
-export default function HRSelectUser({navigation}) {
+export default function HRSelectUser({ navigation }) {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.hr);
 
-   
-    const handlePress = (id)=>{
-        const request = async ()=>{
-            const user = await dispatch(userRequest({userId:id}))
-            navigation.navigate("Recursos Humanos Editar Usuario")
-        }
-        request();
-    }
+  const handlePress = (id) => {
+    const request = async () => {
+      const user = await dispatch(userRequest({ userId: id }));
+      navigation.navigate("Recursos Humanos Editar Usuario");
+    };
+    request();
+  };
 
-  
   return (
-    <SafeAreaView style={styles.container}>
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-    <Text style={styles.mainText}>Buscar usuario</Text>
-      <SearchInput dispatchInput={hrSearchUsersByInput} style={styles.button}/>
-      <SectionList
-        sections={[{ title: "Buscar Empleado", data: users}]}
-        renderItem={({ item }) => (
-           <Pressable onPress={() =>handlePress(item.id)}>
-            <View style={styles.row}>
-            <Text style={styles.text}>{item.firstName} {item.lastName}</Text>
-            <Text>{(item.user?.positionId === 4)&& "Rango: Empleado"}{(item.user?.positionId === 3)&& "Rango: Coordinador"}{(item.user?.positionId === 2)&& "Rango: Jefe"}{(item.user?.positionId === 1)&& "Rango: Gerente"}</Text>
-            <Text>Legajo: {item.employeeId}</Text>
-            <Text>Email: {item.email}</Text>
-            <Text>Dias Laborales: {item.workingDays}</Text>
-            <Text>Turnos: {item.shift}</Text>
-            <Text>Equipos: </Text>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.mainText}> Busqueda por Usuario </Text>
+        <SearchInput
+          dispatchInput={hrSearchUsersByInput}
+          style={styles.button}
+        />
+        <SectionList
+          sections={[{ title: "Buscar Empleado", data: users }]}
+          renderItem={({ item }) => (
+            <Pressable onPress={() => handlePress(item.id)}>
+              <View style={styles.row}>
+                <Text style={styles.text}>
+                  {item.firstName} {item.lastName}
+                </Text>
+                <Text>
+                  {item.user?.positionId === 4 && "Rango: Empleado"}
+                  {item.user?.positionId === 3 && "Rango: Coordinador"}
+                  {item.user?.positionId === 2 && "Rango: Jefe"}
+                  {item.user?.positionId === 1 && "Rango: Gerente"}
+                </Text>
+                <Text>Legajo: {item.employeeId}</Text>
+                <Text>Email: {item.email}</Text>
+                <Text>Dias Laborales: {item.workingDays}</Text>
+                <Text>Turnos: {item.shift}</Text>
+                <Text>Equipos: </Text>
 
-            {item?.teams.map((team,i)=>{return(<Text> {i+1}-{team.name}</Text>)})}
+                {item?.teams.map((team, i) => {
+                  return (
+                    <Text>
+                      {" "}
+                      {i + 1}-{team.name}
+                    </Text>
+                  );
+                })}
 
-            <Text>{(item.availabilityId === 1)&& "Disponible: Si"}{(item.availabilityId === 2)&&"Disponible: No"}</Text>
-            <Text>Oficina: </Text>
-            {/* {item.offices.map((office)=>{return(<Text>{office.name}</Text>)})} */}
-          </View>
-          </Pressable>
-        )}
-        
-        keyExtractor={(item) => item.id}
-      /> 
-      </ImageBackground>
-    </SafeAreaView>
+                <Text>
+                  {item.availabilityId === 1 && "Disponible: Si"}
+                  {item.availabilityId === 2 && "Disponible: No"}
+                </Text>
+                <Text>Oficina: </Text>
+                {/* {item.offices.map((office)=>{return(<Text>{office.name}</Text>)})} */}
+              </View>
+            </Pressable>
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
@@ -83,7 +99,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    
   },
   row: {
     paddingHorizontal: 20,
@@ -92,7 +107,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     margin: 2,
     borderRadius: 5,
-    marginTop:10,
+    marginTop: 10,
   },
   sectionHeader: {
     backgroundColor: "#efefef",
@@ -107,12 +122,12 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   buttomView: {
-    margin: 10
+    margin: 10,
   },
-  text:{
-    fontSize: 20
+  text: {
+    fontSize: 20,
   },
-  mainText:{
+  mainText: {
     fontSize: 22,
     marginTop: 10,
   },

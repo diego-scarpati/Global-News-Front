@@ -9,31 +9,34 @@ import {
   StatusBar,
   Button,
   Pressable,
+  ImageBackground,
 } from "react-native";
-
+import image from "../../assets/background-startScreen-02.png";
 
 export default function AttendanceControler() {
   const users = useSelector((state) => state.hr);
   const attendance = useSelector((state) => state.attendance);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.mainText}>Control de asistencias</Text>
-      <Text style={styles.text}>
-        Nombre: {users[0].firstName} {users[0].lastName}
-      </Text>
-      <Text style={styles.text}>Legajo: {users[0].employeeId}</Text>
-      <SectionList
-        sections={[{ title: "Control de asistencias", data: attendance }]}
-        renderItem={({ item }) => (
-          <View style={styles.row}>
-            <Text>Ingreso: {item.workDayStart}</Text>
-            <Text>Egreso: {item.workDayEnd}</Text>
-          </View>
-        )}
-        keyExtractor={(item) => item.id}
-      />
-    </SafeAreaView>
+    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.mainText}>Control de asistencias</Text>
+        <Text style={styles.text}>
+          Nombre: {users[0].firstName} {users[0].lastName}
+        </Text>
+        <Text style={styles.text}>Legajo: {users[0].employeeId}</Text>
+        <SectionList
+          sections={[{ title: "Control de asistencias", data: attendance }]}
+          renderItem={({ item }) => (
+            <View style={styles.row}>
+              <Text>Ingreso: {item.workDayStart}</Text>
+              <Text>Egreso: {item.workDayEnd}</Text>
+            </View>
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
@@ -47,6 +50,14 @@ const styles = StyleSheet.create({
     padding: 5,
     margin: 5,
     marginTop: 5,
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: 600,
+    width: "100%",
+    minHeight: 700,
   },
   item: {
     backgroundColor: "#f9c2ff",

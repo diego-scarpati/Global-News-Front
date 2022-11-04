@@ -13,6 +13,7 @@ import HomeButton from "./components/HomeButtons";
 import image from "../../assets/background-startScreen-02.png";
 import { Badge } from "react-native-paper";
 import { sendLogoutRequest } from "../../store/user";
+import { sendHRLogoutRequest } from "../../store/hr";
 
 export default function UserProfileView({ navigation }) {
   const user = useSelector((state) => state.user);
@@ -30,6 +31,7 @@ export default function UserProfileView({ navigation }) {
       removeItemFromStorage();
     }
     dispatch(sendLogoutRequest());
+    dispatch(sendHRLogoutRequest());
     navigation.replace("Inicio");
   };
 
@@ -42,6 +44,10 @@ export default function UserProfileView({ navigation }) {
             text="Perfil"
             onPress={() => navigation.navigate("Mi Perfil")}
           />
+          <HomeButton
+            text="Dar Presente"
+            onPress={() => navigation.navigate("Dar Presente")}
+          />
 
           <HomeButton
             text="Licencias"
@@ -51,10 +57,6 @@ export default function UserProfileView({ navigation }) {
             text="Equipos"
             onPress={() => navigation.navigate("Equipos")}
           />
-          <HomeButton
-            text="Dar Presente"
-            onPress={() => navigation.navigate("Dar Presente")}
-          />
 
           {user?.positionId === 3 && (
             <>
@@ -62,9 +64,10 @@ export default function UserProfileView({ navigation }) {
                 text="Gestión de Personal"
                 onPress={() => navigation.navigate("Vista Principal")}
               />
-              <Badge style={styles.body} size={30}>
+              {/* Este badge es para mostrar las notificaciones de licencias que todavia no funciona */}
+              {/* <Badge style={styles.body} size={30}>
                 {license.length}
-              </Badge>
+              </Badge> */}
             </>
           )}
 

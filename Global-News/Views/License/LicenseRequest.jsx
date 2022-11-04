@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-// import { PickerIOS, Picker } from "@react-native-picker/picker";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLicenseRequest } from "../../store/license";
@@ -66,7 +65,7 @@ export default function License({ navigation }) {
   const sendNotification = async () => {
     const resultToken = user.expoToken;
     if (!resultToken) {
-      Alert.alert("No se pudo obtener el token del usuario");
+      Alert.alert("Licencia enviada");
       return;
     }
     const messageNotification = setNotificationMessage(
